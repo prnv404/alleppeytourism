@@ -172,11 +172,11 @@ export function PackageBuilder() {
     };
 
     return (
-        <section className="py-16 bg-white border-t border-gray-100">
+        <section className="py-8 bg-white border-t border-gray-100">
             <div className="max-w-5xl mx-auto px-4 md:px-6">
 
                 {/* Compact Header */}
-                <div className="text-center mb-10">
+                <div className="text-center mb-7">
                     <h2 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
                         Customize Your <span className="text-emerald-600">Itinerary</span>
                     </h2>

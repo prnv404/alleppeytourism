@@ -12,7 +12,7 @@ const bookings = [
     {
         id: "houseboat",
         title: "Luxury Houseboat",
-        description: "Experience the Venice of the East in a premium floating palace. Overnight stays with all meals included.",
+        description: "Experience the Venice of the East in a premium floating palace.",
         image: "/images/hero-1.jpg",
         price: "₹8,500",
         unit: "/ night",
@@ -20,44 +20,47 @@ const bookings = [
         reviews: 124,
         features: ["AC Bedrooms", "All Meals", "Private Deck"],
         icon: Ship,
-        color: "text-emerald-500",
+        color: "text-emerald-600 bg-emerald-50",
+        badgeColor: "bg-emerald-500",
         href: "/houseboats",
-        highlights: ["✨ 20% Off Today", "🍽️ Breakfast + Lunch", "🌅 Sunset Cruise", "👨‍✈️ Private Captain"]
+        highlights: ["✨ 20% Off Today", "🍽️ All Meals Inc.", "🌅 Sunset Cruise"]
     },
     {
         id: "shikara",
         title: "Shikara Ride",
-        description: "Drift through narrow canals and witness village life up close. Perfect for couples and small families.",
+        description: "Drift through narrow canals and witness village life up close.",
         image: "/images/hero-2.jpg",
         price: "₹800",
         unit: "/ hour",
         rating: 4.9,
         reviews: 85,
-        features: ["Open Deck", "Guided Tour", "Sunset View"],
+        features: ["Open Deck", "Guided Tour", "Sunset"],
         icon: Anchor,
-        color: "text-orange-500",
+        color: "text-orange-600 bg-orange-50",
+        badgeColor: "bg-orange-500",
         href: "/shikara",
-        highlights: ["💑 Couple Special", "📸 Photo Stops", "🛶 Village Tour", "🕒 Flexible Timings"]
+        highlights: ["💑 Couple Special", "📸 Photo Stops", "🛶 Village Tour"]
     },
     {
         id: "kayak",
-        title: "Kayaking Adventure",
-        description: "Paddle your way through the serene backwaters. Get close to nature in the most eco-friendly way.",
+        title: "Kayaking",
+        description: "Paddle your way through the serene backwaters nature tour.",
         image: "/images/hero-3.jpg",
         price: "₹500",
         unit: "/ person",
         rating: 4.7,
         reviews: 42,
-        features: ["Training", "Safety Gear", "Morning/Evening"],
+        features: ["Training", "Safety Gear", "Eco Friendly"],
         icon: Users,
-        color: "text-blue-500",
+        color: "text-blue-600 bg-blue-50",
+        badgeColor: "bg-blue-500",
         href: "/kayak",
-        highlights: ["🚣 Beginner Friendly", "🌅 Sunrise Special", "🌿 Eco Tour", "🥤 Refreshments"]
+        highlights: ["🚣 Beginner Friendly", "🌅 Sunrise Special", "🌿 Eco Tour"]
     },
     {
         id: "speedboat",
         title: "Speed Boat",
-        description: "Feel the thrill of speed on the vast Vembanad Lake. Experience the rush of the waves.",
+        description: "Feel the thrill of speed on the vast Vembanad Lake.",
         image: "/images/hero-1.jpg",
         price: "₹1,500",
         unit: "/ trip",
@@ -65,9 +68,10 @@ const bookings = [
         reviews: 38,
         features: ["High Speed", "Life Jackets", "Lake Round"],
         icon: Zap,
-        color: "text-red-500",
+        color: "text-red-600 bg-red-50",
+        badgeColor: "bg-red-500",
         href: "/speedboat",
-        highlights: ["⚡ Adrenaline Rush", "🌊 Lake Crossing", "👷 Safety First", "👨‍👩‍👧‍👦 Group Fun"]
+        highlights: ["⚡ Adrenaline Rush", "🌊 Lake Crossing", "👷 Safety First"]
     }
 ];
 
@@ -76,105 +80,127 @@ export function BookingListings() {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setHighlightIndex((prev) => (prev + 1) % 4); // Assuming 4 highlights max for simplicity
+            setHighlightIndex((prev) => (prev + 1) % 3);
         }, 3000);
         return () => clearInterval(interval);
     }, []);
 
     return (
-        <section className="py-16 md:py-24 px-4 md:px-6 lg:px-8 bg-white">
-            <div className="max-w-[1400px] mx-auto">
-                <div className="text-center mb-16 space-y-4">
-                    <h2 className="text-3xl md:text-5xl font-bold text-gray-900 tracking-tight leading-tight">
-                        Curated Alleppey Experiences
-                    </h2>
+        <section className="py-12 md:py-24 bg-white">
+            <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-12 gap-4">
+                    <div className="space-y-2">
+                        <span className="text-emerald-600 font-bold tracking-widest text-xs uppercase">Unforgettable Journeys</span>
+                        <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter">
+                            FEATURED EXPERIENCES
+                        </h2>
+                    </div>
+                    <Button variant="outline" className="hidden md:flex rounded-full border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all font-medium px-6">
+                        Explore All <ArrowRight className="ml-2 w-4 h-4" />
+                    </Button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {/* Wireless scrolling container for mobile, Grid for desktop */}
+                <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 overflow-x-auto pb-8 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
                     {bookings.map((item) => (
-                        <div key={item.id} className="block group h-full">
-                            <Card className="relative border-0 shadow-lg hover:shadow-2xl transition-all duration-500 bg-white rounded-3xl h-full flex flex-col group-hover:-translate-y-1 overflow-hidden">
-                                {/* Link wrapper for top part only to keep button distinct if needed, or wrap whole card. 
-                                    Request implies button on right, text on left. Often clearer if button is the primary action.
-                                    We'll make the whole card clickable except maybe the footer? 
-                                    Or just wrap the whole thing in Link but style the button visually.
-                                */}
-                                <Link href={item.href} className="contents">
-                                    {/* Image Section - Round top corners are handled by card rounded-3xl + overflow-hidden */}
-                                    <div className="relative h-48 md:h-72 w-full overflow-hidden">
-                                        <Image
-                                            src={item.image}
-                                            alt={item.title}
-                                            fill
-                                            className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                        />
-                                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+                        <div key={item.id} className="min-w-[85vw] sm:min-w-[340px] md:min-w-0 snap-center md:snap-align-none h-full">
+                            <Link href={item.href} className="group block h-full relative">
+                                {/* Immersive Card Container */}
+                                <div className="relative aspect-[3/4] md:aspect-[4/5] w-full overflow-hidden rounded-[2rem] bg-gray-200 isolate">
+                                    {/* Full Background Image */}
+                                    <Image
+                                        src={item.image}
+                                        alt={item.title}
+                                        fill
+                                        className="object-cover transition-transform duration-1000 group-hover:scale-110 ease-out"
+                                    />
 
-                                        {/* Rating Badge */}
-                                        <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm z-10">
-                                            <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                                            <span className="text-sm font-bold text-gray-900">{item.rating}</span>
+                                    {/* Gradient Overlays for Readability */}
+                                    <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/90 pointer-events-none" />
+                                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none" />
+
+                                    {/* Top Floating Elements */}
+                                    <div className="absolute top-5 left-5 right-5 flex justify-between items-start z-10">
+                                        <span className="bg-white/95 backdrop-blur-md text-gray-900 text-[10px] font-extrabold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
+                                            {item.title.split(' ')[0]}
+                                        </span>
+                                        <div className="flex items-center gap-1 bg-black/40 backdrop-blur-md px-2.5 py-1.5 rounded-full text-white text-xs font-bold border border-white/10">
+                                            <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
+                                            {item.rating}
                                         </div>
                                     </div>
 
-                                    {/* Content Section */}
-                                    <CardContent className="pt-4 px-4 md:px-5 flex-grow flex flex-col">
-                                        <div className="mb-3">
-                                            <div className="flex items-center justify-between mb-2">
-                                                <div className={`p-1.5 rounded-lg bg-gray-50/80 w-fit ${item.color}`}>
-                                                    <item.icon className="w-4 h-4" />
-                                                </div>
-                                                <div className="text-right">
-                                                    <p className="text-base md:text-lg font-bold text-gray-900 leading-none">{item.price}</p>
-                                                    <p className="text-[10px] text-gray-500 font-medium">{item.unit}</p>
-                                                </div>
-                                            </div>
+                                    {/* Bottom Content Area */}
+                                    <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-10 flex flex-col justify-end">
 
-                                            <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-1 group-hover:text-emerald-600 transition-colors line-clamp-1">
+                                        {/* Main Text */}
+                                        <div className="transform transition-transform duration-500 group-hover:-translate-y-2">
+                                            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 leading-none tracking-tight">
                                                 {item.title}
                                             </h3>
-                                            <p className="text-gray-600 text-xs leading-relaxed line-clamp-2">
+                                            <p className="text-white/80 text-sm font-medium line-clamp-2 md:line-clamp-none mb-4 leading-relaxed mix-blend-plus-lighter">
                                                 {item.description}
                                             </p>
                                         </div>
 
-                                        {/* Feature Pills */}
-                                        <div className="flex flex-wrap gap-1.5 mt-auto mb-4">
-                                            {item.features.map((feature, idx) => (
-                                                <span key={idx} className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-gray-100 text-gray-600 border border-gray-100">
+                                        {/* Features Row - Hidden on mobile initial, visible on hover/desktop preference? 
+                                            Actually let's keep it visible but minimal 
+                                        */}
+                                        <div className="flex flex-wrap gap-2 mb-6">
+                                            {item.features.slice(0, 2).map((feature, idx) => (
+                                                <span key={idx} className="text-[10px] font-bold text-white/90 uppercase tracking-wider bg-white/20 backdrop-blur-sm px-2 py-0.5 rounded border border-white/20">
                                                     {feature}
                                                 </span>
                                             ))}
+                                            {item.features.length > 2 && (
+                                                <span className="text-[10px] font-bold text-white/90 uppercase tracking-wider bg-white/20 backdrop-blur-sm px-2 py-0.5 rounded border border-white/20">
+                                                    +{item.features.length - 2} More
+                                                </span>
+                                            )}
                                         </div>
 
-                                        {/* Action Footer */}
-                                        <div className="border-t border-gray-100 pt-3 mt-1 flex items-center justify-between h-10">
-                                            {/* Left: Text Motion Carousel */}
-                                            <div className="flex-1 relative h-full overflow-hidden flex items-center">
-                                                <AnimatePresence mode="wait">
-                                                    <motion.p
-                                                        key={highlightIndex}
-                                                        initial={{ y: 15, opacity: 0 }}
-                                                        animate={{ y: 0, opacity: 1 }}
-                                                        exit={{ y: -15, opacity: 0 }}
-                                                        transition={{ duration: 0.3 }}
-                                                        className="text-[10px] md:text-xs font-medium text-emerald-600 absolute w-full truncate pr-2"
-                                                    >
-                                                        {item.highlights[highlightIndex % item.highlights.length]}
-                                                    </motion.p>
-                                                </AnimatePresence>
+                                        {/* Interactive Footer */}
+                                        <div className="flex items-center justify-between gap-4 pt-4 border-t border-white/20">
+                                            <div>
+                                                <div className="flex items-baseline gap-1 text-white">
+                                                    <span className="text-lg font-bold">{item.price}</span>
+                                                    <span className="text-xs text-white/70 font-medium uppercase">{item.unit}</span>
+                                                </div>
+                                                {/* Animated Highlight */}
+                                                <div className="h-4 overflow-hidden mt-1">
+                                                    <AnimatePresence mode="wait">
+                                                        <motion.p
+                                                            key={highlightIndex}
+                                                            initial={{ y: 20 }}
+                                                            animate={{ y: 0 }}
+                                                            exit={{ y: -20 }}
+                                                            className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider truncate"
+                                                        >
+                                                            {item.highlights[highlightIndex % item.highlights.length]}
+                                                        </motion.p>
+                                                    </AnimatePresence>
+                                                </div>
                                             </div>
 
-                                            {/* Right: Book Button */}
-                                            <Button className="rounded-full bg-black hover:bg-emerald-600 text-white transition-all shadow-sm hover:shadow-md px-4 h-8 text-xs font-semibold group-hover:shadow-emerald-500/20">
-                                                Book
+                                            <Button size="icon" className="h-12 w-12 rounded-full bg-white text-black hover:bg-emerald-500 hover:text-white transition-all duration-300 shadow-xl border-none">
+                                                <ArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform duration-500" />
                                             </Button>
                                         </div>
-                                    </CardContent>
-                                </Link>
-                            </Card>
+                                    </div>
+                                </div>
+                            </Link>
                         </div>
                     ))}
+
+                    {/* View All - Styles matched to immersive card size
+                    <div className="min-w-[200px] snap-center md:hidden flex items-center justify-center p-4">
+                        <Link href="/all-activities" className="group relative w-full h-full aspect-[3/4] rounded-[2rem] border-2 border-dashed border-gray-300 flex flex-col items-center justify-center gap-4 hover:bg-gray-50 transition-colors">
+                            <div className="w-16 h-16 rounded-full bg-black text-white flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                                <ArrowRight className="w-6 h-6" />
+                            </div>
+                            <span className="text-sm font-bold tracking-widest uppercase text-gray-900">View All</span>
+                        </Link>
+                    </div> */}
                 </div>
             </div>
         </section>
