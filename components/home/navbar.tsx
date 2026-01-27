@@ -130,7 +130,7 @@ export function Navbar() {
                             {/* Call */}
                             <a
                                 href="tel:+919567296056"
-                                className={`h-9 w-9 inline-flex items-center justify-center rounded-full transition
+                                className={`h-9 inline-flex items-center justify-center rounded-full transition px-3 gap-2
                                     ${isScrolled
                                         ? "text-white hover:bg-white/10"
                                         : "text-black hover:bg-black/5"
@@ -138,7 +138,8 @@ export function Navbar() {
                                 `}
                                 aria-label="Call"
                             >
-                                <Phone className="h-4.5 w-4.5" />
+                                <Phone className="h-4 w-4" />
+                                <span className="text-xs font-semibold">CALL</span>
                             </a>
 
                             {/* Mobile toggle */}

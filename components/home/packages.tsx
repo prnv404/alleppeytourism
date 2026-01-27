@@ -302,11 +302,10 @@ export function PackageBuilder() {
                                             />
                                             <div className={`absolute inset-0 transition-colors ${isSelected ? 'bg-emerald-900/40' : 'bg-gradient-to-t from-black/80 to-transparent'}`} />
 
-                                            {isSelected && (
-                                                <div className="absolute top-2 right-2 bg-emerald-500 rounded-full p-0.5">
-                                                    <Check className="w-3 h-3 text-white" />
-                                                </div>
-                                            )}
+                                            {/* Selection Checkbox Indicator */}
+                                            <div className={`absolute top-2 right-2 w-5 h-5 rounded-full border flex items-center justify-center transition-all ${isSelected ? 'bg-emerald-500 border-emerald-500' : 'bg-black/20 border-white/70 hover:bg-black/40'}`}>
+                                                {isSelected && <Check className="w-3 h-3 text-white" />}
+                                            </div>
 
                                             <div className="absolute bottom-2 left-2 right-2">
                                                 <p className="text-white text-xs font-bold leading-tight shadow-sm">{dest.name}</p>
