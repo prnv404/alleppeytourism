@@ -6,7 +6,7 @@ import { BookingListings } from "@/components/home/listing";
 import { Footer } from "@/components/home/footer";
 import { Testimonials } from "@/components/home/testimonial";
 import { PackageBuilder } from "@/components/home/packages";
-import ElevenLabsWidget from "@/components/eleven-labs-widget";
+import ElevenLabsWidget from "@/components/shared/eleven-labs-widget";
 
 export default function Home() {
   return (
@@ -19,21 +19,21 @@ export default function Home() {
             title: "Experience the Magic of Alleppey",
             subtitle: "Discover the Venice of the East with our luxurious houseboat cruises.",
             buttonText: "Book Now",
-            buttonUrl: "/booking",
+            buttonUrl: "/book/houseboat",
           },
           {
             image: "/images/hero-2.jpg",
             title: "Alleppey Backwaters",
             subtitle: "Explore the serene backwaters and lush greenery of Alleppey.",
             buttonText: "Learn More",
-            buttonUrl: "/about",
+            buttonUrl: "/book/shikara",
           },
           {
             image: "/images/hero-3.jpg",
             title: "Alleppey Houseboats",
             subtitle: "Relax and rejuvenate on our premium houseboats.",
             buttonText: "View Packages",
-            buttonUrl: "/packages",
+            buttonUrl: "/book/kayak",
           },
         ]}
       />
@@ -42,6 +42,7 @@ export default function Home() {
 
       <Testimonials />
       <Footer />
+      <ElevenLabsWidget />
     </>
   );
 }

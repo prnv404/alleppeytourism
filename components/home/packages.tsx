@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, Ship, Anchor, Zap, Users, MapPin, ChevronDown, ChevronUp, X, ArrowRight, Clock, FileText, MessageCircle } from "lucide-react";
+import { Check, MapPin, ChevronDown, ChevronUp, X, ArrowRight, Clock, FileText, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -16,81 +16,8 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 
-type ActivityType = "houseboat" | "time-based";
-
-interface Activity {
-    id: string;
-    name: string;
-    type: ActivityType;
-    icon: any;
-    image: string;
-    basePrice: number;
-    variants?: { id: string; name: string; price: number }[];
-    durations?: { id: string; name: string; multiplier: number }[];
-}
-
-const activities: Activity[] = [
-    {
-        id: "houseboat",
-        name: "Private Houseboat",
-        type: "houseboat",
-        icon: Ship,
-        image: "/images/hero-1.jpg",
-        basePrice: 0, // Price depends on variant
-        variants: [
-            { id: "deluxe", name: "Deluxe (AC 9pm-6am)", price: 8500 },
-            { id: "premium", name: "Premium (AC Full Time)", price: 12000 },
-            { id: "luxury", name: "Luxury (Glass Covered)", price: 18000 }
-        ]
-    },
-    {
-        id: "shikara",
-        name: "Shikara Ride",
-        type: "time-based",
-        icon: Anchor,
-        image: "/images/hero-2.jpg",
-        basePrice: 800,
-        durations: [
-            { id: "1hr", name: "1 Hour", multiplier: 1 },
-            { id: "2hr", name: "2 Hours", multiplier: 2 },
-            { id: "3hr", name: "3 Hours", multiplier: 3 },
-            { id: "sunset", name: "Sunset (2.5 Hrs)", multiplier: 2.5 }
-        ]
-    },
-    {
-        id: "kayak",
-        name: "Kayaking",
-        type: "time-based",
-        icon: Users,
-        image: "/images/hero-3.jpg",
-        basePrice: 500,
-        durations: [
-            { id: "1hr", name: "1 Hour", multiplier: 1 },
-            { id: "sunrise", name: "Sunrise (Morning)", multiplier: 1.5 },
-            { id: "sunset", name: "Sunset (Evening)", multiplier: 1.5 }
-        ]
-    },
-    {
-        id: "speedboat",
-        name: "Speed Boat",
-        type: "time-based",
-        icon: Zap,
-        image: "/images/hero-1.jpg",
-        basePrice: 1500,
-        durations: [
-            { id: "round", name: "Lake Round", multiplier: 1 },
-            { id: "hour", name: "1 Hour Blast", multiplier: 2 }
-        ]
-    },
-];
-
-const destinations = [
-    { id: "temple", name: "Ambalappuzha", image: "/images/hero-2.jpg" },
-    { id: "church", name: "Pulinkunnu", image: "/images/hero-3.jpg" },
-    { id: "beach", name: "Alleppey Beach", image: "/images/hero-1.jpg" },
-    { id: "museum", name: "Revi Museum", image: "/images/hero-2.jpg" },
-    { id: "kuttanad", name: "Kuttanad", image: "/images/hero-3.jpg" },
-];
+import { activities, destinations } from "@/lib/packages-data";
+import Link from "next/link";
 
 interface Selection {
     id: string;
@@ -273,6 +200,11 @@ export function PackageBuilder() {
                                                                 </div>
                                                             </div>
                                                         )}
+                                                    </div>
+                                                    <div className="mt-3 pt-3 border-t border-gray-100 flex justify-end">
+                                                        <Link href={`/book/${item.id}`} className="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1 bg-emerald-50 px-3 py-2 rounded-lg transition-colors">
+                                                            View Full Details <ArrowRight className="w-3.5 h-3.5" />
+                                                        </Link>
                                                     </div>
                                                 </motion.div>
                                             )}

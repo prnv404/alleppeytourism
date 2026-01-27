@@ -18,11 +18,10 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const navItems = [
     { label: "Home", href: "/", icon: Home },
-    { label: "Houseboats", href: "/houseboats", icon: Ship },
-    { label: "Shikara", href: "/shikara", icon: Ship },
-    { label: "Kayak", href: "/kayak", icon: Ship },
-    { label: "SpeedBoat", href: "/speedboat", icon: Ship },
-    { label: "Contact", href: "/contact", icon: MessageCircle },
+    { label: "Houseboats", href: "/book/houseboat", icon: Ship },
+    { label: "Shikara", href: "/book/shikara", icon: Ship },
+    { label: "Kayak", href: "/book/kayak", icon: Ship },
+    { label: "SpeedBoat", href: "/book/speedboat", icon: Ship },
 ];
 
 const carouselItems = [

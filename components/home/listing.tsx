@@ -22,7 +22,7 @@ const bookings = [
         icon: Ship,
         color: "text-emerald-600 bg-emerald-50",
         badgeColor: "bg-emerald-500",
-        href: "/houseboats",
+        href: "/book/houseboat",
         highlights: ["✨ 20% Off Today", "🍽️ All Meals Inc.", "🌅 Sunset Cruise"]
     },
     {
@@ -37,8 +37,8 @@ const bookings = [
         features: ["Open Deck", "Guided Tour", "Sunset"],
         icon: Anchor,
         color: "text-orange-600 bg-orange-50",
-        badgeColor: "bg-orange-500",
-        href: "/shikara",
+        badgeColor:"bg-orange-500",
+        href: "/book/shikara",
         highlights: ["💑 Couple Special", "📸 Photo Stops", "🛶 Village Tour"]
     },
     {
@@ -54,7 +54,7 @@ const bookings = [
         icon: Users,
         color: "text-blue-600 bg-blue-50",
         badgeColor: "bg-blue-500",
-        href: "/kayak",
+        href: "/book/kayak",
         highlights: ["🚣 Beginner Friendly", "🌅 Sunrise Special", "🌿 Eco Tour"]
     },
     {
@@ -70,7 +70,7 @@ const bookings = [
         icon: Zap,
         color: "text-red-600 bg-red-50",
         badgeColor: "bg-red-500",
-        href: "/speedboat",
+        href: "/book/speedboat",
         highlights: ["⚡ Adrenaline Rush", "🌊 Lake Crossing", "👷 Safety First"]
     }
 ];
