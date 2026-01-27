@@ -16,16 +16,19 @@ export interface Activity {
 export const activities: Activity[] = [
     {
         id: "houseboat",
-        name: "Private Houseboat",
-        description: "Experience the tranquility of the backwaters in a private luxury houseboat. All meals included.",
+        name: "Houseboat Stay",
+        description: "Choose between private luxury boats or budget-friendly shared experiences.",
         type: "houseboat",
         image: "/images/hero-1.jpg",
-        basePrice: 0,
-        features: ["Private Bedroom", "AC Options", "All Meals Included", "Scenic Route"],
+        basePrice: 4999,
+        features: ["Private & Shared Options", "All Meals Included", "Scenic Route", "AC Bedrooms"],
         variants: [
-            { id: "deluxe", name: "Deluxe (AC 9pm-6am)", price: 8500, description: "Classic houseboat experience with AC in bedroom during sleeping hours." },
-            { id: "premium", name: "Premium (AC Full Time)", price: 12000, description: "Enjoy full-time air conditioning in the bedroom for maximum comfort." },
-            { id: "luxury", name: "Luxury (Glass Covered)", price: 18000, description: "High-end glass-covered boat with premium amenities and full-time AC." }
+            { id: "shared-standard", name: "Shared Standard", price: 4999, description: "Private bedroom in a shared boat (AC 9pm-6am)." },
+            { id: "shared-premium", name: "Shared Premium", price: 6500, description: "Premium private room in a shared boat with full-time AC." },
+            { id: "private-deluxe", name: "Private Deluxe", price: 12000, description: "Entire boat to yourself. AC Options available." },
+            { id: "private-premium", name: "Private Premium", price: 18000, description: "Glass-covered premium boat with premium amenities." },
+            { id: "private-luxury", name: "Private Luxury", price: 24000, description: "Glass-covered luxury boat with premium amenities." }
+
         ]
     },
     {

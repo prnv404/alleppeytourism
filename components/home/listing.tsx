@@ -11,10 +11,10 @@ import { motion, AnimatePresence } from "framer-motion";
 const bookings = [
     {
         id: "houseboat",
-        title: "Luxury Houseboat",
-        description: "Experience the Venice of the East in a premium floating palace.",
+        title: "Houseboat",
+        description: "Experience the Venice of the East in a floating palace.",
         image: "/images/hero-1.jpg",
-        price: "₹8,500",
+        price: "₹4,999",
         unit: "/ night",
         rating: 4.8,
         reviews: 124,
@@ -22,7 +22,7 @@ const bookings = [
         icon: Ship,
         color: "text-emerald-600 bg-emerald-50",
         badgeColor: "bg-emerald-500",
-        href: "/book/houseboat",
+        href: "/houseboats",
         highlights: ["✨ 20% Off Today", "🍽️ All Meals Inc.", "🌅 Sunset Cruise"]
     },
     {
@@ -37,7 +37,7 @@ const bookings = [
         features: ["Open Deck", "Guided Tour", "Sunset"],
         icon: Anchor,
         color: "text-orange-600 bg-orange-50",
-        badgeColor:"bg-orange-500",
+        badgeColor: "bg-orange-500",
         href: "/book/shikara",
         highlights: ["💑 Couple Special", "📸 Photo Stops", "🛶 Village Tour"]
     },
@@ -106,7 +106,7 @@ export function BookingListings() {
                         <div key={item.id} className="min-w-[85vw] sm:min-w-[340px] md:min-w-0 snap-center md:snap-align-none h-full">
                             <Link href={item.href} className="group block h-full relative">
                                 {/* Immersive Card Container */}
-                                <div className="relative aspect-[3/4] md:aspect-[4/5] w-full overflow-hidden rounded-[2rem] bg-gray-200 isolate">
+                                <div className="relative aspect-[3/4] md:aspect-[4/5] w-full overflow-hidden rounded-[1rem] bg-gray-200 isolate">
                                     {/* Full Background Image */}
                                     <Image
                                         src={item.image}

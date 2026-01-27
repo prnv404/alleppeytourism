@@ -11,14 +11,15 @@ import {
     Compass,
     Info,
     MessageCircle,
-
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const navItems = [
     { label: "Home", href: "/", icon: Home },
-    { label: "Houseboats", href: "/book/houseboat", icon: Ship },
+    { label: "Houseboats", href: "/houseboats", icon: Ship },
     { label: "Shikara", href: "/book/shikara", icon: Ship },
     { label: "Kayak", href: "/book/kayak", icon: Ship },
     { label: "SpeedBoat", href: "/book/speedboat", icon: Ship },
@@ -32,9 +33,13 @@ const carouselItems = [
     "Crazy SpeedBoat"
 ];
 
-export function Navbar() {
+interface NavbarProps {
+    className?: string;
+}
+
+export function Navbar({ className }: NavbarProps) {
     const [isOpen, setIsOpen] = useState(false);
-    const [activeTab, setActiveTab] = useState("Home");
+    const pathname = usePathname();
     const [carouselIndex, setCarouselIndex] = useState(0);
     const [isScrolled, setIsScrolled] = useState(false);
 
@@ -57,7 +62,7 @@ export function Navbar() {
 
     return (
         <>
-            <nav className="fixed top-0 left-0 right-0 z-50 pt-3 transition-all duration-300">
+            <nav className={`fixed top-0 left-0 right-0 z-50 pt-3 transition-all duration-300 ${className || ""}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                     {/* NAV CONTAINER */}
@@ -69,42 +74,44 @@ export function Navbar() {
                     >
 
                         {/* Logo Carousel */}
-                        <a
+                        <Link
                             href="/"
                             className={`relative h-6 w-40 overflow-hidden text-lg lg:text-xl font-bold leading-none tracking-tight flex items-center transition-colors duration-300
                                 ${isScrolled ? "text-white" : "text-black"}
                             `}
                         >
                             Alleppey <span className="text-emerald-500 ml-1">Tourism</span>
-                        </a>
+                        </Link>
 
                         {/* Desktop Navigation */}
                         <div className="hidden lg:flex items-center gap-1">
-                            {navItems.map((item) => (
-                                <a
-                                    key={item.label}
-                                    href={item.href}
-                                    onClick={() => setActiveTab(item.label)}
-                                    className={`group relative h-9 px-4 inline-flex items-center justify-center gap-2 rounded-full text-sm font-medium transition-all
-                                        ${activeTab === item.label
-                                            ? isScrolled
-                                                ? "bg-white text-black shadow-md shadow-white/10"
-                                                : "bg-black text-white shadow-md shadow-black/20"
-                                            : isScrolled
-                                                ? "text-gray-300 hover:text-white hover:bg-white/10"
-                                                : "text-gray-600 hover:text-black hover:bg-black/5"
-                                        }
-                                    `}
-                                >
-                                    <item.icon className={`h-4 w-4 transition-colors
-                                        ${activeTab === item.label
-                                            ? "text-emerald-500"
-                                            : isScrolled ? "text-gray-400 group-hover:text-white" : "text-gray-500 group-hover:text-black"
-                                        }
-                                    `} />
-                                    {item.label}
-                                </a>
-                            ))}
+                            {navItems.map((item) => {
+                                const isActive = pathname === item.href;
+                                return (
+                                    <Link
+                                        key={item.label}
+                                        href={item.href}
+                                        className={`group relative h-9 px-4 inline-flex items-center justify-center gap-2 rounded-full text-sm font-medium transition-all
+                                            ${isActive
+                                                ? isScrolled
+                                                    ? "bg-white text-black shadow-md shadow-white/10"
+                                                    : "bg-black text-white shadow-md shadow-black/20"
+                                                : isScrolled
+                                                    ? "text-gray-300 hover:text-white hover:bg-white/10"
+                                                    : "text-gray-600 hover:text-black hover:bg-black/5"
+                                            }
+                                        `}
+                                    >
+                                        <item.icon className={`h-4 w-4 transition-colors
+                                            ${isActive
+                                                ? "text-emerald-500"
+                                                : isScrolled ? "text-gray-400 group-hover:text-white" : "text-gray-500 group-hover:text-black"
+                                            }
+                                        `} />
+                                        {item.label}
+                                    </Link>
+                                );
+                            })}
                         </div>
 
                         {/* Right Section */}
@@ -170,29 +177,31 @@ export function Navbar() {
                         : "bg-white/90 border-black/5"
                     }
                 `}>
-                    {navItems.map((item) => (
-                        <a
-                            key={item.label}
-                            href={item.href}
-                            onClick={() => {
-                                setActiveTab(item.label);
-                                setIsOpen(false);
-                            }}
-                            className={`flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition
-                                ${activeTab === item.label
-                                    ? isScrolled
-                                        ? "bg-white/10 text-white font-semibold"
-                                        : "bg-gray-100 text-black font-semibold"
-                                    : isScrolled
-                                        ? "text-gray-400 hover:text-white hover:bg-white/5"
-                                        : "text-gray-600 hover:text-black hover:bg-black/5"
-                                }
-                            `}
-                        >
-                            <item.icon className={`h-4 w-4 ${activeTab === item.label ? "text-emerald-500" : isScrolled ? "text-gray-500" : "text-gray-500"}`} />
-                            {item.label}
-                        </a>
-                    ))}
+                    {navItems.map((item) => {
+                        const isActive = pathname === item.href;
+                        return (
+                            <Link
+                                key={item.label}
+                                href={item.href}
+                                onClick={() => {
+                                    setIsOpen(false);
+                                }}
+                                className={`flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition
+                                    ${isActive
+                                        ? isScrolled
+                                            ? "bg-white/10 text-white font-semibold"
+                                            : "bg-gray-100 text-black font-semibold"
+                                        : isScrolled
+                                            ? "text-gray-400 hover:text-white hover:bg-white/5"
+                                            : "text-gray-600 hover:text-black hover:bg-black/5"
+                                    }
+                                `}
+                            >
+                                <item.icon className={`h-4 w-4 ${isActive ? "text-emerald-500" : isScrolled ? "text-gray-500" : "text-gray-500"}`} />
+                                {item.label}
+                            </Link>
+                        );
+                    })}
                 </div>
             </div>
         </>

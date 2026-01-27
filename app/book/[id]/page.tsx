@@ -1,5 +1,6 @@
 import { activities } from "@/lib/packages-data";
 import { ActivityDetail } from "@/components/booking/activity-detail";
+import { Navbar } from "@/components/home/navbar";
 import { notFound } from "next/navigation";
 
 interface PageProps {
@@ -20,5 +21,9 @@ export default async function BookingPage({ params }: PageProps) {
         notFound();
     }
 
-    return <ActivityDetail activity={activity} />;
+    return (
+        <>
+            <ActivityDetail activity={activity} />
+        </>
+    );
 }

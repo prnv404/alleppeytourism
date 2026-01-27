@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@dodopayments/nextjs": "^0.3.3",
     "@elevenlabs/react": "^0.13.0",
     "@radix-ui/react-popover": "^1.1.15",
     "@radix-ui/react-slot": "^1.2.4",
