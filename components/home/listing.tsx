@@ -38,7 +38,7 @@ const bookings = [
         icon: Anchor,
         color: "text-orange-600 bg-orange-50",
         badgeColor: "bg-orange-500",
-        href: "/book/shikara",
+        href: "/shikara",
         highlights: ["💑 Couple Special", "📸 Photo Stops", "🛶 Village Tour"]
     },
     {
@@ -54,7 +54,7 @@ const bookings = [
         icon: Users,
         color: "text-blue-600 bg-blue-50",
         badgeColor: "bg-blue-500",
-        href: "/book/kayak",
+        href: "/kayak",
         highlights: ["🚣 Beginner Friendly", "🌅 Sunrise Special", "🌿 Eco Tour"]
     },
     {
@@ -70,7 +70,7 @@ const bookings = [
         icon: Zap,
         color: "text-red-600 bg-red-50",
         badgeColor: "bg-red-500",
-        href: "/book/speedboat",
+        href: "/speedboat",
         highlights: ["⚡ Adrenaline Rush", "🌊 Lake Crossing", "👷 Safety First"]
     }
 ];

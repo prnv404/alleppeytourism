@@ -20,9 +20,9 @@ import Link from "next/link";
 const navItems = [
     { label: "Home", href: "/", icon: Home },
     { label: "Houseboats", href: "/houseboats", icon: Ship },
-    { label: "Shikara", href: "/book/shikara", icon: Ship },
-    { label: "Kayak", href: "/book/kayak", icon: Ship },
-    { label: "SpeedBoat", href: "/book/speedboat", icon: Ship },
+    { label: "Shikara", href: "/shikara", icon: Ship },
+    { label: "Kayak", href: "/kayak", icon: Ship },
+    { label: "SpeedBoat", href: "/speedboat", icon: Ship },
 ];
 
 const carouselItems = [

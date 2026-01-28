@@ -61,7 +61,7 @@ export function Hero({ slides }: HeroProps) {
   }, [currentIndex]);
 
   return (
-    <div className="relative w-full mt-24 px-4 sm:px-6 lg:px-8 mb-5">
+    <div className="relative w-full mt-5 px-4 sm:px-6 lg:px-8 mb-5">
       <div className="relative w-full h-[75vh] min-h-[600px] max-h-[900px] rounded-[1.2rem] overflow-hidden shadow-2xl mx-auto max-w-7xl bg-black group">
 
         <AnimatePresence initial={false} custom={direction}>

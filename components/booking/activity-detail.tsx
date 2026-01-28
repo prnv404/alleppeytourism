@@ -6,13 +6,14 @@ import { Activity, activities } from "@/lib/packages-data";
 import { useSearchParams } from "next/navigation";
 import { ListingGrid, ListingItem } from "@/components/ui/listing-grid";
 
-import { ActivityNavbar } from "./detail/activity-navbar";
+
+import { Navbar } from "@/components/home/navbar";
 import { ActivityHero } from "./detail/activity-hero";
-import { ActivityHeader } from "./detail/activity-header";
+
 import { ActivityHighlights } from "./detail/activity-highlights";
 import { ActivityInfo } from "./detail/activity-info";
 import { MobileSelectionSection } from "./detail/mobile-selection-section";
-import { CruiseItinerary } from "./detail/cruise-itinerary";
+
 import { BookingWidget } from "./detail/booking-widget";
 import { MobileBottomBar } from "./detail/mobile-bottom-bar";
 import { CRUISE_TYPES, StayType } from "./detail/shared";
@@ -29,14 +30,14 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
     const [selectedVariantId, setSelectedVariantId] = useState<string>(
         paramVariant || (activity.variants ? activity.variants[0].id : "")
     );
-    const [selectedDurationId, setSelectedDurationId] = useState<string>(
-        paramDuration || (activity.durations ? activity.durations[0].id : "")
+    const [selectedDurationId, setSelectedDurationId] = useState<string | null>(
+        paramDuration || null
     );
     const [date, setDate] = useState<Date | undefined>(undefined);
     const [peopleCount, setPeopleCount] = useState(2);
     const [isScrolled, setIsScrolled] = useState(false);
     const [selectedAddons, setSelectedAddons] = useState<string[]>([]);
-    const [stayType, setStayType] = useState<StayType>("overnight");
+    const [stayType, setStayType] = useState<StayType | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [showMobileBar, setShowMobileBar] = useState(true);
 
@@ -77,10 +78,10 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
 
     // Helper for selected variant/duration details
     const selectedVariant = activity.variants?.find(v => v.id === selectedVariantId);
-    const selectedDuration = activity.durations?.find(d => d.id === selectedDurationId);
+    const selectedDuration = selectedDurationId ? activity.durations?.find(d => d.id === selectedDurationId) : null;
 
     // Is per-person pricing?
-    const isPerPerson = activity.id === 'kayak' || activity.id === 'speedboat'; // Ideally this should be in the data model
+    const isPerPerson = activity.id === 'kayak' || activity.id === 'speedboat';
 
     // Helper to get add-on price
     const getAddonPrice = (addon: Activity) => {
@@ -100,10 +101,12 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
         // Base Activity Price
         let base = 0;
         if (activity.type === "houseboat" && activity.variants) {
+            if (!stayType) return 0; // No selection yet
             const v = activity.variants.find(v => v.id === selectedVariantId);
             const multiplier = CRUISE_TYPES[stayType].multiplier;
             base = v ? v.price * multiplier : 0;
         } else if (activity.type === "time-based" && activity.durations) {
+            if (!selectedDurationId) return 0; // No selection yet
             const d = activity.durations.find(d => d.id === selectedDurationId);
             base = d ? activity.basePrice * d.multiplier : 0;
         } else {
@@ -130,15 +133,25 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
     const currentPrice = getPrice();
 
     const handleWhatsAppClick = () => {
+        // Validation
+        if (activity.type === "houseboat" && !stayType) {
+            alert("Please select a Cruise Type (Overnight, Day, etc).");
+            // Highlight section logic could go here
+            return;
+        }
+        if (activity.type === "time-based" && !selectedDurationId) {
+            alert("Please select a Duration.");
+            return;
+        }
+
         let message = `Hi Alleppey Tourism! 👋\nI'm interested in booking: *${activity.name}*\n`;
 
-        if (activity.type === "houseboat") {
+        if (activity.type === "houseboat" && stayType) {
             const v = activity.variants?.find(x => x.id === selectedVariantId);
             message += `*Type:* ${v?.name}\n`;
             message += `*Cruise:* ${CRUISE_TYPES[stayType].label}\n`;
-        } else {
-            const d = activity.durations?.find(x => x.id === selectedDurationId);
-            message += `*Duration:* ${d?.name}\n`;
+        } else if (selectedDuration) {
+            message += `*Duration:* ${selectedDuration.name}\n`;
         }
 
         message += `*Guests:* ${peopleCount}\n`;
@@ -165,7 +178,22 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
     };
 
     const handlePayment = async () => {
+        // Validation for payment
+        if (activity.type === "houseboat" && !stayType) {
+            alert("Please select a Cruise Type (Overnight, Day, etc).");
+            return;
+        }
+        if (activity.type === "time-based" && !selectedDurationId) {
+            alert("Please select a Duration.");
+            return;
+        }
+        if (!date) {
+            alert("Please select a travel date.");
+            return;
+        }
+
         setIsLoading(true);
+
         try {
             // Calculate 25% advance payment in paise (smallest currency unit)
             // currentPrice is in rupees, so multiply by 100 to convert to paise
@@ -289,25 +317,25 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
     });
 
     return (
-        <div className="min-h-screen bg-gray-50/50 pb-24 md:pb-12 md:pt-24 font-sans">
-            <ActivityNavbar activity={activity} isScrolled={isScrolled} />
+        <div className="min-h-screen bg-gray-50/50 pb-24 md:pb-12 pt-20 md:pt-24 font-sans">
+            <Navbar />
 
-            <main className="max-w-7xl mx-auto md:px-6 md:pt-8 min-h-screen">
-                <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+            <main className="max-w-7xl mx-auto px-4 md:px-6 md:pt-8 min-h-screen">
+                {/* Full Width Hero Section */}
+                <ActivityHero activity={activity} />
 
-                    {/* Left Column: Visuals & Info */}
+                <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 relative px-4 md:px-0">
+
+                    {/* Left Column: Info */}
                     <div className="flex-1 w-full">
-                        <ActivityHero activity={activity} />
 
-                        {/* Content Container - Overlaps on Mobile */}
-                        <div className="relative z-10 -mt-4 md:mt-10 bg-white rounded-t-[1.5rem] md:rounded-none px-5 py-6 md:p-0">
+                        {/* Content Container */}
+                        <div className="relative z-10 bg-white rounded-t-[1.5rem] md:rounded-none py-6 md:p-0">
                             <div className="w-10 h-1 bg-gray-200 rounded-full mx-auto mb-6 md:hidden" />
 
-                            <ActivityHeader activity={activity} />
+
 
                             <div className="space-y-8 md:space-y-12">
-                                <ActivityHighlights specs={activity.specs} features={activity.features} />
-
                                 <MobileSelectionSection
                                     activity={activity}
                                     selectedVariantId={selectedVariantId}
@@ -326,9 +354,11 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
                                     setStayType={setStayType}
                                 />
 
+                                <ActivityHighlights specs={activity.specs} features={activity.features} />
+
                                 <ActivityInfo activity={activity} />
 
-                                {activity.type === "houseboat" && <CruiseItinerary />}
+
                             </div>
                         </div>
                     </div>
@@ -358,11 +388,7 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
                 </div>
             </main>
 
-            {/* Explore More - Cross Sell Section */}
-            <section id="explore-more-section" className="max-w-7xl mx-auto px-4 md:px-6 py-16 border-t border-gray-100">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Explore More</h2>
-                <ListingGrid items={crossSellItems} />
-            </section>
+
 
             <MobileBottomBar
                 peopleCount={peopleCount}

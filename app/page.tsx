@@ -6,7 +6,6 @@ import { BookingListings } from "@/components/home/listing";
 import { Footer } from "@/components/home/footer";
 import { Testimonials } from "@/components/home/testimonial";
 import { PackageBuilder } from "@/components/home/packages";
-import ElevenLabsWidget from "@/components/shared/eleven-labs-widget";
 
 import { ListingGrid, ListingItem } from "@/components/ui/listing-grid";
 import { activities } from "@/lib/packages-data";
@@ -42,6 +41,14 @@ export default function Home() {
   return (
     <>
       <Navbar />
+      <div className="mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="space-y-2">
+          <span className="text-emerald-600 font-bold tracking-widest text-xs uppercase">Explore Alleppey with us</span>
+          <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter">
+            DISCOVER ALLEPPEY
+          </h2>
+        </div>
+      </div>
       <Hero
         slides={[
           {
@@ -113,7 +120,7 @@ export default function Home() {
 
       <Testimonials />
       <Footer />
-      <ElevenLabsWidget />
+
     </>
   );
 }

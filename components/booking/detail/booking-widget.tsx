@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { format } from "date-fns";
-import { Minus, Plus, Calendar as CalendarIcon, Check, Star, Lock, Loader2 } from "lucide-react";
+import { Minus, Plus, Calendar as CalendarIcon, Check, Star, Lock, Loader2, Phone } from "lucide-react";
 import { Activity } from "@/lib/packages-data";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -19,7 +19,7 @@ interface BookingWidgetProps {
     setDate: (date: Date | undefined) => void;
     selectedVariantId: string;
     setSelectedVariantId: (id: string) => void;
-    selectedDurationId: string;
+    selectedDurationId: string | null;
     setSelectedDurationId: (id: string) => void;
     availableAddons: Activity[];
     selectedAddons: string[];
@@ -29,7 +29,7 @@ interface BookingWidgetProps {
     handleWhatsAppClick: () => void;
     handlePayment: () => void;
     isLoading: boolean;
-    stayType: StayType;
+    stayType: StayType | null;
     setStayType: (type: StayType) => void;
 }
 
@@ -68,7 +68,7 @@ export function BookingWidget({
                     <div className="flex justify-between items-start mb-6">
                         <div>
                             <h2 className="text-4xl font-black text-gray-900 tracking-tight">
-                                ₹{currentPrice.toLocaleString()}
+                                {currentPrice > 0 ? `₹${currentPrice.toLocaleString()}` : <span className="text-3xl text-gray-400">Select Option</span>}
                             </h2>
                             <p className="text-sm font-medium text-gray-500 mt-1">
                                 {activity.type === "houseboat"
@@ -239,39 +239,28 @@ export function BookingWidget({
 
                     {/* Book Buttons */}
                     <div className="flex gap-2">
+                        <a
+                            href="tel:+919567296056"
+                            className="bg-white hover:bg-emerald-50 text-gray-900 border border-gray-200 hover:border-emerald-300 h-14 w-14 rounded-xl flex items-center justify-center shadow-sm shrink-0 transition-all group"
+                            title="Call Us"
+                        >
+                            <Phone className="w-5 h-5 text-gray-500 group-hover:text-emerald-600 transition-colors" />
+                        </a>
                         <Button
                             onClick={handleWhatsAppClick}
-                            className="bg-white hover:bg-emerald-50 text-emerald-600 border border-emerald-200 hover:border-emerald-300 h-14 w-12 rounded-xl flex items-center justify-center shadow-sm shrink-0"
-                            title="Chat on WhatsApp"
+                            className="flex-1 h-14 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-xl shadow-lg shadow-emerald-200 transition-all border border-transparent hover:border-emerald-600 relative overflow-hidden group"
                         >
-                            <WhatsAppIcon className="w-6 h-6 fill-current" />
-                        </Button>
-                        <Button
-                            className="flex-1 h-14 bg-[#3B82F6] hover:bg-[#2563EB] text-white rounded-xl shadow-lg shadow-blue-200 transition-all border border-transparent hover:border-blue-700 relative overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed"
-                            onClick={handlePayment}
-                            disabled={isLoading}
-                        >
-                            <div className="absolute inset-0 bg-white/10 group-hover:bg-transparent transition-colors" />
-                            <div className="relative flex flex-col items-start pl-2">
-                                <div className="flex items-center gap-2">
-                                    {isLoading ? (
-                                        <Loader2 className="w-4 h-4 text-blue-100 animate-spin" />
-                                    ) : (
-                                        <Lock className="w-4 h-4 text-blue-100" />
-                                    )}
-                                    <span className="text-sm font-bold">{isLoading ? "Processing..." : "Pay 25% Advance"}</span>
-                                </div>
-                                <span className="text-[10px] text-blue-100 font-medium ml-6">Pay rest before check-in</span>
+                            <div className="flex items-center justify-center gap-3">
+                                <WhatsAppIcon className="w-6 h-6 fill-white" />
+                                <span className="text-lg font-bold">Book via WhatsApp</span>
                             </div>
                         </Button>
                     </div>
+                    <p className="text-[10px] text-center text-gray-400 font-medium mt-3">
+                        Instant confirmation • No hidden fees
+                    </p>
 
-                    <div className="text-center mt-3">
-                        <div className="text-[10px] text-gray-400 flex items-center justify-center gap-1.5">
-                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)] animate-pulse" />
-                            <span>Only ₹{(currentPrice * 0.25).toLocaleString()} needed to confirm</span>
-                        </div>
-                    </div>
+
 
                 </div>
             </div>

@@ -26,7 +26,6 @@ export default async function BookingPage({ params }: PageProps) {
         <>
             <Navbar className="hidden md:block" />
             <ActivityDetail activity={activity} />
-            <Footer />
         </>
     );
 }
