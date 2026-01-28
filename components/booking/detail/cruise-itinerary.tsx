@@ -64,7 +64,7 @@ export function CruiseItinerary() {
                     <div
                         key={item.id}
                         className={cn(
-                            "min-w-[280px] snap-center rounded-2xl border p-5 transition-all hover:shadow-lg relative overflow-hidden group bg-white",
+                            "min-w-[280px] md:min-w-0 md:w-auto snap-center rounded-2xl border p-5 transition-all hover:shadow-lg relative overflow-hidden group bg-white",
                             item.border
                         )}
                     >

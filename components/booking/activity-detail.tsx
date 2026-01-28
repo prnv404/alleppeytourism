@@ -37,6 +37,8 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
     const [isScrolled, setIsScrolled] = useState(false);
     const [selectedAddons, setSelectedAddons] = useState<string[]>([]);
     const [stayType, setStayType] = useState<StayType>("overnight");
+    const [isLoading, setIsLoading] = useState(false);
+    const [showMobileBar, setShowMobileBar] = useState(true);
 
     // Scroll listener for header background
     useEffect(() => {
@@ -45,6 +47,32 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
         };
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    // Hide mobile bar when scrolled to "Explore More" section
+    useEffect(() => {
+        const handleScroll = () => {
+            const exploreSection = document.getElementById('explore-more-section');
+            if (exploreSection) {
+                const rect = exploreSection.getBoundingClientRect();
+                const isVisible = rect.top <= window.innerHeight && rect.bottom >= 0;
+                setShowMobileBar(!isVisible);
+            }
+        };
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Check initial state
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    // Reset loading state when user returns to the page (e.g., back from checkout)
+    useEffect(() => {
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === 'visible') {
+                setIsLoading(false);
+            }
+        };
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
     }, []);
 
     // Helper for selected variant/duration details
@@ -134,6 +162,93 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
 
         message += `\n*Total Estimated Price:* ₹${currentPrice.toLocaleString()}\n\nPlease confirm availability.`;
         window.open(`https://wa.me/919567296056?text=${encodeURIComponent(message)}`, '_blank');
+    };
+
+    const handlePayment = async () => {
+        setIsLoading(true);
+        try {
+            // Calculate 25% advance payment in paise (smallest currency unit)
+            // currentPrice is in rupees, so multiply by 100 to convert to paise
+            // Then take 25% of that amount
+            const advanceAmountInPaise = Math.round(currentPrice * 100 * 0.25);
+
+            // Create product with 25% advance amount
+            const productResponse = await fetch('/api/products', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: activity.name,
+                    description: activity.description,
+                    price: advanceAmountInPaise,
+                    currency: "INR",
+                    type: activity.type,
+                    stayType: stayType,
+                    variantId: selectedVariantId,
+                    durationId: selectedDurationId,
+                    addons: selectedAddons,
+                    peopleCount: peopleCount,
+                    date: date ? date.toISOString() : '',
+                })
+            });
+
+            if (!productResponse.ok) {
+                const errorData = await productResponse.json();
+                throw new Error(errorData.error || 'Product creation failed');
+            }
+            const productData = await productResponse.json();
+            console.log('Product Created:', productData);
+
+            const productId = productData.product_id || productData.id;
+            if (!productId) {
+                throw new Error('Product ID missing in response');
+            }
+
+            // Create checkout session
+            const response = await fetch('/api/checkout', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    product_cart: [
+                        {
+                            product_id: productId,
+                            quantity: 1
+                        }
+                    ],
+                    payment_link: true,
+                    billing_currency: "INR",
+                    billing: {
+                        city: "Alleppey",
+                        country: "IN",
+                        state: "Kerala",
+                        street: "Boat Jetty",
+                        zipcode: "688001"
+                    },
+                    metadata: {
+                        date: date ? date.toISOString() : '',
+                        variant: selectedVariantId,
+                        duration: selectedDurationId,
+                        productName: activity.name,
+                        amount: advanceAmountInPaise.toString()
+                    }
+                })
+            });
+
+            console.log(response);
+
+            if (!response.ok) throw new Error('Payment creation failed');
+
+            const data = await response.json();
+            if (data.checkout_url || data.url || data.payment_link) {
+                window.location.href = data.checkout_url || data.url || data.payment_link;
+            } else {
+                console.error("No payment link returned", data);
+                setIsLoading(false);
+            }
+        } catch (error) {
+            console.error("Payment error", error);
+            alert("Could not initiate payment. Please try again.");
+            setIsLoading(false);
+        }
     };
 
     // Filter available add-ons (exclude current activity)
@@ -235,6 +350,8 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
                         getAddonPrice={getAddonPrice}
                         currentPrice={currentPrice}
                         handleWhatsAppClick={handleWhatsAppClick}
+                        handlePayment={handlePayment}
+                        isLoading={isLoading}
                         stayType={stayType}
                         setStayType={setStayType}
                     />
@@ -242,7 +359,7 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
             </main>
 
             {/* Explore More - Cross Sell Section */}
-            <section className="max-w-7xl mx-auto px-4 md:px-6 py-16 border-t border-gray-100">
+            <section id="explore-more-section" className="max-w-7xl mx-auto px-4 md:px-6 py-16 border-t border-gray-100">
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Explore More</h2>
                 <ListingGrid items={crossSellItems} />
             </section>
@@ -250,7 +367,13 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
             <MobileBottomBar
                 peopleCount={peopleCount}
                 currentPrice={currentPrice}
+                activityName={activity.name}
+                activityId={activity.id}
+                date={date}
                 handleWhatsAppClick={handleWhatsAppClick}
+                handlePayment={handlePayment}
+                isLoading={isLoading}
+                showMobileBar={showMobileBar}
             />
 
 

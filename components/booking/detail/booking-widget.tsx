@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { format } from "date-fns";
-import { Minus, Plus, Calendar as CalendarIcon, Check, Star, Lock } from "lucide-react";
+import { Minus, Plus, Calendar as CalendarIcon, Check, Star, Lock, Loader2 } from "lucide-react";
 import { Activity } from "@/lib/packages-data";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -27,6 +27,8 @@ interface BookingWidgetProps {
     getAddonPrice: (addon: Activity) => number;
     currentPrice: number;
     handleWhatsAppClick: () => void;
+    handlePayment: () => void;
+    isLoading: boolean;
     stayType: StayType;
     setStayType: (type: StayType) => void;
 }
@@ -47,6 +49,8 @@ export function BookingWidget({
     getAddonPrice,
     currentPrice,
     handleWhatsAppClick,
+    handlePayment,
+    isLoading,
     stayType,
     setStayType
 }: BookingWidgetProps) {
@@ -243,14 +247,19 @@ export function BookingWidget({
                             <WhatsAppIcon className="w-6 h-6 fill-current" />
                         </Button>
                         <Button
-                            className="flex-1 h-14 bg-[#3B82F6] hover:bg-[#2563EB] text-white rounded-xl shadow-lg shadow-blue-200 transition-all border border-transparent hover:border-blue-700 relative overflow-hidden group"
-                            onClick={() => alert("Redirecting to secure payment gateway...")}
+                            className="flex-1 h-14 bg-[#3B82F6] hover:bg-[#2563EB] text-white rounded-xl shadow-lg shadow-blue-200 transition-all border border-transparent hover:border-blue-700 relative overflow-hidden group disabled:opacity-70 disabled:cursor-not-allowed"
+                            onClick={handlePayment}
+                            disabled={isLoading}
                         >
                             <div className="absolute inset-0 bg-white/10 group-hover:bg-transparent transition-colors" />
                             <div className="relative flex flex-col items-start pl-2">
                                 <div className="flex items-center gap-2">
-                                    <Lock className="w-4 h-4 text-blue-100" />
-                                    <span className="text-sm font-bold">Pay 25% Advance</span>
+                                    {isLoading ? (
+                                        <Loader2 className="w-4 h-4 text-blue-100 animate-spin" />
+                                    ) : (
+                                        <Lock className="w-4 h-4 text-blue-100" />
+                                    )}
+                                    <span className="text-sm font-bold">{isLoading ? "Processing..." : "Pay 25% Advance"}</span>
                                 </div>
                                 <span className="text-[10px] text-blue-100 font-medium ml-6">Pay rest before check-in</span>
                             </div>
@@ -258,10 +267,10 @@ export function BookingWidget({
                     </div>
 
                     <div className="text-center mt-3">
-                        <p className="text-[10px] text-gray-400 flex items-center justify-center gap-1.5">
+                        <div className="text-[10px] text-gray-400 flex items-center justify-center gap-1.5">
                             <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)] animate-pulse" />
                             <span>Only ₹{(currentPrice * 0.25).toLocaleString()} needed to confirm</span>
-                        </p>
+                        </div>
                     </div>
 
                 </div>
