@@ -20,20 +20,52 @@ export interface ListingItem {
 interface ListingGridProps {
     items: ListingItem[];
     className?: string;
+    scrollable?: boolean | "mobile";
 }
 
-export function ListingGrid({ items, className }: ListingGridProps) {
+export function ListingGrid({ items, className, scrollable = false }: ListingGridProps) {
+    const isMobileScroll = scrollable === "mobile";
+    const isAlwaysScroll = scrollable === true;
+
+    // specific classes for the scrollable behavior
+    const scrollContainerClasses = "flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 scroll-pl-4 sm:gap-6 sm:mx-0 sm:px-0 sm:scroll-pl-0";
+    const gridContainerClasses = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10";
+
+    // specific classes for items in scroll mode
+    const scrollItemClasses = "w-[280px] sm:w-[320px] shrink-0 snap-start";
+
+    let containerClasses = "";
+    let itemClasses = "";
+
+    if (isAlwaysScroll) {
+        containerClasses = scrollContainerClasses;
+        itemClasses = scrollItemClasses;
+    } else if (isMobileScroll) {
+        // Mobile: Scroll, Desktop: Grid
+        containerClasses = `${scrollContainerClasses} md:grid md:grid-cols-3 lg:grid-cols-4 md:gap-x-6 md:gap-y-10 md:overflow-visible md:pb-0`;
+        itemClasses = `${scrollItemClasses} md:w-auto md:shrink-0 md:snap-align-none`;
+    } else {
+        containerClasses = gridContainerClasses;
+    }
+
     return (
-        <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10 ${className || ""}`}>
+        <div className={`${containerClasses} ${className || ""}`}>
             {items.map((item, index) => {
                 // If rating is not provided, generate a fake plausible one or hide
                 const rating = item.rating || 4.8 + (index * 0.05);
                 const isGuestFavorite = item.isGuestFavorite ?? (index === 0 || index === 2);
 
                 return (
-                    <Link href={item.href} key={item.id} className="group block cursor-pointer">
+                    <Link
+                        href={item.href}
+                        key={item.id}
+                        className={`
+                            ${itemClasses}
+                            group block cursor-pointer
+                        `}
+                    >
                         {/* Image Carousel Wrapper */}
-                        <div className="relative aspect-[20/19] bg-gray-200 rounded-xl overflow-hidden mb-3">
+                        <div className="relative aspect-square bg-gray-200 rounded-xl overflow-hidden mb-3">
                             <Image
                                 src={item.image}
                                 alt={item.title}

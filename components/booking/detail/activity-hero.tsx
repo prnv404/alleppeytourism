@@ -16,7 +16,7 @@ export function ActivityHero({ activity }: ActivityHeroProps) {
     const [imageIndex, setImageIndex] = useState(0);
 
     return (
-        <div className="relative w-full h-[50vh] md:h-[600px] md:rounded-[2.5rem] overflow-hidden group shadow-2xl shadow-gray-200/50">
+        <div className="relative w-full h-[50vh] md:h-[600px] md:rounded-[1rem] overflow-hidden group shadow-2xl shadow-gray-200/50">
             {/* Images Slider */}
             <div className="absolute inset-0 flex transition-transform duration-700 ease-out" style={{ transform: `translateX(-${imageIndex * 100}%)` }}>
                 {[activity.image, "/images/hero-1.jpg", "/images/hero-2.jpg", "/images/hero-3.jpg"].map((img, idx) => (
@@ -64,8 +64,8 @@ export function ActivityHero({ activity }: ActivityHeroProps) {
             </div>
 
             {/* Desktop Back Button */}
-            <Link href="/" className="absolute top-8 left-8 z-30 hidden md:flex items-center gap-2 bg-black/20 hover:bg-black/40 backdrop-blur-md text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all border border-white/10">
-                <ChevronLeft className="w-4 h-4" /> Back to Explorations
+            <Link href="/houseboats" className="absolute top-8 left-8 z-30 hidden md:flex items-center gap-2 bg-white/90 hover:bg-white text-gray-900 px-5 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg hover:scale-105 active:scale-95 group">
+                <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Back to Explorations
             </Link>
 
             {/* Mobile Title Overlay */}

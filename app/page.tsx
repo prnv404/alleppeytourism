@@ -75,13 +75,27 @@ export default function Home() {
         <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
           <div>
             <span className="text-emerald-600 font-bold tracking-widest text-xs uppercase">Stay on the Water</span>
-            <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">Premium Houseboats</h2>
+            <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">Shared Houseboats</h2>
           </div>
           <a href="/houseboats" className="text-sm font-bold border-b-2 border-black pb-0.5 hover:text-emerald-600 hover:border-emerald-600 transition-colors">
             View All Stays
           </a>
         </div>
-        <ListingGrid items={houseboatItems} />
+        <ListingGrid items={houseboatItems} scrollable={true} />
+      </section>
+
+      {/* Houseboats Section */}
+      <section className="py-10 md:py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
+          <div>
+            <span className="text-emerald-600 font-bold tracking-widest text-xs uppercase">Stay on the Water</span>
+            <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">Private Houseboats</h2>
+          </div>
+          <a href="/houseboats" className="text-sm font-bold border-b-2 border-black pb-0.5 hover:text-emerald-600 hover:border-emerald-600 transition-colors">
+            View All Stays
+          </a>
+        </div>
+        <ListingGrid items={houseboatItems} scrollable={true} />
       </section>
 
       {/* Activities Section */}
@@ -93,7 +107,7 @@ export default function Home() {
               <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">Activities & Adventures</h2>
             </div>
           </div>
-          <ListingGrid items={adventureItems} />
+          <ListingGrid items={adventureItems} scrollable={true} />
         </div>
       </section>
 

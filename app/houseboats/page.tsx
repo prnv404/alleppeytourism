@@ -87,7 +87,7 @@ export default function HouseboatsPage() {
                         <span className="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs uppercase tracking-wide">Budget Friendly</span>
                         Shared Houseboats
                     </h2>
-                    <ListingGrid items={sharedItems} />
+                    <ListingGrid items={sharedItems} scrollable="mobile" />
                 </div>
 
                 {/* Private Houseboats Section */}
@@ -96,7 +96,7 @@ export default function HouseboatsPage() {
                         <span className="bg-black text-white px-3 py-1 rounded-full text-xs uppercase tracking-wide">Premium & Private</span>
                         Private Houseboats
                     </h2>
-                    <ListingGrid items={privateItems} />
+                    <ListingGrid items={privateItems} scrollable="mobile" />
                 </div>
             </main>
 

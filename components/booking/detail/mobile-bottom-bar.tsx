@@ -1,6 +1,5 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
+import { Lock } from "lucide-react";
 import { WhatsAppIcon } from "./shared";
 
 interface MobileBottomBarProps {
@@ -11,23 +10,47 @@ interface MobileBottomBarProps {
 
 export function MobileBottomBar({ peopleCount, currentPrice, handleWhatsAppClick }: MobileBottomBarProps) {
     return (
-        <div className="fixed bottom-0 left-0 right-0 p-4 pb-8 bg-white/100 border-t border-gray-200 md:hidden z-40 supports-[backdrop-filter]:bg-white/90 supports-[backdrop-filter]:backdrop-blur-xl">
-            <div className="flex items-center gap-4">
-                <div className="flex-1">
-                    <p className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Total Est. ({peopleCount} Guests)</p>
-                    <div className="flex items-baseline gap-1">
-                        <span className="text-2xl font-black text-gray-900">₹{currentPrice.toLocaleString()}</span>
+        <div className="fixed bottom-0 left-0 right-0 p-4 pb-8 bg-white border-t border-gray-100 md:hidden z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+            <div className="flex flex-col gap-3">
+                {/* Price & Info Row */}
+                <div className="flex items-end justify-between px-1">
+                    <div>
+                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Total Estimate</p>
+                        <div className="flex items-baseline gap-1">
+                            <span className="text-2xl font-black text-gray-900 leading-none">₹{currentPrice.toLocaleString()}</span>
+                            <span className="text-xs font-semibold text-gray-500">/ {peopleCount} guests</span>
+                        </div>
+                    </div>
+                    <div className="flex items-center gap-1.5 bg-emerald-50 border border-emerald-100 px-2.5 py-1.5 rounded-full">
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        <span className="text-[10px] font-bold text-emerald-700">Pay ₹{(currentPrice * 0.25).toLocaleString()} to book</span>
                     </div>
                 </div>
-                <Button
-                    onClick={handleWhatsAppClick}
-                    className="flex-1 h-14 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-xl shadow-[0_4px_14px_0_rgba(37,211,102,0.39)] transition-all active:scale-95"
-                >
-                    <div className="flex items-center gap-2">
-                        <WhatsAppIcon className="w-6 h-6 fill-white" />
-                        <span className="font-bold text-base">Check Availability</span>
-                    </div>
-                </Button>
+
+                {/* Buttons Row */}
+                <div className="flex gap-3 h-14">
+                    <Button
+                        onClick={handleWhatsAppClick}
+                        className="bg-white hover:bg-emerald-50 text-emerald-600 border border-emerald-200 w-14 h-full rounded-xl flex items-center justify-center shadow-sm shrink-0"
+                        title="Chat on WhatsApp"
+                    >
+                        <WhatsAppIcon className="w-6 h-6 fill-current" />
+                    </Button>
+
+                    <Button
+                        className="flex-1 h-full bg-[#3B82F6] hover:bg-[#2563EB] text-white rounded-xl shadow-lg shadow-blue-200 active:scale-[0.98] transition-all border-t border-white/20 relative overflow-hidden group"
+                        onClick={() => alert("Redirecting to secure payment gateway...")}
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-100%] animate-[shimmer_2s_infinite]" />
+                        <div className="relative flex flex-col items-start pl-1">
+                            <div className="flex items-center gap-2">
+                                <Lock className="w-4 h-4 text-blue-100" />
+                                <span className="text-base font-bold">Pay 25% Advance</span>
+                            </div>
+                            <span className="text-[10px] text-blue-100 font-medium ml-6 opacity-90">Secure checkout • Rest later</span>
+                        </div>
+                    </Button>
+                </div>
             </div>
         </div>
     );

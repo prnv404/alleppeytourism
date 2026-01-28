@@ -12,6 +12,7 @@ import { ActivityHeader } from "./detail/activity-header";
 import { ActivityHighlights } from "./detail/activity-highlights";
 import { ActivityInfo } from "./detail/activity-info";
 import { MobileSelectionSection } from "./detail/mobile-selection-section";
+import { CruiseItinerary } from "./detail/cruise-itinerary";
 import { BookingWidget } from "./detail/booking-widget";
 import { MobileBottomBar } from "./detail/mobile-bottom-bar";
 import { CRUISE_TYPES, StayType } from "./detail/shared";
@@ -51,7 +52,7 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
     const selectedDuration = activity.durations?.find(d => d.id === selectedDurationId);
 
     // Is per-person pricing?
-    const isPerPerson = activity.id === 'kayak'; // Ideally this should be in the data model
+    const isPerPerson = activity.id === 'kayak' || activity.id === 'speedboat'; // Ideally this should be in the data model
 
     // Helper to get add-on price
     const getAddonPrice = (addon: Activity) => {
@@ -156,7 +157,7 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
                 price: v.price,
                 priceUnit: "/ night",
                 image: act.image,
-                href: `/houseboats/book/houseboat?variant=${v.id}`,
+                href: `/book/houseboat?variant=${v.id}`,
                 rating: 4.8
             }));
         }
@@ -173,7 +174,7 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
     });
 
     return (
-        <div className="min-h-screen bg-gray-50/50 pb-24 md:pb-12 font-sans">
+        <div className="min-h-screen bg-gray-50/50 pb-24 md:pb-12 md:pt-24 font-sans">
             <ActivityNavbar activity={activity} isScrolled={isScrolled} />
 
             <main className="max-w-7xl mx-auto md:px-6 md:pt-8 min-h-screen">
@@ -190,7 +191,7 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
                             <ActivityHeader activity={activity} />
 
                             <div className="space-y-8 md:space-y-12">
-                                <ActivityHighlights features={activity.features} />
+                                <ActivityHighlights specs={activity.specs} features={activity.features} />
 
                                 <MobileSelectionSection
                                     activity={activity}
@@ -211,6 +212,8 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
                                 />
 
                                 <ActivityInfo activity={activity} />
+
+                                {activity.type === "houseboat" && <CruiseItinerary />}
                             </div>
                         </div>
                     </div>
@@ -249,6 +252,8 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
                 currentPrice={currentPrice}
                 handleWhatsAppClick={handleWhatsAppClick}
             />
+
+
         </div>
     );
 }

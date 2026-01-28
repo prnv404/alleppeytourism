@@ -9,6 +9,7 @@ export interface Activity {
     image: string;
     basePrice: number;
     features: string[];
+    specs?: { label: string; value: string; iconKey: string }[];
     variants?: { id: string; name: string; price: number; description?: string }[];
     durations?: { id: string; name: string; multiplier: number }[];
 }
@@ -22,6 +23,14 @@ export const activities: Activity[] = [
         image: "/images/hero-1.jpg",
         basePrice: 4999,
         features: ["Private & Shared Options", "All Meals Included", "Scenic Route", "AC Bedrooms"],
+        specs: [
+            { label: "Max Occupancy (Day Cruise)", value: "6 Guests", iconKey: "users" },
+            { label: "AC Cabins", value: "1 Bedroom", iconKey: "bed" },
+            { label: "Style", value: "Houseboat", iconKey: "boat" },
+            { label: "Authentic Cuisine", value: "Chef Onboard", iconKey: "chef" },
+            { label: "Safety", value: "Certified", iconKey: "shield" },
+            { label: "Spoken", value: "English", iconKey: "language" }
+        ],
         variants: [
             { id: "shared-standard", name: "Shared Standard", price: 4999, description: "Private bedroom in a shared boat (AC 9pm-6am)." },
             { id: "shared-premium", name: "Shared Premium", price: 6500, description: "Premium private room in a shared boat with full-time AC." },
