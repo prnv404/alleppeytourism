@@ -175,12 +175,18 @@ export function BookingWidget({
                                 <span className="w-4 text-center text-sm font-bold text-gray-900">{peopleCount}</span>
                                 <button
                                     onClick={() => setPeopleCount(peopleCount + 1)}
-                                    className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 hover:border-gray-900 transition-colors"
+                                    disabled={activity.maxGuests ? peopleCount >= activity.maxGuests : false}
+                                    className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 hover:border-gray-900 disabled:opacity-30 disabled:border-gray-200 transition-colors"
                                 >
                                     <Plus className="w-3.5 h-3.5" />
                                 </button>
                             </div>
                         </div>
+                        {activity.maxGuests && (
+                            <p className="text-[10px] text-amber-600 font-bold mt-2 text-right">
+                                Max {activity.maxGuests} guests allowed
+                            </p>
+                        )}
 
                         {/* Children Row (Visual only to match mock, functionally 0) */}
                         <div className="flex items-center justify-between">

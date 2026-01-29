@@ -8,10 +8,11 @@ export interface Activity {
     type: ActivityType;
     image: string;
     basePrice: number;
+    maxGuests?: number;
     features: string[];
     specs?: { label: string; value: string; iconKey: string }[];
     variants?: { id: string; name: string; price: number; description?: string }[];
-    durations?: { id: string; name: string; multiplier: number }[];
+    durations?: { id: string; name: string; multiplier: number; minPrice?: number; maxPrice?: number }[];
 }
 
 export const activities: Activity[] = [
@@ -76,10 +77,12 @@ export const activities: Activity[] = [
         type: "time-based",
         image: "/images/hero-1.jpg",
         basePrice: 1500,
+        maxGuests: 7,
         features: ["High Speed", "Lake Round", "Adventure", "Quick Trip"],
         durations: [
-            { id: "round", name: "Lake Round", multiplier: 1 },
-            { id: "hour", name: "1 Hour Blast", multiplier: 2 }
+            { id: "10min", name: "10 Minutes Ride", multiplier: 1, minPrice: 1000, maxPrice: 1500 },
+            { id: "30min", name: "30 Mins Lake Loop", multiplier: 2, minPrice: 2500, maxPrice: 3000 },
+            { id: "1hr", name: "1-Hour Village Safari", multiplier: 4, minPrice: 5000, maxPrice: 6000 }
         ]
     },
 ];

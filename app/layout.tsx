@@ -13,8 +13,8 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Alleppey Tourism - Discover the Venice of the East",
-  description: "Experience the serene backwaters, luxury houseboats, and authentic Kerala culture with Alleppey Tourism. Book your unforgettable journey today.",
+  title: "Alleppey Houseboat Booking | Shikara, Kayak & Speed Boat",
+  description: "Plan your complete trip. Book Deluxe to Luxury Alleppey Houseboats, Shikara rides, Kayaking, and Speed Boat adventures. Get all Alleppey boating packages in one site",
 };
 
 export default function RootLayout({

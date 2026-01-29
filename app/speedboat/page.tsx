@@ -52,7 +52,30 @@ export default function SpeedboatPage() {
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
                         {activity.durations?.map((d) => {
                             const price = Math.round(activity.basePrice * d.multiplier);
-                            const isPopular = d.id === 'round';
+
+                            // Package specific details
+                            const details: Record<string, { route: string; distance: string; durationLabel: string; popular?: boolean }> = {
+                                "1hr": {
+                                    route: "Starts from Alleppey (2km from town) → boat race track → village narrow canals → kainakary terminal → coconut groves → vembanad lake",
+                                    distance: "30km",
+                                    durationLabel: "60 Mins",
+                                    popular: true
+                                },
+                                "30min": {
+                                    route: "Starts from Alleppey → boat race track → vembanad lake → punnamada lake",
+                                    distance: "15km",
+                                    durationLabel: "30 Mins"
+                                },
+                                "10min": {
+                                    route: "Punnamada lake 7Km fun ride",
+                                    distance: "7km",
+                                    durationLabel: "10 Mins"
+                                }
+                            };
+
+                            const detail = details[d.id] || { route: "", distance: "", durationLabel: d.name };
+                            const isPopular = detail.popular;
+
                             return (
                                 <div key={d.id} className="group relative flex flex-col h-full bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-emerald-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-900/10">
                                     {/* Card Image */}
@@ -63,7 +86,7 @@ export default function SpeedboatPage() {
                                             fill
                                             className="object-cover transition-transform duration-500 group-hover:scale-110"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90" />
 
                                         {isPopular && (
                                             <div className="absolute top-4 right-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-3 py-1 text-[10px] font-black italic uppercase tracking-wider shadow-lg">
@@ -71,22 +94,40 @@ export default function SpeedboatPage() {
                                             </div>
                                         )}
                                         <div className="absolute bottom-6 left-6 right-6">
-                                            <h3 className="text-2xl font-black italic uppercase text-white mb-2 leading-none">{d.name}</h3>
+                                            <h3 className="text-xl font-black italic uppercase text-white mb-2 leading-none">{d.name}</h3>
                                             <div className="flex items-center gap-3 text-gray-300 text-xs font-bold uppercase tracking-wider">
-                                                <span className="flex items-center gap-1"><Clock className="w-3 h-3 text-emerald-500" /> {d.id === 'round' ? '60 Mins' : '30 Mins'}</span>
+                                                <span className="flex items-center gap-1"><Clock className="w-3 h-3 text-emerald-500" /> {detail.durationLabel}</span>
+                                                <span className="flex items-center gap-1"><Zap className="w-3 h-3 text-emerald-500" /> {detail.distance}</span>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="p-5 flex items-center justify-between bg-white">
-                                        <div>
-                                            <p className="text-2xl font-black text-gray-900 italic tracking-tight">₹{price}</p>
-                                            <p className="text-[10px] text-gray-500 font-bold uppercase">per boat</p>
+                                    <div className="p-5 flex flex-col flex-1 bg-white">
+                                        <div className="mb-4 flex-1">
+                                            <div className="mb-3">
+                                                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Route</p>
+                                                <p className="text-xs text-gray-600 font-medium leading-relaxed">
+                                                    {detail.route}
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <Button asChild className="bg-black text-white hover:bg-emerald-600 hover:text-white rounded-xl h-10 px-6 font-bold uppercase tracking-widest text-xs transition-all shadow-lg hover:shadow-emerald-500/20">
-                                            <Link href={`/book/${activity.id}?duration=${d.id}`}>Book Now</Link>
-                                        </Button>
+                                        <div className="flex items-center justify-between pt-4 border-t border-gray-100 gap-2">
+                                            <div className="flex-1 min-w-0">
+                                                <p className="text-lg sm:text-2xl font-black text-gray-900 italic tracking-tight truncate">
+                                                    {d.minPrice && d.maxPrice ? `₹${d.minPrice} - ₹${d.maxPrice}` : `₹${price}`}
+                                                </p>
+                                                <div className="flex items-center gap-2 flex-wrap">
+                                                    <p className="text-[10px] text-gray-500 font-bold uppercase whitespace-nowrap">per boat</p>
+                                                    <span className="text-[10px] text-gray-300">•</span>
+                                                    <p className="text-[10px] text-emerald-600 font-bold uppercase whitespace-nowrap">Max 7 Ppl</p>
+                                                </div>
+                                            </div>
+
+                                            <Button asChild className="shrink-0 bg-black text-white hover:bg-emerald-600 hover:text-white rounded-xl h-10 px-4 sm:px-6 font-bold uppercase tracking-widest text-[10px] sm:text-xs transition-all shadow-lg hover:shadow-emerald-500/20">
+                                                <Link href={`/book/${activity.id}?duration=${d.id}`}>Book Now</Link>
+                                            </Button>
+                                        </div>
                                     </div>
                                 </div>
                             );

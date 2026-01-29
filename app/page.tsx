@@ -45,7 +45,7 @@ export default function Home() {
         <div className="space-y-2">
           <span className="text-emerald-600 font-bold tracking-widest text-xs uppercase">Explore Alleppey with us</span>
           <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter">
-            DISCOVER ALLEPPEY
+           Houseboat Booking | Shikara, Kayak & Speed Boat
           </h2>
         </div>
       </div>
@@ -53,25 +53,25 @@ export default function Home() {
         slides={[
           {
             image: "/images/hero-1.jpg",
-            title: "Experience the Magic of Alleppey",
-            subtitle: "Discover the Venice of the East with our luxurious houseboat cruises.",
+            title: "Plan your complete trip.",
+            subtitle: "Book Deluxe to Luxury Alleppey Houseboats, Shikara rides, Kayaking, and Speed Boat adventures. Get all Alleppey boating packages in one site.",
             buttonText: "Book Now",
             buttonUrl: "/houseboats",
           },
-          {
-            image: "/images/hero-2.jpg",
-            title: "Alleppey Backwaters",
-            subtitle: "Explore the serene backwaters and lush greenery of Alleppey.",
-            buttonText: "Learn More",
-            buttonUrl: "/shikara",
-          },
-          {
-            image: "/images/hero-3.jpg",
-            title: "Alleppey Houseboats",
-            subtitle: "Relax and rejuvenate on our premium houseboats.",
-            buttonText: "View Packages",
-            buttonUrl: "/kayak",
-          },
+          // {
+          //   image: "/images/hero-2.jpg",
+          //   title: "Alleppey Backwaters",
+          //   subtitle: "Explore the serene backwaters and lush greenery of Alleppey.",
+          //   buttonText: "Learn More",
+          //   buttonUrl: "/shikara",
+          // },
+          // {
+          //   image: "/images/hero-3.jpg",
+          //   title: "Alleppey Houseboats",
+          //   subtitle: "Relax and rejuvenate on our premium houseboats.",
+          //   buttonText: "View Packages",
+          //   buttonUrl: "/kayak",
+          // },
         ]}
       />
       <BookingListings />
