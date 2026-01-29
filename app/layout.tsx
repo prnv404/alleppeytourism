@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import ElevenLabsWidget from "@/components/shared/eleven-labs-widget";
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/next"
 // DM Sans - Closest open-source alternative to Airbnb Cereal
 // Geometric, slightly rounded, excellent for UI/UX
 const dmSans = DM_Sans({
@@ -29,6 +30,8 @@ export default function RootLayout({
       >
         {children}
         <ElevenLabsWidget />
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
