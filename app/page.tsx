@@ -1,42 +1,47 @@
-import Image from "next/image";
-import { Navbar } from "@/components/home/navbar";
-import { WhatsAppButton } from "@/components/ui/button/whatsapp";
-import { Hero } from "@/components/home/hero";
-import { BookingListings } from "@/components/home/listing";
-import { Footer } from "@/components/home/footer";
-import { Testimonials } from "@/components/home/testimonial";
-import { PackageBuilder } from "@/components/home/packages";
-import { ScrollReveal } from "@/components/ui/scroll-reveal";
+import Image from 'next/image';
+import { Navbar } from '@/components/home/navbar';
+import { WhatsAppButton } from '@/components/ui/button/whatsapp';
+import { Hero } from '@/components/home/hero';
+import { BookingListings } from '@/components/home/listing';
+import { Footer } from '@/components/home/footer';
+import { Testimonials } from '@/components/home/testimonial';
+import { PackageBuilder } from '@/components/home/packages';
+import { ScrollReveal } from '@/components/ui/scroll-reveal';
 
-import { ListingGrid, ListingItem } from "@/components/ui/listing-grid";
-import { activities } from "@/lib/packages-data";
+import { ListingGrid, ListingItem } from '@/components/ui/listing-grid';
+import { activities } from '@/lib/packages-data';
 
 export default function Home() {
-  const houseboatItems: ListingItem[] = activities
-    .filter(a => a.type === "houseboat")
-    .flatMap(a => (a.variants || []).map(v => ({
-      id: v.id,
-      title: v.name,
-      description: v.description || a.description,
-      price: v.price,
-      priceUnit: "/ night",
-      image: a.image,
-      href: `/book/${a.id}?variant=${v.id}`,
-      rating: 4.9,
-      isGuestFavorite: v.id === 'luxury' || v.id === 'deluxe'
-    })));
+  const allHouseboatVariants: ListingItem[] = activities
+    .filter(a => a.type === 'houseboat')
+    .flatMap(a =>
+      (a.variants || []).map(v => ({
+        id: v.id,
+        title: v.name,
+        description: v.description || a.description,
+        price: v.price,
+        priceUnit: '/ night',
+        image: v.id.includes('luxury') ? '/images/hero-3.jpg' : a.image, // Use a premium image for luxury
+        href: `/book/${a.id}?variant=${v.id}`,
+        rating: 4.9,
+        isGuestFavorite: v.id.includes('luxury') || v.id.includes('premium'),
+      }))
+    );
+
+  const sharedHouseboatItems = allHouseboatVariants.filter(v => v.id.includes('shared'));
+  const privateHouseboatItems = allHouseboatVariants.filter(v => !v.id.includes('shared'));
 
   const adventureItems: ListingItem[] = activities
-    .filter(a => a.type === "time-based")
+    .filter(a => a.type === 'time-based')
     .map(a => ({
       id: a.id,
       title: a.name,
       description: a.description,
       price: a.basePrice,
-      priceUnit: "/ trip",
+      priceUnit: '/ trip',
       image: a.image,
       href: `/book/${a.id}`,
-      rating: 4.7
+      rating: 4.7,
     }));
 
   return (
@@ -44,19 +49,20 @@ export default function Home() {
       <Navbar />
       <ScrollReveal className="mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="space-y-2">
-          <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter">
-            Houseboat Booking | Shikara, Kayak & Speed Boat
-          </h2>
+          <h1 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter">
+            Alappuzha Houseboat Booking | Shikara, Kayak & Speed Boat
+          </h1>
         </div>
       </ScrollReveal>
       <Hero
         slides={[
           {
-            image: "/images/hero-1.jpg",
-            title: "",
-            subtitle: "Book Deluxe to Luxury Alleppey Houseboats, Shikara rides, Kayaking, and Speed Boat adventures. Get all Alleppey boating packages in one site.",
-            buttonText: "Book Now",
-            buttonUrl: "/houseboats",
+            image: '/images/hero-1.jpg',
+            title: '',
+            subtitle:
+              'Book Deluxe to Luxury Alleppey Houseboats, Shikara rides, Kayaking, and Speed Boat adventures. Get all Alleppey boating packages in one site.',
+            buttonText: 'Book Now',
+            buttonUrl: '/houseboats',
           },
           // {
           //   image: "/images/hero-2.jpg",
@@ -84,14 +90,19 @@ export default function Home() {
         <ScrollReveal>
           <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
             <div>
-              <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">shared houseboats in alleppey, kerala</h2>
+              <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">
+                shared houseboats in alleppey, kerala
+              </h2>
             </div>
-            <a href="/houseboats" className="text-sm font-bold border-b-2 border-black pb-0.5 hover:text-emerald-600 hover:border-emerald-600 transition-colors">
+            {/* <a
+              href="/houseboats"
+              className="text-sm font-bold border-b-2 border-black pb-0.5 hover:text-emerald-600 hover:border-emerald-600 transition-colors"
+            >
               View All Stays
-            </a>
+            </a> */}
           </div>
         </ScrollReveal>
-        <ListingGrid items={houseboatItems} scrollable={true} />
+        <ListingGrid items={sharedHouseboatItems} scrollable={true} />
       </section>
 
       {/* Houseboats Section */}
@@ -99,14 +110,19 @@ export default function Home() {
         <ScrollReveal>
           <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
             <div>
-              <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">private houseboats in alleppey, kerala</h2>
+              <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">
+                private houseboats in alleppey, kerala
+              </h2>
             </div>
-            <a href="/houseboats" className="text-sm font-bold border-b-2 border-black pb-0.5 hover:text-emerald-600 hover:border-emerald-600 transition-colors">
+            {/* <a
+              href="/houseboats"
+              className="text-sm font-bold border-b-2 border-black pb-0.5 hover:text-emerald-600 hover:border-emerald-600 transition-colors"
+            >
               View All Stays
-            </a>
+            </a> */}
           </div>
         </ScrollReveal>
-        <ListingGrid items={houseboatItems} scrollable={true} />
+        <ListingGrid items={privateHouseboatItems} scrollable={true} />
       </section>
 
       {/* Activities Section */}
@@ -115,8 +131,12 @@ export default function Home() {
           <ScrollReveal>
             <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
               <div>
-                <span className="text-orange-600 font-bold tracking-widest text-xs uppercase">Alleppey Backwater Day Trips & Activities</span>
-                <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">Houseboat Day Cruise, Shikara, Kayak & Speed Boat Packages</h2>
+                <span className="text-orange-600 font-bold tracking-widest text-xs uppercase">
+                  Alleppey Backwater Day Trips & Activities
+                </span>
+                <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">
+                  Houseboat Day Cruise, Shikara, Kayak & Speed Boat Packages
+                </h2>
               </div>
             </div>
           </ScrollReveal>
@@ -128,7 +148,6 @@ export default function Home() {
         <Testimonials />
       </ScrollReveal>
       <Footer />
-
     </>
   );
 }
