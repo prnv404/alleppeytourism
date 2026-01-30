@@ -135,7 +135,7 @@ export default function Home() {
                   Alleppey Backwater Day Trips & Activities
                 </span>
                 <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">
-                  Houseboat Day Cruise, Shikara, Kayak & Speed Boat Packages
+                 Shikara, Kayak & Speed Boat Packages
                 </h2>
               </div>
             </div>
