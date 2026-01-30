@@ -85,25 +85,64 @@ export function BookingListings() {
         return () => clearInterval(interval);
     }, []);
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.2
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.6,
+                ease: "easeOut" as const
+            }
+        }
+    };
+
     return (
         <section className="py-12 md:py-24 bg-white">
             <div className="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
-                <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-12 gap-4">
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-12 gap-4"
+                >
                     <div className="space-y-2">
-                        <span className="text-emerald-600 font-bold tracking-widest text-xs uppercase">Unforgettable Journeys</span>
+                        <span className="text-emerald-600 font-bold tracking-widest text-xs uppercase">Alleppey Tourism Services</span>
                         <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter">
-                            FEATURED EXPERIENCES
+                            best alleppey boat packages
                         </h2>
                     </div>
                     <Button variant="outline" className="hidden md:flex rounded-full border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition-all font-medium px-6">
                         Explore All <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
-                </div>
+                </motion.div>
 
                 {/* Wireless scrolling container for mobile, Grid for desktop */}
-                <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 overflow-x-auto pb-8 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+                <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-50px" }}
+                    className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 overflow-x-auto pb-8 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']"
+                >
                     {bookings.map((item) => (
-                        <div key={item.id} className="min-w-[85vw] sm:min-w-[340px] md:min-w-0 snap-center md:snap-align-none h-full">
+                        <motion.div
+                            key={item.id}
+                            variants={itemVariants}
+                            className="min-w-[85vw] sm:min-w-[340px] md:min-w-0 snap-center md:snap-align-none h-full"
+                        >
                             <Link href={item.href} className="group block h-full relative">
                                 {/* Immersive Card Container */}
                                 <div className="relative aspect-[3/4] md:aspect-[4/5] w-full overflow-hidden rounded-[1rem] bg-gray-200 isolate">
@@ -143,8 +182,8 @@ export function BookingListings() {
                                             </p>
                                         </div>
 
-                                        {/* Features Row - Hidden on mobile initial, visible on hover/desktop preference? 
-                                            Actually let's keep it visible but minimal 
+                                        {/* Features Row - Hidden on mobile initial, visible on hover/desktop preference?
+                                            Actually let's keep it visible but minimal
                                         */}
                                         <div className="flex flex-wrap gap-2 mb-6">
                                             {item.features.slice(0, 2).map((feature, idx) => (
@@ -189,7 +228,7 @@ export function BookingListings() {
                                     </div>
                                 </div>
                             </Link>
-                        </div>
+                        </motion.div>
                     ))}
 
                     {/* View All - Styles matched to immersive card size
@@ -201,8 +240,8 @@ export function BookingListings() {
                             <span className="text-sm font-bold tracking-widest uppercase text-gray-900">View All</span>
                         </Link>
                     </div> */}
-                </div>
+                </motion.div>
             </div>
-        </section>
+        </section >
     );
 }

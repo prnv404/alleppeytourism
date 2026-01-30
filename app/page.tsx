@@ -6,6 +6,7 @@ import { BookingListings } from "@/components/home/listing";
 import { Footer } from "@/components/home/footer";
 import { Testimonials } from "@/components/home/testimonial";
 import { PackageBuilder } from "@/components/home/packages";
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 import { ListingGrid, ListingItem } from "@/components/ui/listing-grid";
 import { activities } from "@/lib/packages-data";
@@ -41,19 +42,18 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div className="mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <ScrollReveal className="mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="space-y-2">
-          <span className="text-emerald-600 font-bold tracking-widest text-xs uppercase">Explore Alleppey with us</span>
           <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter">
-           Houseboat Booking | Shikara, Kayak & Speed Boat
+            Houseboat Booking | Shikara, Kayak & Speed Boat
           </h2>
         </div>
-      </div>
+      </ScrollReveal>
       <Hero
         slides={[
           {
             image: "/images/hero-1.jpg",
-            title: "Plan your complete trip.",
+            title: "",
             subtitle: "Book Deluxe to Luxury Alleppey Houseboats, Shikara rides, Kayaking, and Speed Boat adventures. Get all Alleppey boating packages in one site.",
             buttonText: "Book Now",
             buttonUrl: "/houseboats",
@@ -75,50 +75,58 @@ export default function Home() {
         ]}
       />
       <BookingListings />
-      <PackageBuilder />
+      <ScrollReveal>
+        <PackageBuilder />
+      </ScrollReveal>
 
       {/* Houseboats Section */}
       <section className="py-10 md:py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
-          <div>
-            <span className="text-emerald-600 font-bold tracking-widest text-xs uppercase">Stay on the Water</span>
-            <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">Shared Houseboats</h2>
+        <ScrollReveal>
+          <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">shared houseboats in alleppey, kerala</h2>
+            </div>
+            <a href="/houseboats" className="text-sm font-bold border-b-2 border-black pb-0.5 hover:text-emerald-600 hover:border-emerald-600 transition-colors">
+              View All Stays
+            </a>
           </div>
-          <a href="/houseboats" className="text-sm font-bold border-b-2 border-black pb-0.5 hover:text-emerald-600 hover:border-emerald-600 transition-colors">
-            View All Stays
-          </a>
-        </div>
+        </ScrollReveal>
         <ListingGrid items={houseboatItems} scrollable={true} />
       </section>
 
       {/* Houseboats Section */}
       <section className="py-10 md:py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
-          <div>
-            <span className="text-emerald-600 font-bold tracking-widest text-xs uppercase">Stay on the Water</span>
-            <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">Private Houseboats</h2>
+        <ScrollReveal>
+          <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">private houseboats in alleppey, kerala</h2>
+            </div>
+            <a href="/houseboats" className="text-sm font-bold border-b-2 border-black pb-0.5 hover:text-emerald-600 hover:border-emerald-600 transition-colors">
+              View All Stays
+            </a>
           </div>
-          <a href="/houseboats" className="text-sm font-bold border-b-2 border-black pb-0.5 hover:text-emerald-600 hover:border-emerald-600 transition-colors">
-            View All Stays
-          </a>
-        </div>
+        </ScrollReveal>
         <ListingGrid items={houseboatItems} scrollable={true} />
       </section>
 
       {/* Activities Section */}
       <section className="py-16 md:py-10 bg-gray-50 border-t border-gray-100">
         <div className="max-w-7xl mx-auto md:px-6 lg:px-8 px-4">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
-            <div>
-              <span className="text-orange-600 font-bold tracking-widest text-xs uppercase">Day Cruises & Rides</span>
-              <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">Activities & Adventures</h2>
+          <ScrollReveal>
+            <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
+              <div>
+                <span className="text-orange-600 font-bold tracking-widest text-xs uppercase">Alleppey Backwater Day Trips & Activities</span>
+                <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">Houseboat Day Cruise, Shikara, Kayak & Speed Boat Packages</h2>
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
           <ListingGrid items={adventureItems} scrollable={true} />
         </div>
       </section>
 
-      <Testimonials />
+      <ScrollReveal>
+        <Testimonials />
+      </ScrollReveal>
       <Footer />
 
     </>

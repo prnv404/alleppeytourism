@@ -72,7 +72,7 @@ export default function ShikaraPage() {
 
             {/* Hero Image */}
             <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-                <div className="relative aspect-[4/3] md:aspect-[21/9] w-full rounded-[2rem] overflow-hidden bg-gray-100 shadow-2xl">
+                <div className="relative aspect-[4/3] md:aspect-[21/9] w-full rounded-[1rem] overflow-hidden bg-gray-100 shadow-2xl">
                     <Image
                         src="/images/hero-2.jpg"
                         alt="Shikara Ride"
@@ -278,9 +278,9 @@ export default function ShikaraPage() {
                                 </div>
                             </div>
 
-                            <div className="relative aspect-square rounded-3xl overflow-hidden">
+                            {/* <div className="relative aspect-square rounded-3xl overflow-hidden">
                                 <Image src="/images/hero-2.jpg" alt="Atmosphere" fill className="object-cover" />
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

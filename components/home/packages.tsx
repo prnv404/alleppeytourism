@@ -118,9 +118,9 @@ export function PackageBuilder() {
                 {/* Compact Header */}
                 <div className="text-center mb-7">
                     <h2 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">
-                        Customize Your <span className="text-emerald-600">Experience</span>
+                        plan your custom <span className="text-emerald-600">alleppey trip</span>
                     </h2>
-                    <p className="text-gray-500 text-sm mt-2">Select experiences and extras to get a quick estimate.</p>
+                    <p className="text-gray-500 text-sm mt-2">Select Houseboat cruise, Shikara tours, Speed Boat rides or kayaking to calculate your total package cost.</p>
                 </div>
 
                 <div className="flex flex-col lg:flex-row gap-8">
