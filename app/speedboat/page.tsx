@@ -244,7 +244,7 @@ export default function SpeedboatPage() {
         </div>
       </div>
 
-      {/* 3. Popular Stops (Waypoints) */}
+      {/* 3. Popular Stops (Waypoints)
       <div className="py-16 md:py-32 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="text-center mb-12 md:mb-16">
@@ -275,7 +275,7 @@ export default function SpeedboatPage() {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* 4. Information & FAQ */}
       <div className="max-w-4xl mx-auto px-4 md:px-6 py-12 md:py-20">
