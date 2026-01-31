@@ -7,11 +7,12 @@ import { Hero } from '@/components/home/hero';
 import { PACKAGES } from '@/lib/packages-data';
 import { Check, Star, Users, Coffee, Anchor, Shield, ArrowRight, MapPin, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { FaqSection } from '@/components/ui/faq-section';
 
 export const metadata: Metadata = {
-  title: 'Houseboats in Alleppey | Private & Shared Stays',
+  title: 'Alleppey Boat House Rates | Budget to Luxury Kerala Boats',
   description:
-    'Book premium private houseboats or budget-friendly shared stays in Alleppey backwaters. Experience the Venice of the East.',
+    'Explore the best Alleppey Boat House rates for every budget. Choose from Budget AC, Deluxe, or Luxury Premium boats. View packages & book direct today',
 };
 
 export default function HouseboatsPage() {
@@ -39,8 +40,8 @@ export default function HouseboatsPage() {
           slides={[
             {
               image: '/images/hero-3.jpg',
-              title: 'Living on The Backwaters',
-              subtitle: 'Wake up to the sound of water lapping against your window. Experience the timeless charm of Alleppey.',
+              title: 'Alleppey Boat House Booking',
+              subtitle: 'Explore the best Alleppey Boat House rates for every budget. Choose from Budget AC, Deluxe, or Luxury Premium boats. View packages & book direct today',
               buttonText: 'View Houseboats',
               buttonUrl: '#private',
             },
@@ -52,7 +53,7 @@ export default function HouseboatsPage() {
       <section id="shared" className="max-w-7xl mx-auto px-6 mb-12 md:mb-20 scroll-mt-24">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="text-3xl font-black mb-2">Shared Experiences</h2>
+            <h2 className="text-3xl font-black mb-2">Shared Houseboats</h2>
             <p className="text-gray-500 text-sm">Budget friendly social stays.</p>
           </div>
         </div>
@@ -81,7 +82,7 @@ export default function HouseboatsPage() {
               </div>
 
               <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-black text-gray-900 mb-4 leading-tight truncate">{boat.name}</h3>
+                <h3 className="text-xl font-black text-gray-900 mb-4 leading-tight">{boat.name}</h3>
 
                 {/* High Visibility Features */}
                 <div className="grid grid-cols-2 gap-2 mb-6">
@@ -226,29 +227,37 @@ export default function HouseboatsPage() {
         </div>
       </section>
 
-      
 
-      {/* FAQ Section */}
-      <section className="max-w-3xl mx-auto px-6 mb-12 md:mb-20">
-        <h2 className="text-2xl font-black text-center mb-8">Common Questions</h2>
-        <div className="grid gap-4">
-          {[
-            {
-              q: 'Is food included in the price?',
-              a: 'Yes! All meals (Lunch, Tea/Snacks, Dinner, Breakfast) are included in the package. The cuisine is authentic Kerala style.',
-            },
-            {
-              q: 'What is the check-in time?',
-              a: 'Standard check-in is at 12:00 PM and check-out is at 09:00 AM the next morning.',
-            },
-          ].map((item, i) => (
-            <div key={i} className="bg-white p-5 rounded-2xl border border-gray-200 hover:border-gray-300 transition-colors">
-              <h4 className="font-bold text-sm mb-1 text-gray-900">{item.q}</h4>
-              <p className="text-xs text-gray-500 leading-relaxed">{item.a}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+
+      <FaqSection
+        title="Common Questions"
+        className="mb-12 md:mb-20"
+        items={[
+          {
+            q: 'Is food included in the houseboat package?',
+            a: 'Yes, all meals are included! Your package covers Welcome Drink, Lunch, Evening Tea & Snacks, Dinner, and Breakfast. We serve authentic Kerala-style cuisine.',
+          },
+          {
+            q: 'What are the AC timings on the houseboat?',
+            a: `It depends on your package category:
+
+Deluxe Boats: AC is available in the bedroom from 9:00 PM to 6:00 AM (for sleeping only).
+
+Premium & Luxury Boats: AC is available Full-Time in the bedroom (and Living Area for Luxury boats) whenever the generator is running.
+
+Tip: If you are sensitive to heat/humidity, we highly recommend booking a Premium or Luxury boat.`,
+          },
+          {
+            q: 'Does the houseboat move at night?',
+            a: 'No. As per Government safety regulations, all houseboats must anchor (park) by 5:30 PM. They remain docked until 8:00 AM the next morning. This is the perfect time to enjoy the sunset, take a village walk, or relax on the deck. The cruise resumes in the morning for breakfast.',
+          },
+          {
+            q: 'What is the standard Check-in and Check-out time?',
+            a: `Check-in: 12:00 PM (Noon). We recommend arriving on time to maximize your cruising hours.
+Check-out: 09:00 AM the next morning, after breakfast.`,
+          },
+        ]}
+      />
 
       <Footer />
     </div>

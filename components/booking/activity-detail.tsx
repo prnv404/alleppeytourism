@@ -106,14 +106,28 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
     } else if (activity.type === 'time-based' && activity.durations) {
       if (!selectedDurationId) return 0; // No selection yet
       const d = activity.durations.find(d => d.id === selectedDurationId);
-      base = d ? activity.basePrice * d.multiplier : 0;
+
+      if (activity.id === 'shikara' && d) {
+        // Shikara Logic: 800/hr for 1-4 pax, +100/hr per extra pax.
+        // activity.basePrice is 800. d.multiplier is hours.
+        base = activity.basePrice * d.multiplier;
+
+        if (peopleCount > 4) {
+          const extraPeople = peopleCount - 4;
+          base += extraPeople * 100 * d.multiplier;
+        }
+        price += base;
+      } else {
+        base = d ? activity.basePrice * d.multiplier : 0;
+
+        if (isPerPerson) {
+          price += base * peopleCount;
+        } else {
+          price += base;
+        }
+      }
     } else {
       base = activity.basePrice;
-    }
-
-    if (isPerPerson) {
-      price += base * peopleCount;
-    } else {
       price += base;
     }
 
@@ -319,7 +333,7 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
 
       <main className="max-w-7xl mx-auto px-4 md:px-6 md:pt-8 min-h-screen">
         {/* Full Width Hero Section */}
-        <ActivityHero activity={activity} />
+        <ActivityHero activity={activity} title={selectedVariant?.name} />
 
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 relative px-4 md:px-0">
           {/* Left Column: Info */}

@@ -9,7 +9,16 @@ import { PackageBuilder } from '@/components/home/packages';
 import { ScrollReveal } from '@/components/ui/scroll-reveal';
 
 import { ListingGrid, ListingItem } from '@/components/ui/listing-grid';
-import { activities } from '@/lib/packages-data';
+import { FaqSection } from '@/components/ui/faq-section';
+import { activities, destinations } from '@/lib/packages-data';
+
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Alleppey Packages | Houseboat, Speed Boat, Shikara, Kayak',
+  description:
+    'Book Deluxe to Luxury Houseboats in Alleppey, Shikara rides, Kayaking & Speed Boat adventures. Get all boating packages on one site',
+};
 
 export default function Home() {
   const allHouseboatVariants: ListingItem[] = activities
@@ -40,7 +49,7 @@ export default function Home() {
       price: a.basePrice,
       priceUnit: '/ trip',
       image: a.image,
-      href: `/book/${a.id}`,
+      href: `/${a.id}`,
       rating: 4.7,
     }));
 
@@ -50,8 +59,11 @@ export default function Home() {
       <ScrollReveal className="mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="space-y-2">
           <h1 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter">
-            Alappuzha Houseboat Booking | Shikara, Kayak & Speed Boat
+            Alleppey Tourism – Houseboat Booking & Tour Packages
           </h1>
+          <h2 className="text-xl md:text-2xl text-gray-600 font-medium tracking-tight">
+            Discover Alappuzha Houseboats, Shikara Rides, Kayaking & Speed Boat Adventures
+          </h2>
         </div>
       </ScrollReveal>
       <Hero
@@ -135,7 +147,7 @@ export default function Home() {
                   Alleppey Backwater Day Trips & Activities
                 </span>
                 <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">
-                 Shikara, Kayak & Speed Boat Packages
+                  Shikara, Kayak & Speed Boat Packages
                 </h2>
               </div>
             </div>
@@ -143,6 +155,71 @@ export default function Home() {
           <ListingGrid items={adventureItems} scrollable={true} />
         </div>
       </section>
+
+      {/* Tourist Places Section */}
+      <section className="py-16 md:py-20 bg-white select-none cursor-default">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight mb-4">
+                Alleppey Tourist Places to Visit After Boating
+              </h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Extend your trip and explore these famous spots around Alappuzha (Informational Only)
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {destinations.map((place, i) => (
+              <ScrollReveal key={place.id} delay={i * 0.1}>
+                <div className="group h-full flex flex-col bg-gray-50 rounded-3xl overflow-hidden border border-gray-100 hover:border-gray-200 transition-colors pointer-events-none">
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <Image
+                      src={place.image}
+                      alt={place.name}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale hover:grayscale-0"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="text-xl font-bold text-white mb-1 drop-shadow-md">{place.name}</h3>
+                    </div>
+                  </div>
+                  <div className="p-6 flex-grow">
+                    <p className="text-gray-600 text-sm leading-relaxed">{place.description}</p>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <FaqSection
+        items={[
+          {
+            q: 'What is the best way to explore Alleppey Backwaters?',
+            a: 'It depends on your time and budget. For a complete overnight experience with food, choose a Houseboat Stay. If you have only 2-3 hours and want to see narrow canals, a Shikara Ride or Kayaking is best. For thrill-seekers, we recommend our Speed Boat Cruise.',
+          },
+          {
+            q: 'What is the difference between a Houseboat and a Shikara?',
+            a: 'A Houseboat is like a floating hotel with AC bedrooms, toilets, and a kitchen, designed for overnight stays. A Shikara is a smaller, open-roof boat with comfortable seating, perfect for hourly cruises through village canals.',
+          },
+          {
+            q: 'Is it safe for couples, families, children, and elders?',
+            a: 'Yes, absolutely. All our boats are Government-licensed and 100% safe for all age groups. We specialize in hosting couples, families with small children, and senior citizens.',
+          },
+          {
+            q: 'Do I need to book in advance?',
+            a: 'Yes, we highly recommend booking in advance, especially for Houseboats and Shikara rides during weekends and peak season. Booking online guarantees your reservation and saves you from last-minute high prices.',
+          },
+          {
+            q: 'How do I reach the boarding point?',
+            a: 'Our main boarding point is at Finishing Point Road, Alappuzha. It is just 4 km from the Alappuzha Railway Station and 2 km from the KSRTC Bus Stand. We share the exact Google Maps location via WhatsApp once your booking is confirmed.',
+          },
+        ]}
+      />
 
       <ScrollReveal>
         <Testimonials />

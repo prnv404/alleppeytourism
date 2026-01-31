@@ -10,9 +10,10 @@ import { Activity } from '@/lib/packages-data';
 
 interface ActivityHeroProps {
   activity: Activity;
+  title?: string;
 }
 
-export function ActivityHero({ activity }: ActivityHeroProps) {
+export function ActivityHero({ activity, title }: ActivityHeroProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
@@ -127,7 +128,7 @@ export function ActivityHero({ activity }: ActivityHeroProps) {
             </div>
 
             <h1 className="text-3xl md:text-7xl font-black text-white leading-[1.1] md:leading-[0.95] tracking-tight mb-4 md:mb-6 drop-shadow-lg">
-              {activity.name}
+              {title || activity.name}
             </h1>
 
             <div className="flex flex-wrap items-center gap-4 md:gap-8 text-white/90 text-sm md:text-base font-medium">
