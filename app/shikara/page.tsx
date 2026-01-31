@@ -6,11 +6,12 @@ import { Footer } from '@/components/home/footer';
 import { PACKAGES } from '@/lib/packages-data';
 import { Clock, Users, Star, Check, MapPin, Sunset, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { FaqSection } from '@/components/ui/faq-section';
 
 export const metadata: Metadata = {
   title: 'Alleppey Shikara Boat Ride Booking | Best Price & Canal Tour',
   description:
-    'Book the best Shikara ride in Alleppey starting at ₹800/hour. Explore the narrow Alappuzha village canals, Kuttanad paddy fields, and authentic backwater life. Private boat for couples, families or friends',
+    'Alleppey Shikara Booking starts ₹800/hr. Cruise narrow canals & village backwaters in a private boat. Safe & authentic tour for all ages',
 };
 
 export default function ShikaraPage() {
@@ -34,13 +35,6 @@ export default function ShikaraPage() {
             <span className="text-gray-400">Alleppey.</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed mb-8">
-            Explore the hidden side of Alappuzha with our private Shikara boat cruises. Designed to navigate the Alleppey
-            Backwater, narrow canals that larger houseboats cannot reach, our Shikaras offer a quiet and intimate view of the
-            backwaters. Relax on comfortable reclining seats while you glide past Kuttanad’s lush paddy fields and local
-            villages at your own pace
-          </p>
-
           <div className="flex flex-wrap gap-4 md:gap-8 border-t border-gray-100 pt-8">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-full bg-gray-50">
@@ -57,7 +51,7 @@ export default function ShikaraPage() {
               </div>
               <div>
                 <p className="text-xs text-gray-500 font-medium uppercase tracking-wider">Capacity</p>
-                <p className="font-semibold">Max 6 Pax</p>
+                <p className="font-semibold">Max 8 Pax</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -129,15 +123,17 @@ export default function ShikaraPage() {
             </div>
 
             <div>
-              <h2 className="text-3xl font-bold mb-6">Why Choose a Shikara?</h2>
+              <h2 className="text-3xl font-bold mb-6">Why Choose a Shikara Cruise in Alleppey?</h2>
               <div className="prose prose-lg text-gray-600">
                 <p className="mb-6">
-                  A Shikara is a traditional wooden canoe equipped with comfortable seating and a roof for shade. Unlike large
-                  houseboats, the Shikara is nimble enough to enter the smallest canals where true village life unfolds.
+                  A Shikara is a traditional open-air canoe designed for the ultimate backwater village experience. Unlike large
+                  houseboats, a Shikara is small enough to navigate the narrow canals of Kuttanad, taking you deep into the heart
+                  of the village life that bigger boats cannot reach.
                 </p>
                 <p>
-                  It’s mesmerizingly quiet. Without a heavy diesel engine thrumming, you can hear the birds, the water, and the
-                  wind in the palms.
+                  It is a mesmerizingly quiet experience. With no loud diesel engine, you enjoy a silent, eco-friendly cruise
+                  where you can hear the birds and nature clearly. Equipped with comfortable cushioned seating and a full roof
+                  for shade, it offers the perfect blend of relaxation and adventure."
                 </p>
               </div>
             </div>
@@ -169,13 +165,11 @@ export default function ShikaraPage() {
                     Where clocks <br />
                     <span className="text-gray-400">have no meaning.</span>
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    In Kuttanad, life moves at the speed of a drifting canoe. You'll pass by ancient temples, see children rowing
-                    to school, and watch toddy tappers climbing coconut trees.
-                  </p>
-                  <p className="text-gray-600 leading-relaxed">
-                    The Shikara grants you a front-row seat to this unhurried way of life. It isn't just sightseeing; it's
-                    witnessing a living culture that has survived for centuries.
+                  <p className="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed mb-8">
+                    Explore the hidden side of Alappuzha with our private Shikara boat cruises. Designed to navigate the Alleppey
+                    Backwater, narrow canals that larger houseboats cannot reach, our Shikaras offer a quiet and intimate view of the
+                    backwaters. Relax on comfortable reclining seats while you glide past Kuttanad’s lush paddy fields and local
+                    villages at your own pace
                   </p>
                 </div>
                 <div className="relative aspect-square md:aspect-[4/5] rounded-2xl overflow-hidden order-1 md:order-2">
@@ -184,7 +178,7 @@ export default function ShikaraPage() {
               </div>
             </div>
 
-            {/* Route Highlights */}
+            {/* Route Highlights
             <div className="py-8 md:py-12 border-b border-gray-100 mb-8 md:mb-12">
               <h3 className="font-bold text-2xl mb-8">On the Route</h3>
               <div className="grid sm:grid-cols-2 gap-8">
@@ -208,7 +202,7 @@ export default function ShikaraPage() {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             {/* Shikara vs Houseboat */}
             <div className="bg-gray-50 rounded-2xl p-6 md:p-8 mb-8 md:mb-16 overflow-hidden">
@@ -241,30 +235,29 @@ export default function ShikaraPage() {
             </div>
 
             {/* FAQ Section */}
-            <div className="mb-12">
-              <h3 className="font-bold text-2xl mb-8">Common Questions</h3>
-              <div className="space-y-4">
-                {[
-                  {
-                    q: 'Is food included?',
-                    a: 'No, but we can stop at riverside restaurants or toddy shops where you can buy fresh seafood and meals.',
-                  },
-                  {
-                    q: 'Is there a toilet on board?',
-                    a: 'Most shikaras do not have toilets due to their small size, but we can make stops at clean facilities upon request.',
-                  },
-                  {
-                    q: 'Is it sunny/hot?',
-                    a: 'The boat has a roof which provides full shade. The open sides allow a constant cool breeze, making it very comfortable even at noon.',
-                  },
-                ].map((faq, i) => (
-                  <div key={i} className="bg-white border border-gray-100 rounded-xl p-6 hover:shadow-sm transition-shadow">
-                    <h4 className="font-bold text-gray-900 mb-2">{faq.q}</h4>
-                    <p className="text-gray-600 text-sm leading-relaxed">{faq.a}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* FAQ Section */}
+            <FaqSection
+              title="Common Questions"
+              className="px-0 py-0 mb-12"
+              items={[
+                {
+                  q: 'Is there a toilet on the Shikara boat?',
+                  a: 'Most standard Shikaras are open-air canoes and do not have toilets on board. However, for rides longer than 2 hours, we can stop at clean riverside restaurants or toddy shops for restroom breaks.',
+                },
+                {
+                  q: 'Will I get wet if it rains?',
+                  a: 'No. All our Shikaras are equipped with a roof and side curtains that can be rolled down instantly. You stay completely dry while enjoying the romantic view of the rain on the backwaters.',
+                },
+                {
+                  q: 'Can we order food during the Shikara ride?',
+                  a: 'Food is not cooked on board (unlike houseboats). However, we can stop at famous local toddy shops or riverside restaurants where you can buy fresh duck roast, karimeen fry, and tapioca during the cruise.',
+                },
+                {
+                  q: 'Is the Shikara ride safe for elders and kids?',
+                  a: 'Yes. The water in the canals is very calm (no waves), and the boat is stable with comfortable seating. We provide life jackets for children and non-swimmers to ensure extra safety.',
+                },
+              ]}
+            />
           </div>
 
           {/* Right Sticky Sidebar (Map/Info) */}
