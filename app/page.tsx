@@ -157,37 +157,39 @@ export default function Home() {
       </section>
 
       {/* Tourist Places Section */}
-      <section className="py-16 md:py-20 bg-white select-none cursor-default">
+      <section className="py-12 md:py-16 bg-white select-none cursor-default">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tight mb-4">
-                Alleppey Tourist Places to Visit After Boating
+            <div className="text-center mb-8 md:mb-10">
+              <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight mb-3">
+                Places to Visit After Boating
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Extend your trip and explore these famous spots around Alappuzha (Informational Only)
+              <p className="text-sm md:text-base text-gray-500 max-w-2xl mx-auto">
+                Popular sightseeing spots in Alleppey
               </p>
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {destinations.map((place, i) => (
-              <ScrollReveal key={place.id} delay={i * 0.1}>
-                <div className="group h-full flex flex-col bg-gray-50 rounded-3xl overflow-hidden border border-gray-100 hover:border-gray-200 transition-colors pointer-events-none">
+              <ScrollReveal key={place.id} delay={i * 0.05}>
+                <div className="group h-full flex flex-col bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image
                       src={place.image}
                       alt={place.name}
                       fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105 filter grayscale hover:grayscale-0"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-xl font-bold text-white mb-1 drop-shadow-md">{place.name}</h3>
+                    <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 to-transparent" />
+                    <div className="absolute bottom-3 left-3 right-3">
+                      <h3 className="text-sm font-bold text-white leading-tight drop-shadow-sm">{place.name}</h3>
                     </div>
                   </div>
-                  <div className="p-6 flex-grow">
-                    <p className="text-gray-600 text-sm leading-relaxed">{place.description}</p>
+                  <div className="p-3 flex-grow bg-gray-50/50">
+                    <p className="text-[11px] md:text-xs text-gray-600 leading-relaxed line-clamp-4">
+                      {place.description}
+                    </p>
                   </div>
                 </div>
               </ScrollReveal>

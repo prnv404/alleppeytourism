@@ -255,43 +255,7 @@ export function PackageBuilder() {
               })}
             </div>
 
-            {/* Destinations Grid - Horizontal Scroll */}
-            <div>
-              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2 mt-6">Alleppey Tourist Places to Visit After Boating</h3>
-              <div className="flex overflow-x-auto pb-4 gap-3 snap-x scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
-                {destinations.map(dest => {
-                  const isSelected = selectedDestinations.includes(dest.id);
-                  return (
-                    <div
-                      key={dest.id}
-                      onClick={() => toggleDestination(dest.id)}
-                      className={`relative flex-shrink-0 w-28 h-32 rounded-xl overflow-hidden cursor-pointer group transition-all duration-300 border-2 ${isSelected ? 'border-emerald-500 ring-2 ring-emerald-500/20' : 'border-transparent'}`}
-                    >
-                      <Image
-                        src={dest.image}
-                        alt={dest.name}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div
-                        className={`absolute inset-0 transition-colors ${isSelected ? 'bg-emerald-900/40' : 'bg-gradient-to-t from-black/80 to-transparent'}`}
-                      />
-
-                      {/* Selection Checkbox Indicator */}
-                      <div
-                        className={`absolute top-2 right-2 w-5 h-5 rounded-full border flex items-center justify-center transition-all ${isSelected ? 'bg-emerald-500 border-emerald-500' : 'bg-black/20 border-white/70 hover:bg-black/40'}`}
-                      >
-                        {isSelected && <Check className="w-3 h-3 text-white" />}
-                      </div>
-
-                      <div className="absolute bottom-2 left-2 right-2">
-                        <p className="text-white text-xs font-bold leading-tight shadow-sm">{dest.name}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+           
           </div>
 
           {/* Right: Sticky Summary Card */}

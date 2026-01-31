@@ -8,9 +8,9 @@ import { Clock, Users, Star, Check, MapPin, Shield, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
-  title: 'Kayaking in Alleppey Backwaters | Best Kayak Tours 2026',
+  title: 'Alleppey Kayaking Experience | Sunrise & Sunset Backwater Paddle',
   description:
-    "Experience the thrill of kayaking through Alleppey's serene backwaters. Navigate narrow canals and explore village life.",
+    'Book the best Kayaking in Alleppey starting @ ₹500. Paddle through narrow backwater canals & villages. Safe for non-swimmers. Sunrise & Sunset slots',
   keywords: ['kayaking alleppey', 'backwater kayaking', 'alleppey adventures'],
 };
 
@@ -31,8 +31,8 @@ export default function KayakPage() {
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 mb-6 leading-[1.05]">
-            Kayaking in the <br />
-            <span className="text-gray-400">Hidden Canals.</span>
+            Best Kayaking in <br />
+            <span className="text-gray-400">Alleppey.</span>
           </h1>
 
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed mb-8">
@@ -128,15 +128,17 @@ export default function KayakPage() {
             </div>
 
             <div>
-              <h2 className="text-3xl font-bold mb-6">Experience the Silence</h2>
+              <h2 className="text-3xl font-bold mb-6">Explore the Hidden Narrow Canals of Alleppey</h2>
               <div className="prose prose-lg text-gray-600">
                 <p className="mb-6">
-                  Kayaking offers a level of intimacy with the backwaters that no other vessel can match. You govern your own
-                  pace, gliding silently past sleepy villages, duck farms, and endless paddy fields.
+                  See the real Alleppey that most tourists miss. While big houseboats stay on the main lake, our small
+                  kayaks take you gently into the silent, narrow canals where the water is calm and the village life is
+                  beautiful.
                 </p>
                 <p>
-                  Our guided tours are beginner-friendly. We use stable, sit-on-top kayaks that are impossible to sink and easy to
-                  maneuver.
+                  If you have never kayaked before, don't worry! This experience is perfect for beginners and non-swimmers. We
+                  use very stable boats that are safe and easy to paddle. Join us for a peaceful morning or evening on the
+                  water
                 </p>
               </div>
             </div>
@@ -148,8 +150,6 @@ export default function KayakPage() {
                   'Premium Kayak & Paddle',
                   'Professional English Guide',
                   'Safety Life Jacket',
-                  'Waterproof Bag',
-                  'Mineral Water',
                   'Local Tea & Snacks',
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-sm font-medium text-gray-700">
@@ -159,30 +159,7 @@ export default function KayakPage() {
               </ul>
             </div>
 
-            {/* Visual Storytelling Section */}
-            <div className="py-8 md:py-12 border-y border-gray-100 my-8">
-              <div className="grid md:grid-cols-2 gap-12 items-center">
-                <div className="relative aspect-square md:aspect-[4/5] rounded-2xl overflow-hidden">
-                  <Image src="/images/hero-2.jpg" alt="Sunrise Kayaking" fill className="object-cover" />
-                </div>
-                <div className="space-y-6">
-                  <span className="text-emerald-600 font-bold tracking-widest text-xs uppercase">The Golden Hour</span>
-                  <h3 className="text-3xl font-bold leading-tight">
-                    When the water turns <br />
-                    <span className="text-gray-400">into liquid gold.</span>
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    There is a specific magic that happens at 6:00 AM on the backwaters. The mist still clings to the water
-                    surface, and the only sound is the rhythmic splash of your paddle.
-                  </p>
-                  <p className="text-gray-600 leading-relaxed">
-                    As the sun peeks over the coconut palms, the entire canal lights up in hues of orange and gold. Kingfishers
-                    dive for their breakfast, and the village slowly wakes up. This isn't just a tour; it's a meditation in
-                    motion.
-                  </p>
-                </div>
-              </div>
-            </div>
+           
 
             {/* Itinerary Section */}
             <div className="py-8 md:py-12 border-b border-gray-100 mb-8 md:mb-12">
@@ -225,24 +202,7 @@ export default function KayakPage() {
               </div>
             </div>
 
-            {/* Packing List */}
-            <div className="bg-gray-50 rounded-2xl p-6 md:p-8 mb-8 md:mb-16">
-              <h3 className="font-bold text-xl mb-6">What to Bring</h3>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  'Change of clothes',
-                  'Sunscreen & Hat',
-                  'Sunglasses',
-                  'Waterproof Phone Case',
-                  'Towel',
-                  'Flip flops / Water shoes',
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3 text-sm font-medium text-gray-700">
-                    <div className="w-1.5 h-1.5 rounded-full bg-black/20" /> {item}
-                  </div>
-                ))}
-              </div>
-            </div>
+           
 
             {/* FAQ Section */}
             <div className="mb-12">
