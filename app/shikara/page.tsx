@@ -8,8 +8,9 @@ import { Clock, Users, Star, Check, MapPin, Sunset, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
-  title: 'Shikara Boat Rides | Traditional Alleppey Experience',
-  description: "Drift through the backwaters on a traditional shikara. A peaceful, intimate way to explore Alleppey's villages.",
+  title: 'Alleppey Shikara Boat Ride Booking | Best Price & Canal Tour',
+  description:
+    'Book the best Shikara ride in Alleppey starting at ₹800/hour. Explore the narrow Alappuzha village canals, Kuttanad paddy fields, and authentic backwater life. Private boat for couples, families or friends',
 };
 
 export default function ShikaraPage() {
@@ -29,13 +30,15 @@ export default function ShikaraPage() {
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 mb-6 leading-[1.05]">
-            The Authentic <br />
-            <span className="text-gray-400">Shikara Ride.</span>
+            Best Shikara Boating in <br />
+            <span className="text-gray-400">Alleppey.</span>
           </h1>
 
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed mb-8">
-            Drift silently through narrow canals on a traditional roofed canoe. The perfect blend of comfort and intimacy with
-            nature.
+            Explore the hidden side of Alappuzha with our private Shikara boat cruises. Designed to navigate the Alleppey
+            Backwater, narrow canals that larger houseboats cannot reach, our Shikaras offer a quiet and intimate view of the
+            backwaters. Relax on comfortable reclining seats while you glide past Kuttanad’s lush paddy fields and local
+            villages at your own pace
           </p>
 
           <div className="flex flex-wrap gap-4 md:gap-8 border-t border-gray-100 pt-8">
