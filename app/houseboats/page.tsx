@@ -227,10 +227,8 @@ export default function HouseboatsPage() {
         </div>
       </section>
 
-
-
       <FaqSection
-        title="Common Questions"
+        title="Frequently Asked Questions"
         className="mb-12 md:mb-20"
         items={[
           {

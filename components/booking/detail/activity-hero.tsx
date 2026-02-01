@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ChevronLeft, ChevronRight, Star, MapPin, Share2, Heart, ShieldCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -14,6 +15,7 @@ interface ActivityHeroProps {
 }
 
 export function ActivityHero({ activity, title }: ActivityHeroProps) {
+  const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
@@ -57,12 +59,12 @@ export function ActivityHero({ activity, title }: ActivityHeroProps) {
     <div className="relative w-full mb-8">
       <div className="relative w-full h-[60vh] md:h-[70vh] min-h-[450px] max-h-[800px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-xl md:shadow-2xl bg-black group">
         {/* Back Button */}
-        <Link
-          href="/houseboats"
+        <button
+          onClick={() => router.back()}
           className="absolute top-6 left-6 md:top-8 md:left-8 z-30 flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-2 md:px-5 md:py-2.5 rounded-full text-xs md:text-sm font-bold hover:bg-white hover:text-black transition-all"
         >
           <ChevronLeft className="w-4 h-4" /> Back
-        </Link>
+        </button>
 
         {/* Floating Action Buttons */}
         <div className="absolute top-6 right-6 md:top-8 md:right-8 flex gap-3 z-30">

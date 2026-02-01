@@ -161,11 +161,11 @@ export const PACKAGES: Record<string, Activity> = {
     description: 'Feel the thrill of speed on the serene backwaters. Quick and exciting tours.',
     type: 'time-based',
     image: '/images/hero-1.jpg',
-    basePrice: 1500,
+    basePrice: 1000,
     maxGuests: 7,
     features: ['High Speed', 'Lake Round', 'Adventure', 'Quick Trip'],
     durations: [
-      { id: '10min', name: '10 Minutes Ride', multiplier: 1, minPrice: 1000, maxPrice: 1500 },
+      { id: '10min', name: '10 Minutes Ride', multiplier: 1, minPrice: 900, maxPrice: 1500 },
       { id: '30min', name: '30 Mins Lake Loop', multiplier: 2, minPrice: 2500, maxPrice: 3000 },
       { id: '1hr', name: '1-Hour Village Safari', multiplier: 4, minPrice: 5000, maxPrice: 6000 },
     ],

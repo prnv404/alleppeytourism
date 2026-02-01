@@ -180,7 +180,7 @@ export function MobileSelectionSection({
               >
                 <div className="font-bold text-gray-900 text-sm">{duration.name}</div>
                 <div className="text-xs font-semibold text-emerald-600 mt-0.5">
-                  ₹{(activity.basePrice * duration.multiplier).toLocaleString()}
+                  ₹{(duration.minPrice || activity.basePrice * duration.multiplier).toLocaleString()}
                 </div>
               </div>
             ))}

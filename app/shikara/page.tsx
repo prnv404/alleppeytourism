@@ -237,7 +237,7 @@ export default function ShikaraPage() {
             {/* FAQ Section */}
             {/* FAQ Section */}
             <FaqSection
-              title="Common Questions"
+              title="Frequently Asked Questions"
               className="px-0 py-0 mb-12"
               items={[
                 {

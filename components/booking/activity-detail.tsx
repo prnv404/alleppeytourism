@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { Activity, activities } from '@/lib/packages-data';
+import { calculateTotalPrice, getAddonPrice } from '@/lib/pricing-utils';
 import { useSearchParams } from 'next/navigation';
 import { ListingGrid, ListingItem } from '@/components/ui/listing-grid';
 
@@ -77,72 +78,15 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
   const selectedVariant = activity.variants?.find(v => v.id === selectedVariantId);
   const selectedDuration = selectedDurationId ? activity.durations?.find(d => d.id === selectedDurationId) : null;
 
-  // Is per-person pricing?
-  const isPerPerson = activity.id === 'kayak' || activity.id === 'speedboat';
-
-  // Helper to get add-on price
-  const getAddonPrice = (addon: Activity) => {
-    let price = addon.basePrice;
-    if (addon.type === 'houseboat' && addon.variants) {
-      price = addon.variants[0].price;
-    } else if (addon.type === 'time-based' && addon.durations) {
-      price = addon.basePrice * addon.durations[0].multiplier;
-    }
-    return price;
-  };
-
   // Calculate Price
-  const getPrice = () => {
-    let price = 0;
-
-    // Base Activity Price
-    let base = 0;
-    if (activity.type === 'houseboat' && activity.variants) {
-      if (!stayType) return 0; // No selection yet
-      const v = activity.variants.find(v => v.id === selectedVariantId);
-      const cruiseType = v?.cruiseTypes?.find(ct => ct.id === stayType);
-      const multiplier = cruiseType?.multiplier || 1;
-      base = v ? v.price * multiplier : 0;
-    } else if (activity.type === 'time-based' && activity.durations) {
-      if (!selectedDurationId) return 0; // No selection yet
-      const d = activity.durations.find(d => d.id === selectedDurationId);
-
-      if (activity.id === 'shikara' && d) {
-        // Shikara Logic: 800/hr for 1-4 pax, +100/hr per extra pax.
-        // activity.basePrice is 800. d.multiplier is hours.
-        base = activity.basePrice * d.multiplier;
-
-        if (peopleCount > 4) {
-          const extraPeople = peopleCount - 4;
-          base += extraPeople * 100 * d.multiplier;
-        }
-        price += base;
-      } else {
-        base = d ? activity.basePrice * d.multiplier : 0;
-
-        if (isPerPerson) {
-          price += base * peopleCount;
-        } else {
-          price += base;
-        }
-      }
-    } else {
-      base = activity.basePrice;
-      price += base;
-    }
-
-    // Add-ons Price
-    selectedAddons.forEach(addonId => {
-      const addon = activities.find(a => a.id === addonId);
-      if (addon) {
-        price += getAddonPrice(addon);
-      }
-    });
-
-    return price;
-  };
-
-  const currentPrice = getPrice();
+  const currentPrice = calculateTotalPrice({
+    activity,
+    selectedVariantId,
+    selectedDurationId,
+    stayType,
+    peopleCount,
+    selectedAddons,
+  });
 
   const handleWhatsAppClick = () => {
     // Validation

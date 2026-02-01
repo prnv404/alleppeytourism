@@ -7,18 +7,18 @@ import { Hero } from '@/components/home/hero';
 import { PACKAGES } from '@/lib/packages-data';
 import { Clock, Users, Check, MapPin, Zap, Shield, Camera, Anchor } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { FaqSection } from '@/components/ui/faq-section';
 
 export const metadata: Metadata = {
-  title: 'Speed Boat Rides | Alleppey Adventure',
-  description: 'Feel the thrill of speed on the Vembanad Lake. The fastest way to see the backwaters.',
+  title: 'Speed Boat in Alleppey – Rates, Routes & Booking | Alleppey Tourism',
+  description: 'Looking for a thrilling speed boat in Alleppey? Experience the rush of cruising through Punnamada Lake & Vembanad. Safe, private rides starting at best prices. Book now',
 };
 
 export default function SpeedboatPage() {
   const activity = PACKAGES.speedboat;
 
-
   return (
-    <div className="bg-white min-h-screen font-sans text-gray-900">
+    <div className="bg-white min-h-screen text-gray-900">
       <Navbar />
 
       {/* Standard Hero Section */}
@@ -27,9 +27,9 @@ export default function SpeedboatPage() {
           slides={[
             {
               image: '/images/hero-1.jpg',
-              title: 'UNLEASH THE POWER',
-              subtitle: 'Zero to thrill in seconds. The fastest way to see Alleppey backwaters.',
-              buttonText: 'Choose Your Machine',
+              title: 'Experience the Best Speed Boat in Alleppey',
+              subtitle: 'Looking for a thrilling adventure? Our speed boat in Alleppey takes you through the stunning backwaters...',
+              buttonText: 'Select Your Package',
               buttonUrl: '#rates',
             },
           ]}
@@ -46,17 +46,15 @@ export default function SpeedboatPage() {
 
         <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
           <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-3xl md:text-6xl font-black italic tracking-tighter text-gray-900 uppercase mb-3">
+            <h2 className="text-3xl md:text-5xl font-black tracking-tighter text-gray-900 uppercase mb-3">
               Select Your{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-600">Machine</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-600">Speed Boat Package</span>
             </h2>
             <p className="text-gray-500 font-medium text-sm md:text-base">Choose your duration and intensity level.</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
             {activity.durations?.map(d => {
-              const price = Math.round(activity.basePrice * d.multiplier);
-
               // Package specific details
               const details: Record<string, { route: string; distance: string; durationLabel: string; popular?: boolean }> = {
                 '1hr': {
@@ -97,12 +95,12 @@ export default function SpeedboatPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90" />
 
                     {isPopular && (
-                      <div className="absolute top-4 right-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-3 py-1 text-[10px] font-black italic uppercase tracking-wider shadow-lg">
+                      <div className="absolute top-4 right-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-3 py-1 text-[10px] font-black uppercase tracking-wider shadow-lg">
                         Best Value
                       </div>
                     )}
                     <div className="absolute bottom-6 left-6 right-6">
-                      <h3 className="text-xl font-black italic uppercase text-white mb-2 leading-none">{d.name}</h3>
+                      <h3 className="text-xl font-black uppercase text-white mb-2 leading-none">{d.name}</h3>
                       <div className="flex items-center gap-3 text-gray-300 text-xs font-bold uppercase tracking-wider">
                         <span className="flex items-center gap-1">
                           <Clock className="w-3 h-3 text-emerald-500" /> {detail.durationLabel}
@@ -124,8 +122,8 @@ export default function SpeedboatPage() {
 
                     <div className="flex items-center justify-between pt-4 border-t border-gray-100 gap-2">
                       <div className="flex-1 min-w-0">
-                        <p className="text-lg sm:text-2xl font-black text-gray-900 italic tracking-tight truncate">
-                          {d.minPrice && d.maxPrice ? `₹${d.minPrice} - ₹${d.maxPrice}` : `₹${price}`}
+                        <p className="text-lg sm:text-2xl font-black text-gray-900 tracking-tight truncate">
+                          Starts @ ₹{d.minPrice ? d.minPrice.toLocaleString() : '1,000'}
                         </p>
                         <div className="flex items-center gap-2 flex-wrap">
                           <p className="text-[10px] text-gray-500 font-bold uppercase whitespace-nowrap">per boat</p>
@@ -156,14 +154,13 @@ export default function SpeedboatPage() {
             <div className="inline-block px-4 py-1 rounded-full bg-emerald-100 text-emerald-600 text-xs font-bold uppercase tracking-widest mb-2">
               Full Throttle
             </div>
-            <h2 className="text-4xl md:text-6xl font-black italic uppercase text-gray-900 leading-[0.9]">
+            <h2 className="text-4xl md:text-6xl font-black uppercase text-gray-900 leading-[0.9]">
               Cover More.
               <br />
               <span className="text-gray-300">Faster.</span>
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed font-medium">
-              Speed boats are the only way to reach distant attractions like Pathiramanal Island and the Kumarakom Bird Sanctuary
-              in a short span of time. While others drift, you fly.
+              Are you ready to explore the Venice of the East at full throttle? Our speed boat in Alleppey offers the perfect blend of thrill and scenic beauty. Unlike slow-moving houseboats, a speed boat cruise lets you cover more ground in less time, taking you deep into the famous Punnamada Lake, alleppey village canals and the vast Vembanad Lake.
             </p>
             <ul className="space-y-3">
               {['Max Speed: 60km/h', 'Licensed Drivers', 'Life Jackets Mandatory'].map(item => (
@@ -202,89 +199,14 @@ export default function SpeedboatPage() {
         </div>
       </div>
 
-      {/* 2. Dark Safety Section */}
-      <div className="bg-zinc-950 text-white py-16 md:py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay"></div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-            <div>
-              <h2 className="text-3xl md:text-5xl font-black italic uppercase mb-6 text-white">
-                Safety First.
-                <br />
-                <span className="text-emerald-500">Always.</span>
-              </h2>
-              <p className="text-lg md:text-xl text-gray-400 mb-8 leading-relaxed">
-                We don't compromise on safety. Every boat is inspected daily, and every passenger gets a certified life jacket.
-              </p>
-              <div className="grid grid-cols-2 gap-8">
-                <div className="border-l-4 border-emerald-500 pl-6">
-                  <span className="block text-3xl md:text-4xl font-black text-white mb-1">100%</span>
-                  <span className="text-xs md:text-sm font-bold uppercase text-gray-500 tracking-widest">Licensed Pilots</span>
-                </div>
-                <div className="border-l-4 border-emerald-500 pl-6">
-                  <span className="block text-3xl md:text-4xl font-black text-white mb-1">Zero</span>
-                  <span className="text-xs md:text-sm font-bold uppercase text-gray-500 tracking-widest">Accidents</span>
-                </div>
-              </div>
-            </div>
-            <div className="relative h-64 md:h-80 w-full rounded-2xl overflow-hidden border border-white/10">
-              <Image
-                src="/images/hero-1.jpg"
-                alt="Safety"
-                fill
-                className="object-cover opacity-50 hover:opacity-100 transition-all duration-700"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-emerald-600 flex items-center justify-center animate-pulse">
-                  <Shield className="w-8 h-8 md:w-10 md:h-10 text-white" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 3. Popular Stops (Waypoints)
-      <div className="py-16 md:py-32 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="text-center mb-12 md:mb-16">
-            <span className="text-emerald-600 font-bold tracking-[0.2em] uppercase text-xs mb-4 block">Route Map</span>
-            <h2 className="text-3xl md:text-5xl font-black italic text-gray-900 uppercase">Popular Waypoints</h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {[
-              { title: 'Pathiramanal', subtitle: 'Sands of Night', desc: 'Mysterious island.' },
-              { title: 'Thanneermukkom', subtitle: 'Salt Barrier', desc: 'Longest mud regulator.' },
-              { title: 'Kumarakom', subtitle: 'Bird Sanctuary', desc: 'Siberian cranes.' },
-              { title: 'R-Block', subtitle: 'Reclaimed Land', desc: 'Farming below sea level.' },
-            ].map((stop, i) => (
-              <div
-                key={i}
-                className="group bg-white p-6 md:p-8 rounded-2xl hover:-translate-y-2 transition-transform duration-300 shadow-sm hover:shadow-xl border border-gray-100 relative overflow-hidden"
-              >
-                <span className="absolute top-6 right-6 text-5xl md:text-6xl font-black text-gray-100 group-hover:text-emerald-50 transition-colors pointer-events-none">
-                  0{i + 1}
-                </span>
-                <h3 className="font-black text-xl md:text-2xl mb-1 group-hover:text-emerald-600 transition-colors uppercase italic">
-                  {stop.title}
-                </h3>
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">{stop.subtitle}</p>
-                <p className="text-sm md:text-base text-gray-600 font-medium relative z-10">{stop.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div> */}
-
       {/* 4. Information & FAQ */}
       <div className="max-w-4xl mx-auto px-4 md:px-6 py-12 md:py-20">
         <div className="bg-black text-white rounded-2xl p-8 md:p-12 mb-12 md:mb-16 relative overflow-hidden text-center">
           <div className="relative z-10">
             <MapPin className="w-10 h-10 md:w-12 md:h-12 text-emerald-500 mx-auto mb-6" />
-            <h3 className="text-2xl md:text-3xl font-black uppercase italic mb-2">Boat Jetty Location</h3>
+            <h3 className="text-2xl md:text-3xl font-black uppercase mb-2">Boat Jetty Location</h3>
             <p className="text-gray-400 mb-8 max-w-md mx-auto text-sm md:text-base">
-              Located near KSRTC Bus Stand. Operates 9 AM - 6 PM.
+              Located near KSRTC Bus Stand. Operates 6 AM - 6 PM.
             </p>
             <Button className="bg-white text-black hover:bg-emerald-600 hover:text-white rounded-xl px-8 font-bold h-12 uppercase">
               Get Directions
@@ -293,28 +215,30 @@ export default function SpeedboatPage() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-600/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
         </div>
 
-        <div className="space-y-6">
-          <h3 className="text-xl md:text-2xl font-black text-center mb-8 uppercase italic">Common Questions</h3>
-          {[
+        <FaqSection
+          items={[
             {
-              q: 'Do we get wet?',
-              a: "There might be a light spray of water depending on the wind, but you won't get soaked. It is part of the fun!",
+              q: 'What is the price of a speed boat ride in Alleppey?',
+              a: 'Our speed boat packages are budget-friendly and charged per boat, not per person. Prices start at ₹1,000.',
             },
             {
-              q: 'Is it suitable for seniors?',
-              a: 'The ride can be bumpy at high speeds. We recommend Shikara or Houseboat for guests with back pain or mobility issues.',
+              q: 'What places do we cover in the speed boat cruise?',
+              a: 'The route depends entirely on the package you choose. 1-Hour Cruise (Best Value): Covers approximately 30km. You will see the famous Nehru Trophy Boat Race track, cruise into the vast Vembanad Lake, and explore the narrow village canals of Kainakary. 10-Minute Fun Ride: A quick 7km adrenaline rush solely within Punnamada Lake to experience the speed and thrill.',
             },
             {
-              q: 'Can we stop for photos?',
-              a: 'Yes! The driver will slow down or stop at scenic spots like Pathiramanal island for photography.',
+              q: 'Is the speed boat ride safe for children and seniors?',
+              a: 'Yes, absolutely! We provide certified life jackets for all passengers, including special sizes for small children. Our drivers are licensed professionals who prioritize safety. If you have seniors or young kids on board, simply request the captain to maintain a comfortable cruising speed so your family can enjoy the backwaters without the heavy bumps.',
             },
-          ].map((faq, i) => (
-            <div key={i} className="border-b border-gray-100 pb-6">
-              <h4 className="font-bold text-base md:text-lg mb-2">{faq.q}</h4>
-              <p className="text-sm md:text-base text-gray-600 leading-relaxed">{faq.a}</p>
-            </div>
-          ))}
-        </div>
+            {
+              q: 'Where is the boarding point for the cruise?',
+              a: 'Our boats depart from the Finishing Point or Punnamada Lake area, near the KSRTC Bus Stand. We can also arrange a pickup from your lakeside resort if it has a boat jetty. After booking, we will share the exact Google Maps location via WhatsApp.',
+            },
+            {
+              q: 'Do I need to book in advance?',
+              a: 'We highly recommend booking in advance, especially on weekends and holidays. Since we operate private boats, waiting times at the jetty can be long (30-60 mins) if you haven\'t reserved a slot. You can book online or call us to reserve your boat instantly.',
+            },
+          ]}
+        />
       </div>
 
       <Footer />
