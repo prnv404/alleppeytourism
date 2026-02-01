@@ -74,7 +74,7 @@ export default function ShikaraPage() {
         </div>
       </div>
 
-      
+
 
       {/* Content Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 md:mb-20">
@@ -114,7 +114,7 @@ export default function ShikaraPage() {
                           size="lg"
                           className={`${isPopular ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-gray-900 hover:bg-black'} text-white rounded-lg`}
                         >
-                          <Link href={`/book/${activity.id}?duration=${d.id}`}>Book</Link>
+                          <Link href={`/book/${activity.id}`}>Book</Link>
                         </Button>
                       </div>
                     </div>

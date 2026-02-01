@@ -32,7 +32,7 @@ export default function Home() {
         priceUnit: '',
         pricePrefix: 'Starts from',
         image: v.id.includes('luxury') ? '/images/hero-3.jpg' : a.image, // Use a premium image for luxury
-        href: `/book/${a.id}?variant=${v.id}`,
+        href: `/book/houseboat/${v.id}`,
         rating: 4.9,
         isGuestFavorite: v.id.includes('luxury') || v.id.includes('premium'),
       }))

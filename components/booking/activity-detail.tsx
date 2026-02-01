@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { Activity, activities } from '@/lib/packages-data';
 import { calculateTotalPrice, getAddonPrice } from '@/lib/pricing-utils';
-import { useSearchParams } from 'next/navigation';
 import { ListingGrid, ListingItem } from '@/components/ui/listing-grid';
 
 import { Navbar } from '@/components/home/navbar';
@@ -24,17 +23,15 @@ import { CruisePackages } from './detail/cruise-packages';
 
 interface ActivityDetailProps {
   activity: Activity;
+  initialVariant?: string;
+  initialDuration?: string;
 }
 
-export function ActivityDetail({ activity }: ActivityDetailProps) {
-  const searchParams = useSearchParams();
-  const paramVariant = searchParams.get('variant');
-  const paramDuration = searchParams.get('duration');
-
+export function ActivityDetail({ activity, initialVariant, initialDuration }: ActivityDetailProps) {
   const [selectedVariantId, setSelectedVariantId] = useState<string>(
-    paramVariant || (activity.variants ? activity.variants[0].id : '')
+    initialVariant || (activity.variants ? activity.variants[0].id : '')
   );
-  const [selectedDurationId, setSelectedDurationId] = useState<string | null>(paramDuration || null);
+  const [selectedDurationId, setSelectedDurationId] = useState<string | null>(initialDuration || null);
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [peopleCount, setPeopleCount] = useState(2);
   const [childCount, setChildCount] = useState(0);
@@ -259,7 +256,7 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
         price: v.price,
         priceUnit: '/ night',
         image: act.image,
-        href: `/book/houseboat?variant=${v.id}`,
+        href: `/book/houseboat/${v.id}`,
         rating: 4.8,
       }));
     }
@@ -271,7 +268,7 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
         price: act.basePrice,
         priceUnit: '/ trip',
         image: act.image,
-        href: `/houseboats/book/${act.id}`,
+        href: `/book/${act.id}`,
         rating: 4.7,
       },
     ];

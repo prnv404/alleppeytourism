@@ -136,7 +136,7 @@ export default function SpeedboatPage() {
                         asChild
                         className="shrink-0 bg-black text-white hover:bg-emerald-600 hover:text-white rounded-xl h-10 px-4 sm:px-6 font-bold uppercase tracking-widest text-[10px] sm:text-xs transition-all shadow-lg hover:shadow-emerald-500/20"
                       >
-                        <Link href={`/book/${activity.id}?duration=${d.id}`}>Book Now</Link>
+                        <Link href={`/book/${activity.id}`}>Book Now</Link>
                       </Button>
                     </div>
                   </div>

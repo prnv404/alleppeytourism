@@ -117,7 +117,7 @@ export default function HouseboatsPage() {
                     asChild
                     className="w-full bg-black hover:bg-emerald-600 text-white rounded-2xl h-12 font-bold shadow-lg shadow-gray-200 group-hover:shadow-emerald-200 transition-all"
                   >
-                    <Link href={`/book/${boat.parentId}?variant=${boat.id}`}>
+                    <Link href={`/book/houseboat/${boat.id}`}>
                       Book Now <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </Button>
@@ -191,7 +191,7 @@ export default function HouseboatsPage() {
                     asChild
                     className="w-full bg-black hover:bg-emerald-600 text-white rounded-2xl h-12 font-bold shadow-lg shadow-gray-200 group-hover:shadow-emerald-200 transition-all"
                   >
-                    <Link href={`/book/${boat.parentId}?variant=${boat.id}`}>
+                    <Link href={`/book/houseboat/${boat.id}`}>
                       Book Now <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </Button>

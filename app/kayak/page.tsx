@@ -118,7 +118,7 @@ export default function KayakPage() {
                           size="lg"
                           className={`${isPopular ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-gray-900 hover:bg-black'} text-white rounded-lg`}
                         >
-                          <Link href={`/book/${activity.id}?duration=${d.id}`}>Book</Link>
+                          <Link href={`/book/${activity.id}`}>Book</Link>
                         </Button>
                       </div>
                     </div>
