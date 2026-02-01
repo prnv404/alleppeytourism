@@ -138,37 +138,6 @@ export function CruisePackages({ activity, selectedVariantId, stayType, setStayT
                                 </div>
                             </div>
 
-                            {/* View Route Accordion */}
-                            <div className="mt-6 pt-4 border-t border-black/5">
-                                <button
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        setExpandedRoute(expandedRoute === pkg.id ? null : pkg.id);
-                                    }}
-                                    className="flex items-center justify-between w-full text-xs font-bold text-gray-500 hover:text-gray-900 transition-colors"
-                                >
-                                    <span className="flex items-center gap-1.5">
-                                        <MapPin className="w-3.5 h-3.5" />
-                                        View Full Route
-                                    </span>
-                                    <ChevronDown className={cn("w-4 h-4 transition-transform", expandedRoute === pkg.id ? "rotate-180" : "")} />
-                                </button>
-                                <AnimatePresence>
-                                    {expandedRoute === pkg.id && (
-                                        <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: 'auto', opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            className="overflow-hidden"
-                                        >
-                                            <p className="pt-3 text-xs leading-relaxed text-gray-600 font-medium">
-                                                {pkg.route}
-                                            </p>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
-
                             {/* Selection Check (Mobile/Desktop Visual Cue) */}
                             <div className={cn("absolute top-6 right-6 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all", isSelected ? `${config.icon} border-current` : "border-gray-200")}>
                                 {isSelected && <div className={cn("w-3 h-3 rounded-full bg-current")} />}

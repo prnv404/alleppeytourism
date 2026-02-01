@@ -142,6 +142,8 @@ export function MobileSelectionSection({
 }: MobileSelectionSectionProps) {
   const [isMobileCalendarOpen, setIsMobileCalendarOpen] = useState(false);
   const [detailedViewType, setDetailedViewType] = useState<StayType | null>(null);
+  const isShared = selectedVariantId?.includes('shared');
+  const totalGuests = peopleCount + childCount;
 
   // Calculate base price for display (Houseboat)
   const getBasePrice = () => {
@@ -349,7 +351,8 @@ export function MobileSelectionSection({
               <span className="font-bold text-gray-900">{peopleCount}</span>
               <button
                 onClick={() => setPeopleCount(peopleCount + 1)}
-                className="w-8 h-8 flex items-center justify-center rounded-lg bg-white shadow-sm border border-gray-100 text-gray-600"
+                disabled={isShared && totalGuests >= 4}
+                className="w-8 h-8 flex items-center justify-center rounded-lg bg-white shadow-sm border border-gray-100 text-gray-600 disabled:opacity-50"
               >
                 <Plus className="w-3 h-3" />
               </button>
@@ -369,7 +372,8 @@ export function MobileSelectionSection({
                 <span className="font-bold text-gray-900">{childCount}</span>
                 <button
                   onClick={() => setChildCount(childCount + 1)}
-                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-white shadow-sm border border-gray-100 text-gray-600"
+                  disabled={isShared && totalGuests >= 4}
+                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-white shadow-sm border border-gray-100 text-gray-600 disabled:opacity-50"
                 >
                   <Plus className="w-3 h-3" />
                 </button>

@@ -334,7 +334,6 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
                   </>
                 )}
 
-                <ActivityInfo activity={activity} description={selectedVariant?.description} />
               </div>
             </div>
           </div>

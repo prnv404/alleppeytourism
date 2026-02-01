@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { format } from 'date-fns';
 import { Minus, Plus, Calendar as CalendarIcon, Check, Star, Lock, Loader2, Phone } from 'lucide-react';
@@ -59,12 +59,54 @@ export function BookingWidget({
   setStayType,
 }: BookingWidgetProps) {
   const [isDesktopCalendarOpen, setIsDesktopCalendarOpen] = useState(false);
+  const isShared = selectedVariantId?.includes('shared');
+  const totalGuests = peopleCount + childCount;
 
-  // Calculate base price for display logic (if needed for per-person calcs)
-  // Note: Variants selector is removed from UI as requested, defaulting to initial/current logic.
+  // Smart Sticky Logic
+  const widgetRef = useRef<HTMLDivElement>(null);
+  const [stickyTop, setStickyTop] = useState('6rem'); // Default to top-24 (6rem)
+
+  useEffect(() => {
+    const updateStickyPosition = () => {
+      if (!widgetRef.current) return;
+      const widgetHeight = widgetRef.current.offsetHeight;
+      const viewportHeight = window.innerHeight;
+
+      // If widget fits in viewport (with some buffer), stick to top
+      if (widgetHeight < viewportHeight - 120) {
+        setStickyTop('6rem');
+      } else {
+        // If widget is taller, stick such that bottom is visible
+        // top = viewport - widgetHeight - padding (e.g. 24px)
+        const offset = viewportHeight - widgetHeight - 24;
+        setStickyTop(`${offset}px`);
+      }
+    };
+
+    // Observer for widget resize (internal content changes)
+    const resizeObserver = new ResizeObserver(updateStickyPosition);
+    if (widgetRef.current) {
+      resizeObserver.observe(widgetRef.current);
+    }
+
+    // Listener for window resize
+    window.addEventListener('resize', updateStickyPosition);
+
+    // Initial call
+    updateStickyPosition();
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', updateStickyPosition);
+    };
+  }, [peopleCount, childCount, stayType, date, selectedAddons]); // Re-calc on state changes that affect height
 
   return (
-    <div className="hidden lg:block lg:w-[380px] lg:shrink-0 transition-all duration-300 z-20">
+    <div
+      ref={widgetRef}
+      style={{ top: stickyTop }}
+      className="hidden lg:block lg:w-[380px] lg:shrink-0 transition-[top] duration-300 z-20 sticky h-fit"
+    >
       <div className="">
         <div className="bg-white rounded-[1rem] shadow-xl border border-gray-100 p-6 ring-1 ring-gray-900/5">
           {/* Header: Price & Badge */}
@@ -192,7 +234,7 @@ export function BookingWidget({
                 <span className="w-4 text-center text-sm font-bold text-gray-900">{peopleCount}</span>
                 <button
                   onClick={() => setPeopleCount(peopleCount + 1)}
-                  disabled={activity.maxGuests ? peopleCount >= activity.maxGuests : false}
+                  disabled={(activity.maxGuests ? peopleCount >= activity.maxGuests : false) || (isShared && totalGuests >= 4)}
                   className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 hover:border-gray-900 disabled:opacity-30 disabled:border-gray-200 transition-colors"
                 >
                   <Plus className="w-3.5 h-3.5" />
@@ -201,6 +243,9 @@ export function BookingWidget({
             </div>
             {activity.maxGuests && (
               <p className="text-[10px] text-amber-600 font-bold mt-2 text-right">Max {activity.maxGuests} guests allowed</p>
+            )}
+            {isShared && (
+              <p className="text-[10px] text-amber-600 font-bold mt-2 text-right">Max 4 guests allowed for shared boats</p>
             )}
 
             {/* Children Row */}
@@ -221,7 +266,8 @@ export function BookingWidget({
                   <span className="w-4 text-center text-sm font-bold text-gray-900">{childCount}</span>
                   <button
                     onClick={() => setChildCount(childCount + 1)}
-                    className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 hover:border-gray-900 transition-colors"
+                    disabled={isShared && totalGuests >= 4}
+                    className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 hover:border-gray-900 transition-colors disabled:opacity-30 disabled:border-gray-200"
                   >
                     <Plus className="w-3.5 h-3.5" />
                   </button>

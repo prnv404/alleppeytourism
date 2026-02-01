@@ -19,12 +19,15 @@ export default function VapiWidgetComponent() {
     const durationTimerRef = useRef<NodeJS.Timeout | null>(null);
 
     const SILENCE_TIMEOUT_MS = 20000;
-    const RING_DELAY_MS = 5000;
+    const RING_DELAY_MS = 10000;
+    const RING_DURATION_MS = 18000;
 
     useEffect(() => {
+        let ringDurationTimer: NodeJS.Timeout;
+
         if (widgetState === 'ringing') {
             try {
-                const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2354/2354-preview.mp3');
+                const audio = new Audio('/audio/mixkit-on-hold-ringtone-1361.wav');
                 audio.loop = true;
                 audio.volume = 0.5;
                 const playPromise = audio.play();
@@ -36,6 +39,12 @@ export default function VapiWidgetComponent() {
                 if (typeof navigator !== 'undefined' && navigator.vibrate) {
                     navigator.vibrate([200, 100, 200, 100, 200]);
                 }
+
+                // Auto-decline after 15 seconds
+                ringDurationTimer = setTimeout(() => {
+                    setWidgetState('idle');
+                }, RING_DURATION_MS);
+
             } catch (e) {
                 console.error('Ring setup failed', e);
             }
@@ -55,6 +64,7 @@ export default function VapiWidgetComponent() {
                 audioRef.current.pause();
                 audioRef.current = null;
             }
+            if (ringDurationTimer) clearTimeout(ringDurationTimer);
         };
     }, [widgetState]);
 
@@ -155,6 +165,7 @@ export default function VapiWidgetComponent() {
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.8, opacity: 0 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
                         className="group relative flex items-center gap-4 px-1.5 py-1.5 pr-6 bg-zinc-950/80 backdrop-blur-xl border border-white/5 rounded-[1rem] shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] hover:bg-zinc-900 transition-all"
                         style={{ WebkitTapHighlightColor: 'transparent' }}
                     >
@@ -181,6 +192,7 @@ export default function VapiWidgetComponent() {
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: 20, opacity: 0 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
                         className="bg-black/80 backdrop-blur-2xl text-white rounded-[2rem] p-4 shadow-2xl flex items-center gap-4 border border-white/5 w-[85vw] max-w-[320px]"
                     >
                         <div className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center">
@@ -188,7 +200,7 @@ export default function VapiWidgetComponent() {
                         </div>
                         <div className="flex-1 min-w-0">
                             <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider mb-0.5">Incoming Call</p>
-                            <p className="text-sm font-bold truncate text-white">Maya AI Assistant</p>
+                            <p className="text-sm font-bold truncate text-white">Lily AI Assistant</p>
                         </div>
                         <div className="flex items-center gap-2">
                             <button
@@ -212,6 +224,10 @@ export default function VapiWidgetComponent() {
                     <motion.div
                         key="active"
                         layoutId="widget-container"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ type: "spring", stiffness: 500, damping: 30, mass: 0.8 }}
                         className="bg-black text-white rounded-full pl-2 pr-6 py-2 shadow-2xl flex items-center gap-4 border border-zinc-800 w-auto min-w-[220px]"
                     >
                         {/* Status Orb */}

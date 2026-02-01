@@ -31,8 +31,7 @@ export default function ShikaraPage() {
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 mb-6 leading-[1.05]">
-            Alleppey Shikara Ride: <br />
-            <span className="text-gray-400">Explore Narrow Canals & Village Life</span>
+            Alleppey Shikara Ride
           </h1>
 
           <div className="flex flex-wrap gap-4 md:gap-8 border-t border-gray-100 pt-8">
@@ -74,6 +73,8 @@ export default function ShikaraPage() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
         </div>
       </div>
+
+      
 
       {/* Content Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 md:mb-20">
