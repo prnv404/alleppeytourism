@@ -11,7 +11,7 @@ import { FaqSection } from '@/components/ui/faq-section';
 
 export const metadata: Metadata = {
   title: 'Alleppey Speed Boat Booking: Thrilling Rides from ₹900',
-  description: 'Book thrilling Alleppey Speed Boat rides starting @ ₹900. Cruise Punnamada & Vembanad Lake. Safe, private boats for couples & families. Check availability now',
+  description: 'Book thrilling Alleppey Speed Boat rides starting @ ₹900. Cruise. Safe, private boats for couples & families. Check availability now',
 };
 
 export default function SpeedboatPage() {
