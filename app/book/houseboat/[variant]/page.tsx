@@ -20,24 +20,24 @@ export async function generateStaticParams() {
 // SEO metadata for each variant
 const variantMeta: Record<string, { title: string; description: string }> = {
     'shared-standard': {
-        title: 'Shared Deluxe Houseboat in Alleppey | Budget Backwater Stay',
-        description: 'Book a Shared Deluxe Houseboat in Alleppey from ₹5,499. Private bedroom, all meals included. Perfect for budget couples & backpackers. Day cruise & overnight packages.',
+        title: 'Shared Deluxe Houseboat Alleppey | Budget Backwater Stay',
+        description: 'Shared Houseboat Alleppey starts ₹5,499. Private AC room with attached bath & all meals included. Best choice for budget couples & backpackers',
     },
     'shared-premium': {
-        title: 'Premium Shared Houseboat in Alleppey | 24Hr AC & Premium Dining',
-        description: 'Book a Premium Shared Houseboat in Alleppey from ₹7,499. Full-time AC, premium interiors & gourmet meals. Best value luxury experience on Kerala backwaters.',
+        title: 'Premium Shared Houseboat Alleppey | 24Hr AC & All Meals',
+        description: 'Book Premium Shared Houseboat Alleppey (₹7,499). Enjoy Full-time AC bedroom, premium interiors & gourmet meals. Top luxury choice for couples',
     },
     'private-deluxe': {
-        title: 'Private Deluxe Houseboat in Alleppey | Exclusive Boat for Groups',
-        description: 'Book a Private Deluxe Houseboat in Alleppey from ₹8,500. Exclusive boat for your group, 1-3 bedrooms, personal chef. Overnight & day cruise packages available.',
+        title: 'Private Deluxe Houseboat Alleppey | Exclusive Group Boat',
+        description: 'Private Deluxe Houseboat Alleppey from ₹8,500. Exclusive boat for your group with personal chef & AC bedroom. Perfect for families & friends',
     },
     'private-premium': {
-        title: 'Private Premium Houseboat in Alleppey | Glass-Covered Luxury',
-        description: 'Book a Private Premium Houseboat in Alleppey from ₹15,999. Glass-covered living area, 24hr AC, premium crew. Perfect for honeymoons & special occasions.',
+        title: 'Private Premium Houseboat Alleppey | Glass-Covered Luxury',
+        description: 'Book Private Premium Houseboat Alleppey from ₹15,999. Glass-covered living area, 24hr AC, premium crew. Perfect for honeymoons & special occasions.',
     },
     'private-luxury': {
-        title: 'Private Luxury Houseboat in Alleppey | 5-Star Backwater Experience',
-        description: 'Book the most exclusive Luxury Houseboat in Alleppey from ₹21,999. Full glass design, butler service, chef-special cuisine. The ultimate Kerala backwater experience.',
+        title: 'Luxury Private Houseboat Alleppey | 5-Star Experience',
+        description: 'Book Luxury Houseboat Alleppey (₹21,999). Full glass-enclosed AC living area, butler service & premium cuisine. The ultimate 5-star experience',
     },
 };
 

@@ -4,7 +4,7 @@ import { Footer } from '@/components/home/footer';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | Alleppey Tourism',
-  description: 'Learn how Alleppey Tourism protects your personal information. Read our privacy policy regarding data collection, usage, and security for houseboat and activity bookings.',
+  description: 'Your privacy matters. Read how Alleppey Tourism secures your booking data, payments & personal details. Safe, transparent & secure transactions',
   robots: {
     index: true,
     follow: true,
