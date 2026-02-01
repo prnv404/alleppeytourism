@@ -17,6 +17,10 @@ import { MobileSelectionSection } from './detail/mobile-selection-section';
 import { BookingWidget } from './detail/booking-widget';
 import { MobileBottomBar } from './detail/mobile-bottom-bar';
 import { StayType } from './detail/shared';
+import { HouseboatSpecs } from './detail/houseboat-specs';
+import { HouseboatInclusions } from './detail/houseboat-inclusions';
+import { HouseboatRules } from './detail/houseboat-rules';
+import { CruisePackages } from './detail/cruise-packages';
 
 interface ActivityDetailProps {
   activity: Activity;
@@ -197,6 +201,7 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
             {
               product_id: productId,
               quantity: 1,
+              price: advanceAmountInPaise,
             },
           ],
           payment_link: true,
@@ -305,7 +310,26 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
                   setStayType={setStayType}
                 />
 
+                {/* New Cruise Packages Section (Houseboats Only) */}
+                {activity.type === 'houseboat' && (
+                  <CruisePackages
+                    activity={activity}
+                    selectedVariantId={selectedVariantId}
+                    stayType={stayType}
+                    setStayType={setStayType}
+                  />
+                )}
+
                 <ActivityHighlights specs={selectedVariant?.specs || activity.specs} features={activity.features} />
+
+                {/* Houseboat Specific Specs, Inclusions, and Rules */}
+                {activity.type === 'houseboat' && (
+                  <>
+                    <HouseboatSpecs />
+                    <HouseboatInclusions />
+                    <HouseboatRules />
+                  </>
+                )}
 
                 <ActivityInfo activity={activity} description={selectedVariant?.description} />
               </div>

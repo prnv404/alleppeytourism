@@ -3,7 +3,7 @@ import { DM_Sans } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 
-import ElevenLabsWidget from '@/components/shared/eleven-labs-widget';
+import VapiWidget from '@/components/shared/vapi-widget';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/next';
 
@@ -46,7 +46,7 @@ export default function RootLayout({
       <body className={`${dmSans.variable} font-sans antialiased`}>
         {children}
 
-        <ElevenLabsWidget />
+        <VapiWidget />
         <SpeedInsights />
         <Analytics />
       </body>
