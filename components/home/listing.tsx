@@ -14,8 +14,8 @@ const bookings = [
   {
     ...PACKAGES.houseboat,
     title: PACKAGES.houseboat.name,
-    price: `₹${PACKAGES.houseboat.basePrice.toLocaleString()}`,
-    unit: '/ night',
+    price: `Starts from ₹${PACKAGES.houseboat.basePrice.toLocaleString()}`,
+    unit: '',
     rating: 4.8,
     reviews: 124,
     icon: Ship,
@@ -27,8 +27,8 @@ const bookings = [
   {
     ...PACKAGES.shikara,
     title: PACKAGES.shikara.name,
-    price: `₹${PACKAGES.shikara.basePrice.toLocaleString()}`,
-    unit: '/ hour',
+    price: `Starts from ₹${PACKAGES.shikara.basePrice.toLocaleString()}`,
+    unit: '',
     rating: 4.9,
     reviews: 85,
     icon: Anchor,
@@ -40,8 +40,8 @@ const bookings = [
   {
     ...PACKAGES.kayak,
     title: PACKAGES.kayak.name,
-    price: `₹${PACKAGES.kayak.basePrice.toLocaleString()}`,
-    unit: '/ person',
+    price: `Starts from ₹${PACKAGES.kayak.basePrice.toLocaleString()}`,
+    unit: '',
     rating: 4.7,
     reviews: 42,
     icon: Users,
@@ -53,8 +53,8 @@ const bookings = [
   {
     ...PACKAGES.speedboat,
     title: PACKAGES.speedboat.name,
-    price: `₹${PACKAGES.speedboat.basePrice.toLocaleString()}`,
-    unit: '/ trip',
+    price: `Starts from ₹${PACKAGES.speedboat.basePrice.toLocaleString()}`,
+    unit: '',
     rating: 4.6,
     reviews: 38,
     icon: Zap,
@@ -111,7 +111,7 @@ export function BookingListings() {
         >
           <div className="space-y-2">
             <span className="text-emerald-600 font-bold tracking-widest text-xs uppercase">Alleppey Tourism Services</span>
-            <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter">best alleppey boat packages</h2>
+            <h2 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter">Best Alleppey Boat Packages</h2>
           </div>
           <Button
             variant="outline"

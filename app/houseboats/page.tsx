@@ -7,12 +7,13 @@ import { Hero } from '@/components/home/hero';
 import { PACKAGES } from '@/lib/packages-data';
 import { Check, Star, Users, Coffee, Anchor, Shield, ArrowRight, MapPin, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ScrollReveal } from '@/components/ui/scroll-reveal';
 import { FaqSection } from '@/components/ui/faq-section';
 
 export const metadata: Metadata = {
-  title: 'Alleppey Boat House Rates | Budget to Luxury Kerala Boats',
+  title: 'Alleppey Houseboat Booking 2026 | Rates | Alleppey Tourism',
   description:
-    'Explore the best Alleppey Boat House rates for every budget. Choose from Budget AC, Deluxe, or Luxury Premium boats. View packages & book direct today',
+    'Explore the best Alleppey Boat House rates for every budget. Choose from Budget AC, Deluxe, or Luxury Premium boats. View packages & book  today',
 };
 
 export default function HouseboatsPage() {
@@ -33,15 +34,22 @@ export default function HouseboatsPage() {
     <div className="bg-white min-h-screen font-sans text-gray-900 selection:bg-emerald-100 selection:text-emerald-900">
       <Navbar />
 
-      {/* SEO Header & Category Selection */}
+      <ScrollReveal className="mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+        <div className="space-y-2">
+          <h1 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter">
+            Alleppey Houseboat Booking: Deluxe, Premium & Luxury Packages
+          </h1>
+        </div>
+      </ScrollReveal>
+
       {/* Hero Section */}
-      <div className="pt-16 md:pt-20">
+      <div>
         <Hero
           slides={[
             {
               image: '/images/hero-3.jpg',
-              title: 'Alleppey Boat House Booking',
-              subtitle: 'Explore the best Alleppey Boat House rates for every budget. Choose from Budget AC, Deluxe, or Luxury Premium boats. View packages & book direct today',
+              title: 'Explore the best Alleppey Boat House rates for every budget',
+              subtitle: 'Choose from Budget AC, Deluxe, or Luxury Premium boats',
               buttonText: 'View Houseboats',
               buttonUrl: '#private',
             },
@@ -73,7 +81,7 @@ export default function HouseboatsPage() {
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute top-4 right-4 bg-gray-900/90 backdrop-blur-md text-white px-4 py-2 rounded-2xl shadow-lg border border-white/10">
-                  <div className="text-xs text-gray-300 font-medium uppercase tracking-wider text-right">Per Person</div>
+                  <div className="text-xs text-gray-300 font-medium uppercase tracking-wider text-right">Starting from</div>
                   <div className="text-xl font-black leading-none">₹{boat.price.toLocaleString()}</div>
                 </div>
                 <div className="absolute bottom-4 left-4 bg-amber-400 text-black px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide flex items-center gap-1 shadow-md">
@@ -147,7 +155,7 @@ export default function HouseboatsPage() {
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute top-4 right-4 bg-white/95 backdrop-blur px-4 py-2 rounded-2xl shadow-xl border border-gray-100 group-hover:scale-105 transition-transform duration-300">
-                  <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest text-right mb-0.5">Starts at</div>
+                  <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest text-right mb-0.5">Starting from</div>
                   <div className="text-2xl font-black text-emerald-600 leading-none tracking-tight">₹{boat.price.toLocaleString()}</div>
                 </div>
                 <div className="absolute bottom-4 left-4 bg-emerald-500 text-white px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide flex items-center gap-1 shadow-md">
@@ -247,12 +255,16 @@ Tip: If you are sensitive to heat/humidity, we highly recommend booking a Premiu
           },
           {
             q: 'Does the houseboat move at night?',
-            a: 'No. As per Government safety regulations, all houseboats must anchor (park) by 5:30 PM. They remain docked until 8:00 AM the next morning. This is the perfect time to enjoy the sunset, take a village walk, or relax on the deck. The cruise resumes in the morning for breakfast.',
+            a: 'No. As per Government regulations, all houseboats in Alleppey must anchor by 5:30 PM. They cruise from 12:00 PM to 5:30 PM. The night is spent docked lakeside, where you can enjoy dinner and the silence of nature',
           },
           {
             q: 'What is the standard Check-in and Check-out time?',
             a: `Check-in: 12:00 PM (Noon). We recommend arriving on time to maximize your cruising hours.
 Check-out: 09:00 AM the next morning, after breakfast.`,
+          },
+          {
+            q: "What is the difference between Deluxe and Premium Houseboats?",
+            a: "The main difference is Air Conditioning. Deluxe boats have AC only in the bedroom from 9 PM to 6 AM. Premium boats have AC in the bedroom anytime you want. If you are visiting in summer (March-May), we highly recommend Premium."
           },
         ]}
       />

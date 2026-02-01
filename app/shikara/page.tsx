@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { FaqSection } from '@/components/ui/faq-section';
 
 export const metadata: Metadata = {
-  title: 'Alleppey Shikara Boat Ride Booking | Best Price & Canal Tour',
+  title: 'Alleppey Shikara Boat Ride Booking | Best Village Canal Tours',
   description:
     'Alleppey Shikara Booking starts ₹800/hr. Cruise narrow canals & village backwaters in a private boat. Safe & authentic tour for all ages',
 };
@@ -31,8 +31,8 @@ export default function ShikaraPage() {
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 mb-6 leading-[1.05]">
-            Best Shikara Boating in <br />
-            <span className="text-gray-400">Alleppey.</span>
+            Alleppey Shikara Ride: <br />
+            <span className="text-gray-400">Explore Narrow Canals & Village Life</span>
           </h1>
 
           <div className="flex flex-wrap gap-4 md:gap-8 border-t border-gray-100 pt-8">
@@ -160,16 +160,13 @@ export default function ShikaraPage() {
             <div className="py-8 md:py-12 border-y border-gray-100 my-8">
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <div className="space-y-6 order-2 md:order-1">
-                  <span className="text-gray-900 font-bold tracking-widest text-xs uppercase">A Journey Back in Time</span>
+                  <span className="text-gray-900 font-bold tracking-widest text-xs uppercase">Why We Recommend the Sunrise Ride (6:00 AM)</span>
                   <h3 className="text-3xl font-bold leading-tight">
-                    Where clocks <br />
-                    <span className="text-gray-400">have no meaning.</span>
+                    Experience the magic of Alleppey <br />
+                    <span className="text-gray-400">before the world wakes up.</span>
                   </h3>
                   <p className="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed mb-8">
-                    Explore the hidden side of Alappuzha with our private Shikara boat cruises. Designed to navigate the Alleppey
-                    Backwater, narrow canals that larger houseboats cannot reach, our Shikaras offer a quiet and intimate view of the
-                    backwaters. Relax on comfortable reclining seats while you glide past Kuttanad’s lush paddy fields and local
-                    villages at your own pace
+                    Our sunrise Shikara rides take you through the mist-covered backwaters where you can see village children going to school by boat and local fishermen casting nets. This 6 AM to 9 AM slot offers the best lighting for photography and silence for nature lovers
                   </p>
                 </div>
                 <div className="relative aspect-square md:aspect-[4/5] rounded-2xl overflow-hidden order-1 md:order-2">

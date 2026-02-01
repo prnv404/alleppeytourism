@@ -120,9 +120,11 @@ export function ActivityHero({ activity, title }: ActivityHeroProps) {
             className="max-w-4xl"
           >
             <div className="flex items-center gap-2 md:gap-3 text-amber-400 mb-3 md:mb-4">
-              <span className="bg-amber-400 text-black text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
-                Premium
-              </span>
+              {title?.toLowerCase().includes('premium') && (
+                <span className="bg-amber-400 text-black text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">
+                  Premium
+                </span>
+              )}
               <div className="flex items-center gap-1">
                 <Star className="w-3.5 h-3.5 md:w-4 md:h-4 fill-current" />
                 <span className="text-xs md:text-sm font-bold uppercase tracking-wider text-white">4.9 (128 Reviews)</span>

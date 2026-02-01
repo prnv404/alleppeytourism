@@ -18,8 +18,8 @@ export default function VapiWidgetComponent() {
     const silenceTimerRef = useRef<NodeJS.Timeout | null>(null);
     const durationTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-    const SILENCE_TIMEOUT_MS = 10000;
-    const RING_DELAY_MS = 2000;
+    const SILENCE_TIMEOUT_MS = 20000;
+    const RING_DELAY_MS = 5000;
 
     useEffect(() => {
         if (widgetState === 'ringing') {
@@ -155,26 +155,20 @@ export default function VapiWidgetComponent() {
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.8, opacity: 0 }}
-                        className="group relative flex items-center gap-4 px-1.5 py-1.5 pr-6 bg-zinc-950/80 backdrop-blur-xl border border-white/5 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] hover:bg-zinc-900 transition-all"
+                        className="group relative flex items-center gap-4 px-1.5 py-1.5 pr-6 bg-zinc-950/80 backdrop-blur-xl border border-white/5 rounded-[1rem] shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] hover:bg-zinc-900 transition-all"
                         style={{ WebkitTapHighlightColor: 'transparent' }}
                     >
                         {/* Icon Circle */}
-                        <div className="relative flex items-center justify-center w-12 h-12 rounded-full bg-zinc-800 group-hover:bg-green-500 transition-colors duration-300">
+                        <div className="relative flex items-center justify-center w-12 h-12 rounded-[0.8rem] bg-zinc-800 group-hover:bg-green-500 transition-colors duration-300">
                             <Phone className="w-5 h-5 text-green-400 group-hover:text-black fill-current transition-colors duration-300" />
                             {/* Pulse Ring */}
-                            <div className="absolute inset-0 rounded-full border border-green-500/20 group-hover:border-green-500/50 animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite]" />
+                            <div className="absolute inset-0 rounded-[0.8rem] border border-green-500/20 group-hover:border-green-500/50 animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite]" />
                         </div>
 
                         {/* Text Container */}
                         <div className="flex flex-col items-start gap-0.5">
-                            <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest leading-none">Maya AI</span>
-                            <span className="text-sm font-bold text-white leading-none tracking-tight">Call Agent</span>
-                        </div>
-
-                        {/* Status Indicator */}
-                        <div className="absolute top-0 right-0 -mr-1 -mt-1 w-3 h-3">
-                            <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping"></span>
-                            <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500 border-2 border-black"></span>
+                            <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest leading-none">Lily AI</span>
+                            <span className="text-sm font-bold text-white leading-none tracking-tight">Ask AI</span>
                         </div>
                     </motion.button>
                 )}

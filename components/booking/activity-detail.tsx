@@ -37,6 +37,7 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
   const [selectedDurationId, setSelectedDurationId] = useState<string | null>(paramDuration || null);
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [peopleCount, setPeopleCount] = useState(2);
+  const [childCount, setChildCount] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [selectedAddons, setSelectedAddons] = useState<string[]>([]);
   const [stayType, setStayType] = useState<StayType | null>(null);
@@ -115,7 +116,7 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
       message += `*Duration:* ${selectedDuration.name}\n`;
     }
 
-    message += `*Guests:* ${peopleCount}\n`;
+    message += `*Guests:* ${peopleCount} Adults, ${childCount} Children\n`;
 
     if (selectedAddons.length > 0) {
       message += `\n*Added Extras:*\n`;
@@ -300,6 +301,8 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
                   setSelectedDurationId={setSelectedDurationId}
                   peopleCount={peopleCount}
                   setPeopleCount={setPeopleCount}
+                  childCount={childCount}
+                  setChildCount={setChildCount}
                   date={date}
                   setDate={setDate}
                   availableAddons={availableAddons}
@@ -341,6 +344,8 @@ export function ActivityDetail({ activity }: ActivityDetailProps) {
             activity={activity}
             peopleCount={peopleCount}
             setPeopleCount={setPeopleCount}
+            childCount={childCount}
+            setChildCount={setChildCount}
             date={date}
             setDate={setDate}
             selectedVariantId={selectedVariantId}

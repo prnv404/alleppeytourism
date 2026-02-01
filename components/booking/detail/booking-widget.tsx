@@ -15,6 +15,8 @@ interface BookingWidgetProps {
   activity: Activity;
   peopleCount: number;
   setPeopleCount: (count: number) => void;
+  childCount: number;
+  setChildCount: (count: number) => void;
   date: Date | undefined;
   setDate: (date: Date | undefined) => void;
   selectedVariantId: string;
@@ -37,6 +39,8 @@ export function BookingWidget({
   activity,
   peopleCount,
   setPeopleCount,
+  childCount,
+  setChildCount,
   date,
   setDate,
   selectedVariantId,
@@ -199,19 +203,26 @@ export function BookingWidget({
               <p className="text-[10px] text-amber-600 font-bold mt-2 text-right">Max {activity.maxGuests} guests allowed</p>
             )}
 
-            {/* Children Row (Visual only to match mock, functionally 0) */}
+            {/* Children Row */}
             {activity.id !== 'shikara' && (
               <div className="flex items-center justify-between">
                 <div>
                   <span className="text-base font-medium text-gray-900 block">Children</span>
-                  <span className="text-[10px] text-gray-400 font-medium">Below 5</span>
+                  <span className="text-[10px] text-gray-400 font-medium">Below 5 (Free)</span>
                 </div>
-                <div className="flex items-center gap-3 opacity-50 cursor-not-allowed">
-                  <button disabled className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200">
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setChildCount(Math.max(0, childCount - 1))}
+                    disabled={childCount <= 0}
+                    className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 hover:border-gray-900 disabled:opacity-30 transition-colors"
+                  >
                     <Minus className="w-3.5 h-3.5" />
                   </button>
-                  <span className="w-4 text-center text-sm font-bold text-gray-900">0</span>
-                  <button disabled className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200">
+                  <span className="w-4 text-center text-sm font-bold text-gray-900">{childCount}</span>
+                  <button
+                    onClick={() => setChildCount(childCount + 1)}
+                    className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 hover:border-gray-900 transition-colors"
+                  >
                     <Plus className="w-3.5 h-3.5" />
                   </button>
                 </div>

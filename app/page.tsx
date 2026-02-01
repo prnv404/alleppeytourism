@@ -15,7 +15,7 @@ import { activities, destinations } from '@/lib/packages-data';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Alleppey Packages | Houseboat, Speed Boat, Shikara, Kayak',
+  title: 'Alleppey Houseboat Booking 2026 | Best Rates & Tours',
   description:
     'Book Deluxe to Luxury Houseboats in Alleppey, Shikara rides, Kayaking & Speed Boat adventures. Get all boating packages on one site',
 };
@@ -29,7 +29,8 @@ export default function Home() {
         title: v.name,
         description: v.description || a.description,
         price: v.price,
-        priceUnit: '/ night',
+        priceUnit: '',
+        pricePrefix: 'Starts from',
         image: v.id.includes('luxury') ? '/images/hero-3.jpg' : a.image, // Use a premium image for luxury
         href: `/book/${a.id}?variant=${v.id}`,
         rating: 4.9,
@@ -47,7 +48,8 @@ export default function Home() {
       title: a.name,
       description: a.description,
       price: a.basePrice,
-      priceUnit: '/ trip',
+      priceUnit: '',
+      pricePrefix: 'Starts from',
       image: a.image,
       href: `/${a.id}`,
       rating: 4.7,
@@ -59,11 +61,8 @@ export default function Home() {
       <ScrollReveal className="mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="space-y-2">
           <h1 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter">
-            Alleppey Tourism – Houseboat Booking & Tour Packages
+            Alleppey Houseboat Booking, Shikara, Kayaking & Speed Boat Packages
           </h1>
-          <h2 className="text-xl md:text-2xl text-gray-600 font-medium tracking-tight">
-            Discover Alappuzha Houseboats, Shikara Rides, Kayaking & Speed Boat Adventures
-          </h2>
         </div>
       </ScrollReveal>
       <Hero
@@ -103,7 +102,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
             <div>
               <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">
-                shared houseboats in alleppey, kerala
+                Shared Houseboats in Alleppey, Kerala
               </h2>
             </div>
             {/* <a
@@ -123,7 +122,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
             <div>
               <h2 className="text-3xl md:text-5xl font-black text-gray-900 mt-2 tracking-tight">
-                private houseboats in alleppey, kerala
+                Private Houseboats in Alleppey, Kerala
               </h2>
             </div>
             {/* <a

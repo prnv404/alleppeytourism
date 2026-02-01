@@ -10,8 +10,8 @@ import { Button } from '@/components/ui/button';
 import { FaqSection } from '@/components/ui/faq-section';
 
 export const metadata: Metadata = {
-  title: 'Speed Boat in Alleppey – Rates, Routes & Booking | Alleppey Tourism',
-  description: 'Looking for a thrilling speed boat in Alleppey? Experience the rush of cruising through Punnamada Lake & Vembanad. Safe, private rides starting at best prices. Book now',
+  title: 'Alleppey Speed Boat Booking: Thrilling Rides from ₹900',
+  description: 'Book thrilling Alleppey Speed Boat rides starting @ ₹900. Cruise Punnamada & Vembanad Lake. Safe, private boats for couples & families. Check availability now',
 };
 
 export default function SpeedboatPage() {
@@ -219,7 +219,7 @@ export default function SpeedboatPage() {
           items={[
             {
               q: 'What is the price of a speed boat ride in Alleppey?',
-              a: 'Our speed boat packages are budget-friendly and charged per boat, not per person. Prices start at ₹1,000.',
+              a: 'Our speed boat packages are budget-friendly and charged per boat, not per person. Prices start at ₹900.',
             },
             {
               q: 'What places do we cover in the speed boat cruise?',

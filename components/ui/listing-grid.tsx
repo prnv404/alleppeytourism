@@ -11,6 +11,7 @@ export interface ListingItem {
   description: string;
   price: number;
   priceUnit: string;
+  pricePrefix?: string;
   image: string;
   rating?: number;
   href: string;
@@ -140,7 +141,8 @@ export function ListingGrid({ items, className, scrollable = false }: ListingGri
                   {/* <p>Aug 25 - 30</p> */}
                 </div>
 
-                <div className="flex items-center gap-1.5 mt-2">
+                <div className="flex items-baseline gap-1 mt-2">
+                  {item.pricePrefix && <span className="text-sm font-medium text-gray-500">{item.pricePrefix}</span>}
                   <span className="font-black text-emerald-600 text-lg tracking-tight">₹{item.price.toLocaleString()}</span>
                   <span className="text-gray-400 font-medium text-xs uppercase tracking-wider">{item.priceUnit}</span>
                 </div>

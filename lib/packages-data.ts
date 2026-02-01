@@ -150,9 +150,9 @@ export const PACKAGES: Record<string, Activity> = {
     basePrice: 500,
     features: ['Self-Paddled', 'Guided Tours', 'Morning/Evening Slots', 'Close to Nature'],
     durations: [
-      { id: '1hr', name: '1 Hour', multiplier: 1 },
-      { id: 'sunrise', name: 'Sunrise (Morning) 2hrs', multiplier: 2 },
-      { id: 'sunset', name: 'Sunset (Evening) 2hrs', multiplier: 2 },
+      { id: '1hr', name: '1 Hour: "Quick Trial"', multiplier: 1 },
+      { id: 'sunrise', name: 'Sunrise (2 Hrs): Most Popular', multiplier: 2 },
+      { id: 'sunset', name: 'Sunset (2 Hrs): Golden Hour', multiplier: 2 },
     ],
   },
   speedboat: {
@@ -161,7 +161,7 @@ export const PACKAGES: Record<string, Activity> = {
     description: 'Feel the thrill of speed on the serene backwaters. Quick and exciting tours.',
     type: 'time-based',
     image: '/images/hero-1.jpg',
-    basePrice: 1000,
+    basePrice: 900,
     maxGuests: 7,
     features: ['High Speed', 'Lake Round', 'Adventure', 'Quick Trip'],
     durations: [

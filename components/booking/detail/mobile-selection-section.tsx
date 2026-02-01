@@ -64,7 +64,40 @@ const schedules = [
     sailsAt: 'Upon Check-in',
     checkout: '09:00 AM',
     checkoutNote: '(next day)',
+    meals: ['Welcome Drink', 'Kerala Lunch', 'Delicious Dinner', 'Breakfast'],
+    route: 'Alleppey Round -> Punnamada Lake -> Vembanad Lake -> Kainakary -> Nedumudi -> Moonnattinu Mukham (Night Stay)',
+  },
+  {
+    id: 'day',
+    title: 'Day Cruise',
+    icon: Sun,
+    color: 'text-amber-600',
+    bg: 'bg-amber-50',
+    border: 'border-amber-100',
+    description: 'Explore Punnamada Lake, Vembanad Lake, and narrow canals.',
+    duration: '5.5 Hours',
+    checkin: '11:00 AM',
+    sailsAt: 'Upon Check-in',
+    checkout: '05:00 PM',
+    checkoutNote: '(same day)',
+    meals: ['Welcome Drink', 'Kerala Lunch', 'Tea/Coffee & Snacks'],
+    route: 'Alleppey Round -> Punnamada Lake -> Vembanad Lake -> Kainakary -> Aleppey Finishing Point',
+  },
+  {
+    id: 'night',
+    title: 'Night Stay',
+    icon: Anchor,
+    color: 'text-emerald-600',
+    bg: 'bg-emerald-50',
+    border: 'border-emerald-100',
+    description: 'Anchored experience in the serene backwaters under the stars.',
+    duration: '15.5 Hours',
+    checkin: '05:30 PM',
+    sailsAt: 'Upon Check-in',
+    checkout: '09:00 AM',
+    checkoutNote: '(next day)',
     meals: ['Delicious Dinner', 'Refreshing Breakfast'],
+    route: 'Anchored at specific scenic points in the backwaters (Stationary experience).',
   },
 ];
 
@@ -76,6 +109,8 @@ interface MobileSelectionSectionProps {
   setSelectedDurationId: (id: string) => void;
   peopleCount: number;
   setPeopleCount: (count: number) => void;
+  childCount: number;
+  setChildCount: (count: number) => void;
   date: Date | undefined;
   setDate: (date: Date | undefined) => void;
   availableAddons: Activity[];
@@ -94,6 +129,8 @@ export function MobileSelectionSection({
   setSelectedDurationId,
   peopleCount,
   setPeopleCount,
+  childCount,
+  setChildCount,
   date,
   setDate,
   availableAddons,
@@ -297,27 +334,51 @@ export function MobileSelectionSection({
         </DialogContent>
       </Dialog>
 
-      {/* Guests & Date Row */}
-      <div className="flex gap-3">
-        <div className="flex-1">
-          <h3 className="text-sm font-bold text-gray-900 mb-2">Guests</h3>
-          <div className="flex items-center justify-between h-12 px-3 rounded-xl border border-gray-200 bg-gray-50">
-            <button
-              onClick={() => setPeopleCount(Math.max(1, peopleCount - 1))}
-              className="w-8 h-8 flex items-center justify-center rounded-lg bg-white shadow-sm border border-gray-100 text-gray-600"
-            >
-              <Minus className="w-3 h-3" />
-            </button>
-            <span className="font-bold text-gray-900">{peopleCount}</span>
-            <button
-              onClick={() => setPeopleCount(peopleCount + 1)}
-              className="w-8 h-8 flex items-center justify-center rounded-lg bg-white shadow-sm border border-gray-100 text-gray-600"
-            >
-              <Plus className="w-3 h-3" />
-            </button>
+      {/* Guests, Children & Date Selection */}
+      <div className="space-y-4">
+        <div className="flex gap-3">
+          <div className="flex-1">
+            <h3 className="text-sm font-bold text-gray-900 mb-2">Guests</h3>
+            <div className="flex items-center justify-between h-12 px-3 rounded-xl border border-gray-200 bg-gray-50">
+              <button
+                onClick={() => setPeopleCount(Math.max(1, peopleCount - 1))}
+                className="w-8 h-8 flex items-center justify-center rounded-lg bg-white shadow-sm border border-gray-100 text-gray-600"
+              >
+                <Minus className="w-3 h-3" />
+              </button>
+              <span className="font-bold text-gray-900">{peopleCount}</span>
+              <button
+                onClick={() => setPeopleCount(peopleCount + 1)}
+                className="w-8 h-8 flex items-center justify-center rounded-lg bg-white shadow-sm border border-gray-100 text-gray-600"
+              >
+                <Plus className="w-3 h-3" />
+              </button>
+            </div>
           </div>
+          {activity.id !== 'shikara' && (
+            <div className="flex-1">
+              <h3 className="text-sm font-bold text-gray-900 mb-2">Children</h3>
+              <div className="flex items-center justify-between h-12 px-3 rounded-xl border border-gray-200 bg-gray-50">
+                <button
+                  onClick={() => setChildCount(Math.max(0, childCount - 1))}
+                  disabled={childCount <= 0}
+                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-white shadow-sm border border-gray-100 text-gray-600 disabled:opacity-50"
+                >
+                  <Minus className="w-3 h-3" />
+                </button>
+                <span className="font-bold text-gray-900">{childCount}</span>
+                <button
+                  onClick={() => setChildCount(childCount + 1)}
+                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-white shadow-sm border border-gray-100 text-gray-600"
+                >
+                  <Plus className="w-3 h-3" />
+                </button>
+              </div>
+            </div>
+          )}
         </div>
-        <div className="flex-[1.5]">
+
+        <div>
           <h3 className="text-sm font-bold text-gray-900 mb-2">
             Date <span className="text-red-500">*</span>
           </h3>
@@ -328,12 +389,12 @@ export function MobileSelectionSection({
                 className={cn(
                   'w-full justify-start h-12 rounded-xl border-gray-200 text-left font-normal bg-gray-50 text-sm px-3',
                   !date && 'text-gray-500',
-                  !date && 'border-red-200 bg-red-50' // simple error state hint
+                  !date && 'border-red-200 bg-red-50'
                 )}
               >
                 <CalendarIcon className="h-4 w-4 mr-2 text-gray-400" />
                 {date ? (
-                  <span className="font-semibold text-gray-900 truncate">{format(date, 'MMM dd')}</span>
+                  <span className="font-semibold text-gray-900 truncate">{format(date, 'MMM dd, yyyy')}</span>
                 ) : (
                   <span>Pick date *</span>
                 )}

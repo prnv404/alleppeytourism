@@ -41,7 +41,7 @@ export function calculateTotalPrice(params: PricingParams): number {
     return basePrice + addonsTotal;
 }
 
-function calculateHouseboatPrice({ activity, selectedVariantId, stayType }: PricingParams): number {
+function calculateHouseboatPrice({ activity, selectedVariantId, stayType, peopleCount }: PricingParams): number {
     if (!stayType || !activity.variants) return 0;
 
     const variant = activity.variants.find(v => v.id === selectedVariantId);
@@ -49,7 +49,11 @@ function calculateHouseboatPrice({ activity, selectedVariantId, stayType }: Pric
 
     const cruiseType = variant.cruiseTypes?.find(ct => ct.id === stayType);
     const multiplier = cruiseType?.multiplier || 1;
-    const price = variant.price * multiplier;
+    let price = variant.price * multiplier;
+
+    if (peopleCount > 4) {
+        price += (peopleCount - 4) * 1000;
+    }
 
     // Round to nearest 100 for clean numbers if needed, but keeping exact for now
     return Math.round(price);

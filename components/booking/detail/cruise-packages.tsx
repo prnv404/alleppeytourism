@@ -77,7 +77,7 @@ export function CruisePackages({ activity, selectedVariantId, stayType, setStayT
     ];
 
     return (
-        <div className="mt-12 space-y-8">
+        <div className="hidden md:block mt-12 space-y-8">
             <div>
                 <h3 className="text-2xl md:text-3xl font-black text-gray-900 leading-tight">Choose Your Experience</h3>
                 <p className="text-gray-500 mt-2">Compare our cruise packages to find your perfect journey.</p>

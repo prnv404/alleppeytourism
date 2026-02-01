@@ -8,7 +8,7 @@ import { Clock, Users, Star, Check, MapPin, Shield, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
-  title: 'Alleppey Kayaking Experience | Sunrise & Sunset Backwater Paddle',
+  title: 'Alleppey Kayaking: Sunrise & Sunset Backwater Paddle',
   description:
     'Book the best Kayaking in Alleppey starting @ ₹500. Paddle through narrow backwater canals & villages. Safe for non-swimmers. Sunrise & Sunset slots',
   keywords: ['kayaking alleppey', 'backwater kayaking', 'alleppey adventures'],
@@ -128,17 +128,13 @@ export default function KayakPage() {
             </div>
 
             <div>
-              <h2 className="text-3xl font-bold mb-6">Explore the Hidden Narrow Canals of Alleppey</h2>
+              <h2 className="text-3xl font-bold mb-6">Discover Hidden Routes & Untouched Nature</h2>
               <div className="prose prose-lg text-gray-600">
                 <p className="mb-6">
-                  See the real Alleppey that most tourists miss. While big houseboats stay on the main lake, our small
-                  kayaks take you gently into the silent, narrow canals where the water is calm and the village life is
-                  beautiful.
+                  Escape the crowds and drift into the serene, winding creeks that larger vessels simply cannot reach. This journey takes you deep into the heart of the region, offering a front-row seat to authentic local culture.
                 </p>
                 <p>
-                  If you have never kayaked before, don't worry! This experience is perfect for beginners and non-swimmers. We
-                  use very stable boats that are safe and easy to paddle. Join us for a peaceful morning or evening on the
-                  water
+                  On this journey, you will glide through exclusive, narrow passages where the water is calm and the surroundings are silent. Watch farmers tending to paddy fields, spot colorful Kingfishers, and experience the rhythm of the backwaters away from the busy main lake
                 </p>
               </div>
             </div>
@@ -159,7 +155,7 @@ export default function KayakPage() {
               </ul>
             </div>
 
-           
+
 
             {/* Itinerary Section */}
             <div className="py-8 md:py-12 border-b border-gray-100 mb-8 md:mb-12">
@@ -202,7 +198,7 @@ export default function KayakPage() {
               </div>
             </div>
 
-           
+
 
             {/* FAQ Section */}
             <div className="mb-12">
@@ -224,6 +220,10 @@ export default function KayakPage() {
                   {
                     q: 'Is there a weight limit?',
                     a: 'Our single kayaks support up to 110kg, and double kayaks up to 230kg combined.',
+                  },
+                  {
+                    q: "Is it tiring? Do I need to be fit?",
+                    a: "Not at all! We paddle at a very slow, relaxing pace to enjoy the nature. We go with the water current, so it requires very little effort. If you get tired, our guide can tow you!"
                   },
                 ].map((faq, i) => (
                   <div key={i} className="bg-white border border-gray-100 rounded-xl p-6 hover:shadow-sm transition-shadow">
