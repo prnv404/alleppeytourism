@@ -138,7 +138,6 @@ export const PACKAGES: Record<string, Activity> = {
       { id: '1hr', name: '1 Hour', multiplier: 1 },
       { id: '2hr', name: '2 Hours', multiplier: 2 },
       { id: '3hr', name: '3 Hours', multiplier: 3 },
-      { id: 'sunset', name: 'Sunset (2.5 Hrs)', multiplier: 2.5 },
     ],
   },
   kayak: {

@@ -48,7 +48,7 @@ export default function HouseboatsPage() {
           slides={[
             {
               image: '/images/hero-3.jpg',
-              title: 'Explore the best Alleppey Boat House rates for every budget',
+              title: '',
               subtitle: 'Choose from Budget AC, Deluxe, or Luxury Premium boats',
               buttonText: 'View Houseboats',
               buttonUrl: '#private',
