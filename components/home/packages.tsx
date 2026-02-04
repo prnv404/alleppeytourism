@@ -145,7 +145,7 @@ export function PackageBuilder() {
                       </div>
 
                       <div className="w-10 h-10 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
-                        <Image src={item.image} alt={item.name} width={40} height={40} className="object-cover w-full h-full" />
+                        <Image src={item.images[0]} alt={item.name} width={40} height={40} className="object-cover w-full h-full" />
                       </div>
 
                       <div className="flex-grow">
@@ -255,7 +255,7 @@ export function PackageBuilder() {
               })}
             </div>
 
-           
+
           </div>
 
           {/* Right: Sticky Summary Card */}

@@ -19,7 +19,9 @@ export function ActivityHero({ activity, title }: ActivityHeroProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
-  const images = [activity.image, '/images/hero-1.jpg', '/images/hero-2.jpg', '/images/hero-3.jpg'];
+  const images = activity.images && activity.images.length > 0
+    ? activity.images
+    : ['/images/houseboats/houseboat-hero.jpg', '/images/shikara/shikara-hero.jpg', '/images/kayak/kayak-hero.jpg'];
 
   const slideVariants = {
     enter: (direction: number) => ({

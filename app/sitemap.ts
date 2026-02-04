@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { activities, PACKAGES } from '@/lib/packages-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://alleppeytourism.com';
+    const baseUrl = 'https://alleppeytourism.in';
     const currentDate = new Date().toISOString();
 
     // Static pages with their priorities and change frequencies

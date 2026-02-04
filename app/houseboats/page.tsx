@@ -21,7 +21,7 @@ export default function HouseboatsPage() {
 
   const allHouseboats = (houseboatActivity.variants || []).map(v => ({
     ...v,
-    parentImage: houseboatActivity.image,
+    parentImage: v.images?.[0] || houseboatActivity.images[0],
     parentId: houseboatActivity.id,
     parentDesc: houseboatActivity.description,
   }));
@@ -47,7 +47,7 @@ export default function HouseboatsPage() {
         <Hero
           slides={[
             {
-              image: '/images/hero-3.jpg',
+              image: houseboatActivity.images[0],
               title: '',
               subtitle: 'Choose from Budget AC, Deluxe, or Luxury Premium boats',
               buttonText: 'View Houseboats',

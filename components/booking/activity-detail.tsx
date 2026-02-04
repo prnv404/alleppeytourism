@@ -255,7 +255,7 @@ export function ActivityDetail({ activity, initialVariant, initialDuration }: Ac
         description: v.description || act.description,
         price: v.price,
         priceUnit: '/ night',
-        image: act.image,
+        image: act.images[0],
         href: `/book/houseboat/${v.id}`,
         rating: 4.8,
       }));
@@ -267,7 +267,7 @@ export function ActivityDetail({ activity, initialVariant, initialDuration }: Ac
         description: act.description,
         price: act.basePrice,
         priceUnit: '/ trip',
-        image: act.image,
+        image: act.images[0],
         href: `/book/${act.id}`,
         rating: 4.7,
       },
@@ -280,7 +280,10 @@ export function ActivityDetail({ activity, initialVariant, initialDuration }: Ac
 
       <main className="max-w-7xl mx-auto px-4 md:px-6 md:pt-8 min-h-screen">
         {/* Full Width Hero Section */}
-        <ActivityHero activity={activity} title={selectedVariant?.name} />
+        <ActivityHero
+          activity={selectedVariant ? { ...activity, ...selectedVariant } : activity}
+          title={selectedVariant?.name}
+        />
 
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 relative px-4 md:px-0">
           {/* Left Column: Info */}

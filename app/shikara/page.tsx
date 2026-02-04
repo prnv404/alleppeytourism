@@ -69,7 +69,7 @@ export default function ShikaraPage() {
       {/* Hero Image */}
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mb-24">
         <div className="relative aspect-[4/3] md:aspect-[21/9] w-full rounded-[1rem] overflow-hidden bg-gray-100 shadow-2xl">
-          <Image src="/images/hero-2.jpg" alt="Shikara Ride" fill className="object-cover" priority sizes="100vw" />
+          <Image src={activity.images[0]} alt="Shikara Ride" fill className="object-cover" priority sizes="100vw" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
         </div>
       </div>

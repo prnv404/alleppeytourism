@@ -31,7 +31,7 @@ export default function Home() {
         price: v.price,
         priceUnit: '',
         pricePrefix: 'Starts from',
-        image: v.id.includes('luxury') ? '/images/hero-3.jpg' : a.image, // Use a premium image for luxury
+        image: v.id.includes('luxury') ? '/images/hero-3.jpg' : a.images[0], // Use a premium image for luxury
         href: `/book/houseboat/${v.id}`,
         rating: 4.9,
         isGuestFavorite: v.id.includes('luxury') || v.id.includes('premium'),
@@ -50,7 +50,7 @@ export default function Home() {
       price: a.basePrice,
       priceUnit: '',
       pricePrefix: 'Starts from',
-      image: a.image,
+      image: a.images[0],
       href: `/${a.id}`,
       rating: 4.7,
     }));
@@ -68,27 +68,37 @@ export default function Home() {
       <Hero
         slides={[
           {
-            image: '/images/hero-1.jpg',
+            image: '/images/houseboats/IMG-20241008-WA0006.jpg',
             title: '',
             subtitle:
               'Book Deluxe to Luxury Alleppey Houseboats, Shikara rides, Kayaking, and Speed Boat adventures. Get all Alleppey boating packages in one site.',
             buttonText: 'Book Now',
             buttonUrl: '/houseboats',
           },
-          // {
-          //   image: "/images/hero-2.jpg",
-          //   title: "Alleppey Backwaters",
-          //   subtitle: "Explore the serene backwaters and lush greenery of Alleppey.",
-          //   buttonText: "Learn More",
-          //   buttonUrl: "/shikara",
-          // },
-          // {
-          //   image: "/images/hero-3.jpg",
-          //   title: "Alleppey Houseboats",
-          //   subtitle: "Relax and rejuvenate on our premium houseboats.",
-          //   buttonText: "View Packages",
-          //   buttonUrl: "/kayak",
-          // },
+                    {
+            image: '/images/shikara/IMG-20250517-WA0011.jpg',
+            title: '',
+            subtitle:
+              'Experience the serene backwaters of Alleppey with our Shikara rides. Glide through the narrow canals and witness the lush greenery and local life.',
+            buttonText: 'Book Now',
+            buttonUrl: '/shikara',
+          },
+                    {
+            image: '/images/kayak/IMG_20241117_080932200_HDR.jpg',
+            title: '',
+            subtitle:
+              'Experience the thrill of adventure with our Kayaking tours. Explore the narrow canals and witness the lush greenery and local life.',
+            buttonText: 'Book Now',
+            buttonUrl: '/kayak',
+          },
+          {
+            image: '/images/speedboat/hero-2.jpg',
+            title: '',
+            subtitle:
+              'Experience the thrill of adventure with our Speed Boat tours. Explore the narrow canals and witness the lush greenery and local life.',
+            buttonText: 'Book Now',
+            buttonUrl: '/speedboat',
+          }
         ]}
       />
       <BookingListings />

@@ -293,7 +293,7 @@ export function BookingWidget({
                     )}
                   >
                     <div className="relative w-12 h-12 rounded-xl overflow-hidden flex-shrink-0">
-                      <Image src={addon.image} alt={addon.name} fill className="object-cover" />
+                      <Image src={addon.images[0]} alt={addon.name} fill className="object-cover" />
                     </div>
                     <div className="flex-1">
                       <div className="text-sm font-bold text-gray-900 leading-tight mb-0.5">{addon.name}</div>

@@ -5,7 +5,7 @@ export interface Activity {
   name: string;
   description: string;
   type: ActivityType;
-  image: string;
+  images: string[];
   basePrice: number;
   maxGuests?: number;
   features: string[];
@@ -16,9 +16,10 @@ export interface Activity {
     price: number;
     description?: string;
     specs?: { label: string; value: string; iconKey: string }[];
+    images?: string[];
     cruiseTypes?: { id: string; label: string; multiplier: number; description: string }[];
   }[];
-  durations?: { id: string; name: string; multiplier: number; minPrice?: number; maxPrice?: number }[];
+  durations?: { id: string; name: string; multiplier: number; minPrice?: number; maxPrice?: number; image?: string }[];
 }
 
 export const PACKAGES: Record<string, Activity> = {
@@ -27,7 +28,11 @@ export const PACKAGES: Record<string, Activity> = {
     name: 'Houseboats',
     description: 'Choose between private luxury boats or budget-friendly shared experiences.',
     type: 'houseboat',
-    image: '/images/hero-1.jpg',
+    images: [
+      '/images/houseboats/IMG-20241008-WA0006.jpg',
+      '/images/houseboats/IMG-20251212-WA0013.jpg',
+      '/images/houseboats/IMG-20251217-WA0003.jpg'
+    ],
     basePrice: 4999,
     features: ['Private & Shared Options', 'All Meals Included', 'Scenic Route', 'AC Bedrooms'],
     specs: [
@@ -55,6 +60,7 @@ export const PACKAGES: Record<string, Activity> = {
           { id: 'day', label: 'Day Cruise', multiplier: 0.75, description: '11 AM - 5 PM' },
           { id: 'night', label: 'Night Stay', multiplier: 0.85, description: '5:30 PM - 9 AM Next Day' },
         ],
+        images: ['/images/houseboats/IMG-20241008-WA0006.jpg'],
       },
       {
         id: 'shared-premium',
@@ -72,6 +78,7 @@ export const PACKAGES: Record<string, Activity> = {
           { id: 'day', label: 'Day Cruise', multiplier: 0.75, description: '11 AM - 5 PM' },
           { id: 'night', label: 'Night Stay', multiplier: 0.85, description: '5:30 PM - 9 AM Next Day' },
         ],
+        images: ['/images/houseboats/IMG-20251212-WA0013.jpg'],
       },
       {
         id: 'private-deluxe',
@@ -89,6 +96,7 @@ export const PACKAGES: Record<string, Activity> = {
           { id: 'day', label: 'Day Cruise', multiplier: 0.75, description: '11 AM - 5 PM' },
           { id: 'night', label: 'Night Stay', multiplier: 0.85, description: '5:30 PM - 9 AM Next Day' },
         ],
+        images: ['/images/houseboats/IMG-20251217-WA0003.jpg'],
       },
       {
         id: 'private-premium',
@@ -106,6 +114,7 @@ export const PACKAGES: Record<string, Activity> = {
           { id: 'day', label: 'Day Cruise', multiplier: 0.75, description: '11 AM - 5 PM' },
           { id: 'night', label: 'Night Stay', multiplier: 0.85, description: '5:30 PM - 9 AM Next Day' },
         ],
+        images: ['/images/houseboats/houseboat-hero.jpg'],
       },
       {
         id: 'private-luxury',
@@ -123,6 +132,7 @@ export const PACKAGES: Record<string, Activity> = {
           { id: 'day', label: 'Day Cruise', multiplier: 0.75, description: '11 AM - 5 PM' },
           { id: 'night', label: 'Night Stay', multiplier: 0.85, description: '5:30 PM - 9 AM Next Day' },
         ],
+        images: ['/images/houseboats/houseboat-hero.jpg'],
       },
     ],
   },
@@ -131,7 +141,11 @@ export const PACKAGES: Record<string, Activity> = {
     name: 'Shikara Ride',
     description: 'A traditional open canoe ride through narrow canals where houseboats cannot reach.',
     type: 'time-based',
-    image: '/images/hero-2.jpg',
+    images: [
+      '/images/shikara/shikara-hero.jpg',
+      '/images/shikara/IMG-20250517-WA0011.jpg',
+      '/images/shikara/IMG-20250517-WA0012.jpg'
+    ],
     basePrice: 800,
     features: ['Narrow Canal Access', 'Open Roof View', 'Village Life Tour', 'Peaceful Ride'],
     durations: [
@@ -145,7 +159,12 @@ export const PACKAGES: Record<string, Activity> = {
     name: 'Kayaking',
     description: "Paddle your way through the heart of Alleppey's villages. Perfect for adventure seekers.",
     type: 'time-based',
-    image: '/images/hero-3.jpg',
+    images: [
+      '/images/kayak/kayak-hero.jpg',
+      '/images/kayak/IMG-20241023-WA0034.jpg',
+      '/images/kayak/IMG-20251212-WA0001.jpg',
+      '/images/kayak/IMG-20251212-WA0008.jpg'
+    ],
     basePrice: 500,
     features: ['Self-Paddled', 'Guided Tours', 'Morning/Evening Slots', 'Close to Nature'],
     durations: [
@@ -159,14 +178,17 @@ export const PACKAGES: Record<string, Activity> = {
     name: 'Speed Boat',
     description: 'Feel the thrill of speed on the serene backwaters. Quick and exciting tours.',
     type: 'time-based',
-    image: '/images/hero-1.jpg',
+    images: [
+      '/images/speedboat/speedboat-hero.jpg',
+      '/images/speedboat/WhatsApp Image 2026-01-19 at 12.31.09 PM.jpeg'
+    ],
     basePrice: 900,
     maxGuests: 7,
     features: ['High Speed', 'Lake Round', 'Adventure', 'Quick Trip'],
     durations: [
-      { id: '10min', name: '10 Minutes Ride', multiplier: 1, minPrice: 900, maxPrice: 1500 },
-      { id: '30min', name: '30 Mins Lake Loop', multiplier: 2, minPrice: 2500, maxPrice: 3000 },
-      { id: '1hr', name: '1-Hour Village Safari', multiplier: 4, minPrice: 5000, maxPrice: 6000 },
+      { id: '10min', name: '10 Minutes Ride', multiplier: 1, minPrice: 900, maxPrice: 1500, image: '/images/speedboat/hero-3.jpg' },
+      { id: '30min', name: '30 Mins Lake Loop', multiplier: 2, minPrice: 2500, maxPrice: 3000, image: '/images/speedboat/hero-2.jpg' },
+      { id: '1hr', name: '1-Hour Village Safari', multiplier: 4, minPrice: 5000, maxPrice: 6000, image: '/images/speedboat/speedboat-hero.jpg' },
     ],
   },
 };
@@ -190,19 +212,19 @@ export const destinations = [
   {
     id: 'beach',
     name: 'Alleppey Beach',
-    image: '/images/hero-1.jpg',
+    image: '/images/speedboat/hero-1.jpg',
     description: 'Historic beach with a 150-year-old pier and an old lighthouse.',
   },
   {
     id: 'museum',
     name: 'Revi Karuna Karan Museum',
-    image: '/images/hero-2.jpg',
+    image: '/images/speedboat/hero-2.jpg',
     description: 'A private museum displaying crystal, ivory, and art collections.',
   },
   {
     id: 'kuttanad',
     name: 'Kuttanad Paddy Fields',
-    image: '/images/hero-3.jpg',
+    image: '/images/speedboat/hero-3.jpg',
     description: 'The "Rice Bowl of Kerala", famous for farming below sea level.',
   },
 ];
