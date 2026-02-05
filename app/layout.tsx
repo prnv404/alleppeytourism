@@ -19,9 +19,7 @@ export const metadata: Metadata = {
   title: 'Alappuzha Houseboat Booking | Shikara, Kayak & Speed Boat',
   description:
     'Plan your complete trip. Book Deluxe to Luxury Alleppey Houseboats, Shikara rides, Kayaking, and Speed Boat adventures.',
-  alternates: {
-    canonical: './',
-  },
+
 };
 
 export default function RootLayout({

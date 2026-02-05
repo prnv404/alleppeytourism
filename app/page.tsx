@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   title: 'Alleppey Houseboat Booking 2026 | Best Rates & Tours',
   description:
     'Book Deluxe to Luxury Houseboats in Alleppey, Shikara rides, Kayaking & Speed Boat adventures. Get all boating packages on one site',
+  alternates: {
+    canonical: '/',
+  },
 };
 
 export default function Home() {
