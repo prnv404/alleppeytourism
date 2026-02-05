@@ -14,6 +14,8 @@ export const metadata: Metadata = {
   description: 'Book thrilling Alleppey Speed Boat rides starting @ ₹900. Cruise. Safe, private boats for couples & families. Check availability now',
 };
 
+import { ScrollReveal } from '@/components/ui/scroll-reveal';
+
 export default function SpeedboatPage() {
   const activity = PACKAGES.speedboat;
 
@@ -21,13 +23,21 @@ export default function SpeedboatPage() {
     <div className="bg-white min-h-screen text-gray-900">
       <Navbar />
 
+      <ScrollReveal className="mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+        <div className="space-y-2">
+          <h1 className="text-3xl md:text-5xl font-black text-gray-900 tracking-tighter">
+            Alleppey Speed Boat Booking | Punnamada Lake & Village Canal Cruises
+          </h1>
+        </div>
+      </ScrollReveal>
+
       {/* Standard Hero Section */}
-      <div className="pt-16 md:pt-19 mb-8 md:mb-12">
+      <div className="mb-8 md:mb-12">
         <Hero
           slides={[
             {
               image: activity.images[0],
-              title: 'Experience the Best Speed Boat in Alleppey',
+              title: '',
               subtitle: 'Looking for a thrilling adventure? Our speed boat in Alleppey takes you through the stunning backwaters...',
               buttonText: 'Select Your Package',
               buttonUrl: '#rates',
@@ -174,7 +184,7 @@ export default function SpeedboatPage() {
             </ul>
           </div>
           <div className="order-1 md:order-2 relative aspect-[4/5] md:aspect-square rounded-2xl overflow-hidden shadow-2xl skew-y-3 md:skew-y-0 md:skew-x-3 transition-transform hover:skew-x-0 duration-500">
-            <Image src="/images/hero-2.jpg" alt="Speedboat Action" fill className="object-cover" />
+            <Image src="/images/hero-2.jpg" alt="Alleppey Speedboat Action" fill className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
           </div>
         </div>

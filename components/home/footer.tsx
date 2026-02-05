@@ -10,9 +10,9 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* 1. Brand Section */}
           <div className="space-y-4">
-            <h2 className="text-xl font-bold tracking-tight">
+            <div className="text-xl font-bold tracking-tight">
               Alleppey <span className="text-emerald-500">Tourism</span>
-            </h2>
+            </div>
             <p className="text-gray-400 text-sm leading-relaxed">
               Experience the serenity of the backwaters with our premium houseboats and adventures.
             </p>

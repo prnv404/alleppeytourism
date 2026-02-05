@@ -200,13 +200,13 @@ export const destinations = [
   {
     id: 'temple',
     name: 'Ambalappuzha Temple',
-    image: '/images/hero-2.jpg',
+    image: '/images/shikara/IMG-20250517-WA0012.jpg',
     description: 'Ancient temple famous for its Palpayasam (sweet pudding) and architecture.',
   },
   {
     id: 'church',
     name: 'Champakulam Church',
-    image: '/images/hero-3.jpg',
+    image: '/images/houseboats/IMG-20251212-WA0013.jpg',
     description: 'One of the oldest churches in Kerala, located on the river Pamba.',
   },
   {

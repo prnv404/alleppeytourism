@@ -4,7 +4,7 @@ import { Footer } from '@/components/home/footer';
 
 export const metadata: Metadata = {
   title: 'Terms & Conditions | Alleppey Tourism',
-  description: 'Read the terms and conditions for booking houseboats, Shikara rides, kayaking, and speedboat experiences in Alleppey. Learn about payments, cancellations, and guest guidelines.',
+  description: 'Read our Terms & Conditions for booking Houseboats, Shikara & Speed boats in Alleppey. View policies on payments, cancellations & guest safety.',
   robots: {
     index: true,
     follow: true,

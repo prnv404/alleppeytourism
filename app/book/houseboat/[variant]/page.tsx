@@ -67,7 +67,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             title: meta.title,
             description: meta.description,
             type: 'website',
-            images: ['/images/hero-1.jpg'],
+            images: ['/images/houseboats/houseboat-hero.jpg'],
         },
     };
 }

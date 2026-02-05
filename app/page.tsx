@@ -31,7 +31,7 @@ export default function Home() {
         price: v.price,
         priceUnit: '',
         pricePrefix: 'Starts from',
-        image: v.id.includes('luxury') ? '/images/hero-3.jpg' : a.images[0], // Use a premium image for luxury
+        image: v.id.includes('luxury') ? '/images/houseboats/houseboat-hero.jpg' : a.images[0], // Use a premium image for luxury
         href: `/book/houseboat/${v.id}`,
         rating: 4.9,
         isGuestFavorite: v.id.includes('luxury') || v.id.includes('premium'),
@@ -75,7 +75,7 @@ export default function Home() {
             buttonText: 'Book Now',
             buttonUrl: '/houseboats',
           },
-                    {
+          {
             image: '/images/shikara/IMG-20250517-WA0011.jpg',
             title: '',
             subtitle:
@@ -83,7 +83,7 @@ export default function Home() {
             buttonText: 'Book Now',
             buttonUrl: '/shikara',
           },
-                    {
+          {
             image: '/images/kayak/IMG_20241117_080932200_HDR.jpg',
             title: '',
             subtitle:
