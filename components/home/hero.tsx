@@ -111,9 +111,9 @@ export function Hero({ slides }: HeroProps) {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.3, duration: 0.5 }}
                   >
-                    <h2 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight drop-shadow-lg leading-[1.1]">
+                    <div className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight drop-shadow-lg leading-[1.1]">
                       {slides[currentIndex].title}
-                    </h2>
+                    </div>
                   </motion.div>
                 )}
 
@@ -122,9 +122,9 @@ export function Hero({ slides }: HeroProps) {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.4, duration: 0.5 }}
                 >
-                  <p className="text-lg md:text-2xl text-gray-200 mb-10 max-w-2xl font-light leading-relaxed drop-shadow-md">
+                  <h2 className="text-lg md:text-2xl text-gray-200 mb-10 max-w-2xl font-light leading-relaxed drop-shadow-md">
                     {slides[currentIndex].subtitle}
-                  </p>
+                  </h2>
                 </motion.div>
 
                 <motion.div
