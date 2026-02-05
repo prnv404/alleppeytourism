@@ -38,7 +38,7 @@ export default function SpeedboatPage() {
             {
               image: activity.images[0],
               title: '',
-              subtitle: 'Looking for a thrilling adventure? Our speed boat in Alleppey takes you through the stunning backwaters...',
+              subtitle: 'Thrilling Speed Boat rides through Alleppey Backwaters.',
               buttonText: 'Select Your Package',
               buttonUrl: '#rates',
             },

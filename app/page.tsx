@@ -71,7 +71,7 @@ export default function Home() {
             image: '/images/houseboats/IMG-20241008-WA0006.jpg',
             title: '',
             subtitle:
-              'Book Deluxe to Luxury Alleppey Houseboats, Shikara rides, Kayaking, and Speed Boat adventures. Get all Alleppey boating packages in one site.',
+              'Book Premium Houseboats, Shikara, Kayak & Speed Boats in Alleppey.',
             buttonText: 'Book Now',
             buttonUrl: '/houseboats',
           },
