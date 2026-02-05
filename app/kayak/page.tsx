@@ -12,9 +12,6 @@ export const metadata: Metadata = {
   description:
     'Book the best Kayaking in Alleppey starting @ ₹500. Paddle through narrow backwater canals & villages. Safe for non-swimmers. Sunrise & Sunset slots',
   keywords: ['kayaking alleppey', 'backwater kayaking', 'alleppey adventures'],
-  alternates: {
-    canonical: '/kayak',
-  },
 };
 
 export default function KayakPage() {

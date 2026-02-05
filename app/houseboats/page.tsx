@@ -14,9 +14,6 @@ export const metadata: Metadata = {
   title: 'Alleppey Houseboat Booking 2026 | Rates | Alleppey Tourism',
   description:
     'Explore the best Alleppey Boat House rates for every budget. Choose from Budget AC, Deluxe, or Luxury Premium boats. View packages & book  today',
-  alternates: {
-    canonical: '/houseboats',
-  },
 };
 
 export default function HouseboatsPage() {

@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   description:
     'Plan your complete trip. Book Deluxe to Luxury Alleppey Houseboats, Shikara rides, Kayaking, and Speed Boat adventures.',
 
+  alternates: {
+    canonical: './',
+  },
 };
 
 export default function RootLayout({
