@@ -1,13 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ChevronLeft, ChevronRight, Star, MapPin, Share2, Heart, ShieldCheck } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight, Star, MapPin, Share2, Heart, ShieldCheck, X } from 'lucide-react';
+import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { Activity } from '@/lib/packages-data';
+import { Activity, ActivityImage } from '@/lib/packages-data';
 
 interface ActivityHeroProps {
   activity: Activity;
@@ -18,10 +18,17 @@ export function ActivityHero({ activity, title }: ActivityHeroProps) {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [showThumbnails, setShowThumbnails] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const images = activity.images && activity.images.length > 0
+  const images: ActivityImage[] = activity.images && activity.images.length > 0
     ? activity.images
-    : ['/images/houseboats/houseboat-hero.jpg', '/images/shikara/shikara-hero.jpg', '/images/kayak/kayak-hero.jpg'];
+    : [
+      { src: '/images/houseboats/houseboat-hero.jpg', alt: 'Alleppey houseboat on backwaters' },
+      { src: '/images/shikara/shikara-hero.jpg', alt: 'Shikara boat in Kerala' },
+      { src: '/images/kayak/kayak-hero.jpg', alt: 'Kayaking in Alleppey' }
+    ];
 
   const slideVariants = {
     enter: (direction: number) => ({
@@ -40,7 +47,7 @@ export function ActivityHero({ activity, title }: ActivityHeroProps) {
     }),
   };
 
-  const swipe = (newDirection: number) => {
+  const swipe = useCallback((newDirection: number) => {
     setDirection(newDirection);
     setCurrentIndex(prevIndex => {
       let newIndex = prevIndex + newDirection;
@@ -48,18 +55,62 @@ export function ActivityHero({ activity, title }: ActivityHeroProps) {
       if (newIndex >= images.length) newIndex = 0;
       return newIndex;
     });
-  };
+  }, [images.length]);
 
+  const goToSlide = useCallback((index: number) => {
+    setDirection(index > currentIndex ? 1 : -1);
+    setCurrentIndex(index);
+    setIsPaused(true);
+    // Resume auto-play after 5 seconds
+    setTimeout(() => setIsPaused(false), 5000);
+  }, [currentIndex]);
+
+  // Auto-play timer
   useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(() => {
       swipe(1);
     }, 5000);
     return () => clearInterval(timer);
-  }, [currentIndex]);
+  }, [currentIndex, isPaused, swipe]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        swipe(-1);
+        setIsPaused(true);
+        setTimeout(() => setIsPaused(false), 5000);
+      } else if (e.key === 'ArrowRight') {
+        swipe(1);
+        setIsPaused(true);
+        setTimeout(() => setIsPaused(false), 5000);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [swipe]);
+
+  // Touch/Swipe handlers
+  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+    const swipeThreshold = 50;
+    if (info.offset.x > swipeThreshold) {
+      swipe(-1);
+    } else if (info.offset.x < -swipeThreshold) {
+      swipe(1);
+    }
+    setIsPaused(true);
+    setTimeout(() => setIsPaused(false), 5000);
+  };
 
   return (
     <div className="relative w-full mb-8">
-      <div className="relative w-full h-[60vh] md:h-[70vh] min-h-[450px] max-h-[800px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-xl md:shadow-2xl bg-black group">
+      <div
+        ref={containerRef}
+        className="relative w-full h-[60vh] md:h-[70vh] min-h-[450px] max-h-[800px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-xl md:shadow-2xl bg-black group"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
         {/* Back Button */}
         <button
           onClick={() => router.back()}
@@ -78,6 +129,14 @@ export function ActivityHero({ activity, title }: ActivityHeroProps) {
           </button>
         </div>
 
+        {/* Image Counter Badge */}
+        <div
+          className="absolute top-6 left-1/2 -translate-x-1/2 md:hidden z-30 bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full text-white text-xs font-medium cursor-pointer"
+          onClick={() => setShowThumbnails(true)}
+        >
+          {currentIndex + 1} / {images.length}
+        </div>
+
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={currentIndex}
@@ -90,7 +149,11 @@ export function ActivityHero({ activity, title }: ActivityHeroProps) {
               x: { type: 'spring', stiffness: 300, damping: 30 },
               opacity: { duration: 0.2 },
             }}
-            className="absolute inset-0 w-full h-full"
+            className="absolute inset-0 w-full h-full touch-pan-y"
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.2}
+            onDragEnd={handleDragEnd}
           >
             {/* Image Layer with Ken Burns Effect */}
             <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -101,11 +164,12 @@ export function ActivityHero({ activity, title }: ActivityHeroProps) {
                 className="w-full h-full"
               >
                 <Image
-                  src={images[currentIndex]}
-                  alt={`${activity.name} ${currentIndex + 1}`}
+                  src={images[currentIndex].src}
+                  alt={images[currentIndex].alt}
                   fill
-                  className="object-cover"
+                  className="object-cover pointer-events-none"
                   priority={currentIndex === 0}
+                  draggable={false}
                 />
               </motion.div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 md:opacity-80" />
@@ -114,7 +178,7 @@ export function ActivityHero({ activity, title }: ActivityHeroProps) {
         </AnimatePresence>
 
         {/* Content Overlay */}
-        <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-16 z-20 pointer-events-none pb-12 md:pb-16">
+        <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-16 z-20 pointer-events-none pb-20 md:pb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -150,41 +214,150 @@ export function ActivityHero({ activity, title }: ActivityHeroProps) {
           </motion.div>
         </div>
 
-        {/* Navigation Arrows */}
-        <div className="absolute inset-0 flex items-center justify-between px-4 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        {/* Navigation Arrows - Always visible on mobile, hover on desktop */}
+        <div className="absolute inset-0 flex items-center justify-between px-2 md:px-4 pointer-events-none z-20">
           <button
-            onClick={() => swipe(-1)}
-            className="pointer-events-auto h-12 w-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-all border border-white/20"
+            onClick={() => {
+              swipe(-1);
+              setIsPaused(true);
+              setTimeout(() => setIsPaused(false), 5000);
+            }}
+            className={cn(
+              "pointer-events-auto h-10 w-10 md:h-12 md:w-12 rounded-full bg-black/30 md:bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/30 active:scale-95 transition-all border border-white/20",
+              "opacity-100 md:opacity-0 md:group-hover:opacity-100"
+            )}
+            aria-label="Previous image"
           >
-            <ChevronLeft className="h-6 w-6" />
+            <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
           </button>
           <button
-            onClick={() => swipe(1)}
-            className="pointer-events-auto h-12 w-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/20 transition-all border border-white/20"
+            onClick={() => {
+              swipe(1);
+              setIsPaused(true);
+              setTimeout(() => setIsPaused(false), 5000);
+            }}
+            className={cn(
+              "pointer-events-auto h-10 w-10 md:h-12 md:w-12 rounded-full bg-black/30 md:bg-white/10 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/30 active:scale-95 transition-all border border-white/20",
+              "opacity-100 md:opacity-0 md:group-hover:opacity-100"
+            )}
+            aria-label="Next image"
           >
-            <ChevronRight className="h-6 w-6" />
+            <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
           </button>
         </div>
 
-        {/* Progress Indicators */}
-        <div className="absolute bottom-8 right-8 flex gap-3 z-30">
+        {/* Progress Indicators - Enhanced for touch */}
+        <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-8 flex gap-2 md:gap-3 z-30">
           {images.map((_, index) => (
-            <div
+            <button
               key={index}
-              className="relative h-1.5 rounded-full overflow-hidden bg-white/20 cursor-pointer"
-              style={{ width: currentIndex === index ? '2rem' : '0.5rem', transition: 'width 0.3s ease' }}
-              onClick={() => {
-                setDirection(index > currentIndex ? 1 : -1);
-                setCurrentIndex(index);
-              }}
+              className={cn(
+                "relative rounded-full overflow-hidden cursor-pointer transition-all duration-300 ease-out",
+                "h-2 md:h-1.5",
+                currentIndex === index
+                  ? "w-8 md:w-8 bg-white"
+                  : "w-2 md:w-2 bg-white/40 hover:bg-white/60"
+              )}
+              onClick={() => goToSlide(index)}
+              aria-label={`Go to image ${index + 1}`}
             >
               {currentIndex === index && (
-                <motion.div layoutId="activeIndicator" className="absolute inset-0 bg-white" transition={{ duration: 0.3 }} />
+                <motion.div
+                  layoutId="activeIndicator"
+                  className="absolute inset-0 bg-white"
+                  transition={{ duration: 0.3 }}
+                />
               )}
-            </div>
+            </button>
           ))}
         </div>
+
+        {/* Thumbnail Strip - Desktop */}
+        {images.length > 1 && (
+          <div className="hidden md:flex absolute bottom-8 left-8 gap-2 z-30">
+            {images.slice(0, 5).map((img, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={cn(
+                  "relative w-16 h-12 rounded-lg overflow-hidden transition-all duration-200 border-2",
+                  currentIndex === index
+                    ? "border-white/90 ring-2 ring-white/30 scale-105"
+                    : "border-transparent opacity-60 hover:opacity-100 hover:scale-105"
+                )}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover"
+                />
+              </button>
+            ))}
+            {images.length > 5 && (
+              <button
+                onClick={() => setShowThumbnails(true)}
+                className="w-16 h-12 rounded-lg bg-black/50 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white text-xs font-medium hover:bg-black/70 transition-all"
+              >
+                +{images.length - 5}
+              </button>
+            )}
+          </div>
+        )}
       </div>
+
+      {/* Full Thumbnail Modal - Mobile/All Images */}
+      <AnimatePresence>
+        {showThumbnails && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/95 z-50 flex flex-col"
+          >
+            <div className="flex items-center justify-between p-4 border-b border-white/10">
+              <h3 className="text-white font-semibold">All Photos ({images.length})</h3>
+              <button
+                onClick={() => setShowThumbnails(false)}
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-all"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="flex-1 overflow-y-auto p-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                {images.map((img, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      goToSlide(index);
+                      setShowThumbnails(false);
+                    }}
+                    className={cn(
+                      "relative aspect-[4/3] rounded-xl overflow-hidden transition-all duration-200",
+                      currentIndex === index
+                        ? "ring-2 ring-white ring-offset-2 ring-offset-black"
+                        : "hover:ring-2 hover:ring-white/50 hover:ring-offset-1 hover:ring-offset-black"
+                    )}
+                  >
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      className="object-cover"
+                    />
+                    {currentIndex === index && (
+                      <div className="absolute inset-0 bg-white/20 flex items-center justify-center">
+                        <span className="bg-white text-black text-xs font-bold px-2 py-1 rounded-full">Current</span>
+                      </div>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

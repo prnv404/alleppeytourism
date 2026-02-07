@@ -1,11 +1,16 @@
 export type ActivityType = 'houseboat' | 'time-based';
 
+export interface ActivityImage {
+  src: string;
+  alt: string;
+}
+
 export interface Activity {
   id: string;
   name: string;
   description: string;
   type: ActivityType;
-  images: string[];
+  images: ActivityImage[];
   basePrice: number;
   maxGuests?: number;
   features: string[];
@@ -16,7 +21,7 @@ export interface Activity {
     price: number;
     description?: string;
     specs?: { label: string; value: string; iconKey: string }[];
-    images?: string[];
+    images?: ActivityImage[];
     cruiseTypes?: { id: string; label: string; multiplier: number; description: string }[];
   }[];
   durations?: { id: string; name: string; multiplier: number; minPrice?: number; maxPrice?: number; image?: string }[];
@@ -29,9 +34,9 @@ export const PACKAGES: Record<string, Activity> = {
     description: 'Choose between private luxury boats or budget-friendly shared experiences.',
     type: 'houseboat',
     images: [
-      '/images/houseboats/IMG-20241008-WA0006.jpg',
-      '/images/houseboats/IMG-20251212-WA0013.jpg',
-      '/images/houseboats/IMG-20251217-WA0003.jpg'
+      { src: '/images/houseboats/premium-hosueboat-1.jpg', alt: 'Alleppey houseboat cruise on Kerala backwaters' },
+      { src: '/images/houseboats/premium-houseboat-2.jpg', alt: 'Premium houseboat with AC bedroom in Alleppey' },
+      { src: '/images/houseboats/delux-shared.jpg', alt: 'Deluxe shared houseboat interior in Kerala' }
     ],
     basePrice: 4999,
     features: ['Private & Shared Options', 'All Meals Included', 'Scenic Route', 'AC Bedrooms'],
@@ -60,7 +65,7 @@ export const PACKAGES: Record<string, Activity> = {
           { id: 'day', label: 'Day Cruise', multiplier: 0.75, description: '11 AM - 5 PM' },
           { id: 'night', label: 'Night Stay', multiplier: 0.85, description: '5:30 PM - 9 AM Next Day' },
         ],
-        images: ['/images/houseboats/IMG-20241008-WA0006.jpg'],
+        images: [{ src: '/images/houseboats/premium-room-1.jpeg', alt: 'Deluxe shared houseboat bedroom in Alleppey' }],
       },
       {
         id: 'shared-premium',
@@ -78,7 +83,9 @@ export const PACKAGES: Record<string, Activity> = {
           { id: 'day', label: 'Day Cruise', multiplier: 0.75, description: '11 AM - 5 PM' },
           { id: 'night', label: 'Night Stay', multiplier: 0.85, description: '5:30 PM - 9 AM Next Day' },
         ],
-        images: ['/images/houseboats/IMG-20251212-WA0013.jpg'],
+        images: [
+          { src: '/images/houseboats/premium-room-4.jpeg', alt: 'Premium shared houseboat AC room in Alleppey' }
+        ],
       },
       {
         id: 'private-deluxe',
@@ -96,7 +103,7 @@ export const PACKAGES: Record<string, Activity> = {
           { id: 'day', label: 'Day Cruise', multiplier: 0.75, description: '11 AM - 5 PM' },
           { id: 'night', label: 'Night Stay', multiplier: 0.85, description: '5:30 PM - 9 AM Next Day' },
         ],
-        images: ['/images/houseboats/IMG-20251217-WA0003.jpg'],
+        images: [{ src: '/images/houseboats/premium-hosueboat-1.jpg', alt: 'Private deluxe houseboat on Alleppey backwaters' }],
       },
       {
         id: 'private-premium',
@@ -114,7 +121,7 @@ export const PACKAGES: Record<string, Activity> = {
           { id: 'day', label: 'Day Cruise', multiplier: 0.75, description: '11 AM - 5 PM' },
           { id: 'night', label: 'Night Stay', multiplier: 0.85, description: '5:30 PM - 9 AM Next Day' },
         ],
-        images: ['/images/houseboats/houseboat-hero.jpg'],
+        images: [{ src: '/images/houseboats/premium-houseboat-2.jpg', alt: 'Private premium glass-covered houseboat Alleppey' }],
       },
       {
         id: 'private-luxury',
@@ -132,7 +139,7 @@ export const PACKAGES: Record<string, Activity> = {
           { id: 'day', label: 'Day Cruise', multiplier: 0.75, description: '11 AM - 5 PM' },
           { id: 'night', label: 'Night Stay', multiplier: 0.85, description: '5:30 PM - 9 AM Next Day' },
         ],
-        images: ['/images/houseboats/houseboat-hero.jpg'],
+        images: [{ src: '/images/houseboats/premium-houseboat-2.jpg', alt: 'Luxury 5-star houseboat cruise in Alleppey' }],
       },
     ],
   },
@@ -142,9 +149,9 @@ export const PACKAGES: Record<string, Activity> = {
     description: 'A traditional open canoe ride through narrow canals where houseboats cannot reach.',
     type: 'time-based',
     images: [
-      '/images/shikara/shikara-hero.jpg',
-      '/images/shikara/IMG-20250517-WA0011.jpg',
-      '/images/shikara/IMG-20250517-WA0012.jpg'
+      { src: '/images/shikara/shikara-hero.jpg', alt: 'Shikara boat ride in Alleppey backwaters' },
+      { src: '/images/shikara/IMG-20250517-WA0011.jpg', alt: 'Traditional shikara canoe in Kerala backwaters' },
+      { src: '/images/shikara/IMG-20250517-WA0012.jpg', alt: 'Scenic shikara ride through Alleppey canals' }
     ],
     basePrice: 800,
     features: ['Narrow Canal Access', 'Open Roof View', 'Village Life Tour', 'Peaceful Ride'],
@@ -160,10 +167,10 @@ export const PACKAGES: Record<string, Activity> = {
     description: "Paddle your way through the heart of Alleppey's villages. Perfect for adventure seekers.",
     type: 'time-based',
     images: [
-      '/images/kayak/kayak-hero.jpg',
-      '/images/kayak/IMG-20241023-WA0034.jpg',
-      '/images/kayak/IMG-20251212-WA0001.jpg',
-      '/images/kayak/IMG-20251212-WA0008.jpg'
+      { src: '/images/kayak/IMG_20241117_080932200_HDR.jpg', alt: 'Kayaking through Alleppey village backwaters' },
+      { src: '/images/kayak/IMG-20241023-WA0034.jpg', alt: 'Sunrise kayak tour in Kerala backwaters' },
+      { src: '/images/kayak/IMG-20251212-WA0001.jpg', alt: 'Solo kayaker in peaceful Alleppey canals' },
+      { src: '/images/kayak/IMG-20251212-WA0008.jpg', alt: 'Guided kayaking adventure in Alleppey' }
     ],
     basePrice: 500,
     features: ['Self-Paddled', 'Guided Tours', 'Morning/Evening Slots', 'Close to Nature'],
@@ -179,8 +186,8 @@ export const PACKAGES: Record<string, Activity> = {
     description: 'Feel the thrill of speed on the serene backwaters. Quick and exciting tours.',
     type: 'time-based',
     images: [
-      '/images/speedboat/speedboat-hero.jpg',
-      '/images/speedboat/WhatsApp Image 2026-01-19 at 12.31.09 PM.jpeg'
+      { src: '/images/speedboat/speedboat-hero.jpg', alt: 'Speed boat ride on Alleppey lake' },
+      { src: '/images/speedboat/WhatsApp Image 2026-01-19 at 12.31.09 PM.jpeg', alt: 'Thrilling speedboat tour in Kerala backwaters' }
     ],
     basePrice: 900,
     maxGuests: 7,
@@ -206,7 +213,7 @@ export const destinations = [
   {
     id: 'church',
     name: 'Champakulam Church',
-    image: '/images/houseboats/IMG-20251212-WA0013.jpg',
+    image: '/images/houseboats/premium-houseboat-2.jpg',
     description: 'One of the oldest churches in Kerala, located on the river Pamba.',
   },
   {
