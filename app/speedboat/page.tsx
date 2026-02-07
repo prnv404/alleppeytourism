@@ -36,7 +36,7 @@ export default function SpeedboatPage() {
         <Hero
           slides={[
             {
-              image: activity.images[0],
+              image: activity.images[0].src,
               title: '',
               subtitle: 'Thrilling Speed Boat rides through Alleppey Backwaters.',
               buttonText: 'Select Your Package',
@@ -97,7 +97,7 @@ export default function SpeedboatPage() {
                   {/* Card Image */}
                   <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
                     <Image
-                      src={d.image || activity.images[0]}
+                      src={d.image || activity.images[0].src}
                       alt={`${d.name} Speedboat`}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-110"

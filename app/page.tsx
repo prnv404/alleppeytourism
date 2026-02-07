@@ -31,7 +31,7 @@ export default function Home() {
         price: v.price,
         priceUnit: '',
         pricePrefix: 'Starts from',
-        image: v.id.includes('luxury') ? '/images/houseboats/houseboat-hero.jpg' : a.images[0], // Use a premium image for luxury
+        image: v.images?.[0]?.src || a.images[0].src, // Use variant's image, fallback to parent
         href: `/book/houseboat/${v.id}`,
         rating: 4.9,
         isGuestFavorite: v.id.includes('luxury') || v.id.includes('premium'),
@@ -50,7 +50,7 @@ export default function Home() {
       price: a.basePrice,
       priceUnit: '',
       pricePrefix: 'Starts from',
-      image: a.images[0],
+      image: a.images[0].src,
       href: `/${a.id}`,
       rating: 4.7,
     }));
@@ -68,7 +68,7 @@ export default function Home() {
       <Hero
         slides={[
           {
-            image: '/images/houseboats/IMG-20241008-WA0006.jpg',
+            image: '/images/houseboats/premium-hosueboat-1.jpg',
             title: '',
             subtitle:
               'Book Premium Houseboats, Shikara, Kayak & Speed Boats in Alleppey.',

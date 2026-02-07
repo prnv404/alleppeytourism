@@ -255,7 +255,7 @@ export function ActivityDetail({ activity, initialVariant, initialDuration }: Ac
         description: v.description || act.description,
         price: v.price,
         priceUnit: '/ night',
-        image: act.images[0],
+        image: act.images[0].src,
         href: `/book/houseboat/${v.id}`,
         rating: 4.8,
       }));
@@ -267,7 +267,7 @@ export function ActivityDetail({ activity, initialVariant, initialDuration }: Ac
         description: act.description,
         price: act.basePrice,
         priceUnit: '/ trip',
-        image: act.images[0],
+        image: act.images[0].src,
         href: `/book/${act.id}`,
         rating: 4.7,
       },

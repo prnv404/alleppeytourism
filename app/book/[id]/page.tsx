@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: titles[id] || `Book ${activity.name} | Alleppey Tourism`,
       description: descriptions[id] || activity.description,
       type: 'website',
-      images: [activity.images[0]],
+      images: [activity.images[0].src],
     },
   };
 }

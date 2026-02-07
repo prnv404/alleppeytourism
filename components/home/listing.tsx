@@ -140,7 +140,7 @@ export function BookingListings() {
                 <div className="relative aspect-[3/4] md:aspect-[4/5] w-full overflow-hidden rounded-[1rem] bg-gray-200 isolate">
                   {/* Full Background Image */}
                   <Image
-                    src={item.images[0]}
+                    src={item.images[0].src}
                     alt={item.title}
                     fill
                     className="object-cover transition-transform duration-1000 group-hover:scale-110 ease-out"

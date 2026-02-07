@@ -448,7 +448,7 @@ export function MobileSelectionSection({
               )}
             >
               <div className="h-10 w-10 relative rounded-lg overflow-hidden shrink-0 bg-gray-200">
-                <Image src={addon.images[0]} alt={addon.name} fill className="object-cover" />
+                <Image src={addon.images[0].src} alt={addon.images[0].alt} fill className="object-cover" />
               </div>
               <div className="ml-3 flex-1">
                 <h4 className="text-sm font-bold text-gray-900">{addon.name}</h4>
