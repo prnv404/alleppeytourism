@@ -110,7 +110,8 @@ export default function VapiWidgetComponent() {
             resetSilenceTimer();
         });
 
-        vapi.on('error', () => {
+        vapi.on('error', (error: any) => {
+            console.error('[Vapi Error]', error);
             setWidgetState('idle');
         });
 
@@ -126,9 +127,11 @@ export default function VapiWidgetComponent() {
     const handleAnswer = async () => {
         setWidgetState('connecting');
         try {
+            console.log('[Vapi] Starting call...');
             await vapiRef.current?.start('4028a9a3-8d13-4881-9cf6-0be745180e17');
-        } catch (err) {
-            console.error(err);
+            console.log('[Vapi] Call started successfully');
+        } catch (err: any) {
+            console.error('[Vapi] Failed to start call:', err?.message || err);
             setWidgetState('idle');
         }
     };

@@ -186,7 +186,7 @@ export default function Home() {
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image
                       src={place.image}
-                      alt={place.name}
+                      alt={place.alt || place.name}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
