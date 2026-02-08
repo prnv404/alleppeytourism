@@ -15,7 +15,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://alleppeytourism.in'),
+  metadataBase: new URL('https://www.alleppeytourism.in'),
   title: 'Alappuzha Houseboat Booking | Shikara, Kayak & Speed Boat',
   description:
     'Plan your complete trip. Book Deluxe to Luxury Alleppey Houseboats, Shikara rides, Kayaking, and Speed Boat adventures.',
