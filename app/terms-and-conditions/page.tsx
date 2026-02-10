@@ -9,6 +9,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  alternates: {
+    canonical: '/terms-and-conditions',
+  },
 };
 
 export default function TermsPage() {

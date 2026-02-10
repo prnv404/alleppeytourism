@@ -52,6 +52,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: 'website',
       images: [activity.images[0].src],
     },
+    alternates: {
+      canonical: `/book/${id}`,
+    },
   };
 }
 

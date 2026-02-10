@@ -10,7 +10,7 @@ import { ScrollReveal } from '@/components/ui/scroll-reveal';
 
 import { ListingGrid, ListingItem } from '@/components/ui/listing-grid';
 import { FaqSection } from '@/components/ui/faq-section';
-import { activities, destinations } from '@/lib/packages-data';
+import { activities, DESTINATIONS, HOME_FAQS } from '@/lib/data';
 
 import { Metadata } from 'next';
 
@@ -180,7 +180,7 @@ export default function Home() {
           </ScrollReveal>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {destinations.map((place, i) => (
+            {DESTINATIONS.map((place, i) => (
               <ScrollReveal key={place.id} delay={i * 0.05}>
                 <div className="group h-full flex flex-col bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-all">
                   <div className="relative aspect-[4/3] overflow-hidden">
@@ -207,30 +207,7 @@ export default function Home() {
         </div>
       </section>
 
-      <FaqSection
-        items={[
-          {
-            q: 'What is the best way to explore Alleppey Backwaters?',
-            a: 'It depends on your time and budget. For a complete overnight experience with food, choose a Houseboat Stay. If you have only 2-3 hours and want to see narrow canals, a Shikara Ride or Kayaking is best. For thrill-seekers, we recommend our Speed Boat Cruise.',
-          },
-          {
-            q: 'What is the difference between a Houseboat and a Shikara?',
-            a: 'A Houseboat is like a floating hotel with AC bedrooms, toilets, and a kitchen, designed for overnight stays. A Shikara is a smaller, open-roof boat with comfortable seating, perfect for hourly cruises through village canals.',
-          },
-          {
-            q: 'Is it safe for couples, families, children, and elders?',
-            a: 'Yes, absolutely. All our boats are Government-licensed and 100% safe for all age groups. We specialize in hosting couples, families with small children, and senior citizens.',
-          },
-          {
-            q: 'Do I need to book in advance?',
-            a: 'Yes, we highly recommend booking in advance, especially for Houseboats and Shikara rides during weekends and peak season. Booking online guarantees your reservation and saves you from last-minute high prices.',
-          },
-          {
-            q: 'How do I reach the boarding point?',
-            a: 'Our main boarding point is at Finishing Point Road, Alappuzha. It is just 4 km from the Alappuzha Railway Station and 2 km from the KSRTC Bus Stand. We share the exact Google Maps location via WhatsApp once your booking is confirmed.',
-          },
-        ]}
-      />
+      <FaqSection items={HOME_FAQS} />
 
       <ScrollReveal>
         <Testimonials />

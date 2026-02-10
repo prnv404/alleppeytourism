@@ -69,6 +69,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             type: 'website',
             images: ['/images/houseboats/houseboat-hero.jpg'],
         },
+        alternates: {
+            canonical: `/book/houseboat/${variant}`,
+        },
     };
 }
 
