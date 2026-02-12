@@ -234,7 +234,7 @@ export function BookingWidget({
                 <span className="w-4 text-center text-sm font-bold text-gray-900">{peopleCount}</span>
                 <button
                   onClick={() => setPeopleCount(peopleCount + 1)}
-                  disabled={(activity.maxGuests ? peopleCount >= activity.maxGuests : false) || (isShared && totalGuests >= 4)}
+                  disabled={activity.maxGuests ? peopleCount >= activity.maxGuests : false}
                   className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 hover:border-gray-900 disabled:opacity-30 disabled:border-gray-200 transition-colors"
                 >
                   <Plus className="w-3.5 h-3.5" />
@@ -243,9 +243,6 @@ export function BookingWidget({
             </div>
             {activity.maxGuests && (
               <p className="text-[10px] text-amber-600 font-bold mt-2 text-right">Max {activity.maxGuests} guests allowed</p>
-            )}
-            {isShared && (
-              <p className="text-[10px] text-amber-600 font-bold mt-2 text-right">Max 4 guests allowed for shared boats</p>
             )}
 
             {/* Children Row */}
@@ -266,7 +263,6 @@ export function BookingWidget({
                   <span className="w-4 text-center text-sm font-bold text-gray-900">{childCount}</span>
                   <button
                     onClick={() => setChildCount(childCount + 1)}
-                    disabled={isShared && totalGuests >= 4}
                     className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 hover:border-gray-900 transition-colors disabled:opacity-30 disabled:border-gray-200"
                   >
                     <Plus className="w-3.5 h-3.5" />

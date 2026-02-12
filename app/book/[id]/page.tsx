@@ -28,9 +28,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const titles: Record<string, string> = {
-    shikara: 'Book Shikara Ride in Alleppey | Village Backwater Tours',
-    kayak: 'Book Kayaking in Alleppey | Sunrise & Sunset Tours',
-    speedboat: 'Book Speed Boat Ride in Alleppey | Thrilling Adventures',
+    shikara: 'Alleppey Shikara Boat Price | 1 - 6 Hour Village Cruise',
+    kayak: 'Alleppey Kayaking Price | 1, 2 & 3 Hour Village Tours',
+    speedboat: 'Alleppey Speed Boat Price | 10 Min, 30 Min & 1 Hour Rides',
   };
 
   const descriptions: Record<string, string> = {

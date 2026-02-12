@@ -8,7 +8,7 @@ import { Clock, Users, Star, Check, MapPin, Shield, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
-  title: 'Alleppey Kayaking: Sunrise & Sunset Backwater Paddle',
+  title: 'Kayaking in Alleppey | Sunrise, Sunset & Village Tours',
   description:
     'Book the best Kayaking in Alleppey starting @ ₹500. Paddle through narrow backwater canals & villages. Safe for non-swimmers. Sunrise & Sunset slots',
   keywords: ['kayaking alleppey', 'backwater kayaking', 'alleppey adventures'],

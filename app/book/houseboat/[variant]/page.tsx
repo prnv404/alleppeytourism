@@ -20,23 +20,23 @@ export async function generateStaticParams() {
 // SEO metadata for each variant
 const variantMeta: Record<string, { title: string; description: string }> = {
     'shared-standard': {
-        title: 'Shared Deluxe Houseboat Alleppey | Budget Backwater Stay',
+        title: 'Alleppey Shared Houseboat Booking | Budget & AC Deluxe Room',
         description: 'Shared Houseboat Alleppey starts ₹5,499. Private AC room with attached bath & all meals included. Best choice for budget couples & backpackers',
     },
     'shared-premium': {
-        title: 'Premium Shared Houseboat Alleppey | 24Hr AC & All Meals',
+        title: 'Premium Shared Houseboat Booking | Best for Couples',
         description: 'Book Premium Shared Houseboat Alleppey (₹7,499). Enjoy Full-time AC bedroom, premium interiors & gourmet meals. Top luxury choice for couples',
     },
     'private-deluxe': {
-        title: 'Private Deluxe Houseboat Alleppey | Exclusive Group Boat',
+        title: 'Alleppey Private Houseboat Booking | Deluxe AC Boat',
         description: 'Private Deluxe Houseboat Alleppey from ₹8,500. Exclusive boat for your group with personal chef & AC bedroom. Perfect for families & friends',
     },
     'private-premium': {
-        title: 'Private Premium Houseboat Alleppey | Glass-Covered Luxury',
+        title: 'Alleppey Premium Private Houseboat Booking | Full Time AC',
         description: 'Book Private Premium Houseboat Alleppey from ₹15,999. Glass-covered living area, 24hr AC, premium crew. Perfect for honeymoons & special occasions.',
     },
     'private-luxury': {
-        title: 'Luxury Private Houseboat Alleppey | 5-Star Experience',
+        title: 'Alleppey Luxury Houseboat Booking | Glass Covered AC',
         description: 'Book Luxury Houseboat Alleppey (₹21,999). Full glass-enclosed AC living area, butler service & premium cuisine. The ultimate 5-star experience',
     },
 };
