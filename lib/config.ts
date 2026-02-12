@@ -35,7 +35,7 @@ export const siteConfig = {
  * Used across all pages
  */
 export const seoConfig = {
-    titleTemplate: '%s | Alleppey Tourism',
+    titleTemplate: '%s',
     defaultTitle: 'Alleppey Houseboat Booking | Shikara, Kayak & Speed Boat',
     defaultDescription: 'Plan your complete trip. Book Deluxe to Luxury Alleppey Houseboats, Shikara rides, Kayaking, and Speed Boat adventures.',
     openGraph: {
