@@ -85,10 +85,7 @@ export function HouseboatCard({ boat }: HouseboatCardProps) {
                     <span className="text-xs font-bold text-orange-500">({discount}% OFF)</span>
                 </div>
 
-                {/* Timer / Urgency */}
-                <div className="text-[10px] font-medium text-orange-600 flex items-center gap-1">
-                    Ends in 7h 53m
-                </div>
+
             </div>
         </Link>
     );
