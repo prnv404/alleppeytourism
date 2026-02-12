@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: 'Alleppey Speed Boat Ride | Thrilling Backwater Safari',
   description: 'Book thrilling Alleppey Speed Boat rides starting @ ₹900. Cruise. Safe, private boats for couples & families. Check availability now',
   alternates: {
-    canonical: '/speedboat',
+    canonical: 'https://www.alleppeytourism.in/speedboat',
   },
 };
 

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description:
     'Explore the best Alleppey Boat House rates for every budget. Choose from Budget AC, Deluxe, or Luxury Premium boats. View packages & book today',
   alternates: {
-    canonical: '/houseboats',
+    canonical: 'https://www.alleppeytourism.in/houseboats',
   },
 };
 

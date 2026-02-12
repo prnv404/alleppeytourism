@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       images: [activity.images[0].src],
     },
     alternates: {
-      canonical: `/book/${id}`,
+      canonical: `https://www.alleppeytourism.in/book/${id}`,
     },
   };
 }

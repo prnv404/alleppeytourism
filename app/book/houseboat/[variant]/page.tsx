@@ -70,7 +70,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             images: ['/images/houseboats/houseboat-hero.jpg'],
         },
         alternates: {
-            canonical: `/book/houseboat/${variant}`,
+            canonical: `https://www.alleppeytourism.in/book/houseboat/${variant}`,
         },
     };
 }

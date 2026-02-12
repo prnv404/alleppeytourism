@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description:
     'Alleppey Shikara Booking starts ₹800/hr. Cruise narrow canals & village backwaters in a private boat. Safe & authentic tour for all ages',
   alternates: {
-    canonical: '/shikara',
+    canonical: 'https://www.alleppeytourism.in/shikara',
   },
 };
 
