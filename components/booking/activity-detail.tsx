@@ -133,7 +133,7 @@ export function ActivityDetail({ activity, initialVariant, initialDuration }: Ac
     }
 
     message += `\n*Total Estimated Price:* ₹${currentPrice.toLocaleString()}\n\nPlease confirm availability.`;
-    window.open(`https://wa.me/919567296056?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/919947753154?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   const handlePayment = async () => {

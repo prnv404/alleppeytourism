@@ -55,7 +55,7 @@ export function MobileBottomBar({
         {/* Actions */}
         <div className="flex items-center gap-2 shrink-0">
           <a
-            href="tel:+919567296056"
+            href="tel:+919947753154"
             className="bg-gray-50 hover:bg-emerald-50 text-gray-600 border border-gray-200 w-11 h-11 rounded-xl flex items-center justify-center shadow-sm transition-colors"
             title="Call Us"
           >

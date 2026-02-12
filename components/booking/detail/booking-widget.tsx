@@ -318,7 +318,7 @@ export function BookingWidget({
           {/* Book Buttons */}
           <div className="flex gap-2">
             <a
-              href="tel:+919567296056"
+              href="tel:+919947753154"
               className="bg-white hover:bg-emerald-50 text-gray-900 border border-gray-200 hover:border-emerald-300 h-14 w-14 rounded-xl flex items-center justify-center shadow-sm shrink-0 transition-all group"
               title="Call Us"
             >

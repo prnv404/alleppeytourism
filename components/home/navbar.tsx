@@ -71,26 +71,24 @@ export function Navbar({ className }: NavbarProps) {
                     key={item.label}
                     href={item.href}
                     className={`group relative h-9 px-4 inline-flex items-center justify-center gap-2 rounded-full text-sm font-medium transition-all
-                                            ${
-                                              isActive
-                                                ? isScrolled
-                                                  ? 'bg-white text-black shadow-md shadow-white/10'
-                                                  : 'bg-black text-white shadow-md shadow-black/20'
-                                                : isScrolled
-                                                  ? 'text-gray-300 hover:text-white hover:bg-white/10'
-                                                  : 'text-gray-600 hover:text-black hover:bg-black/5'
-                                            }
+                                            ${isActive
+                        ? isScrolled
+                          ? 'bg-white text-black shadow-md shadow-white/10'
+                          : 'bg-black text-white shadow-md shadow-black/20'
+                        : isScrolled
+                          ? 'text-gray-300 hover:text-white hover:bg-white/10'
+                          : 'text-gray-600 hover:text-black hover:bg-black/5'
+                      }
                                         `}
                   >
                     <item.icon
                       className={`h-4 w-4 transition-colors
-                                            ${
-                                              isActive
-                                                ? 'text-emerald-500'
-                                                : isScrolled
-                                                  ? 'text-gray-400 group-hover:text-white'
-                                                  : 'text-gray-500 group-hover:text-black'
-                                            }
+                                            ${isActive
+                          ? 'text-emerald-500'
+                          : isScrolled
+                            ? 'text-gray-400 group-hover:text-white'
+                            : 'text-gray-500 group-hover:text-black'
+                        }
                                         `}
                     />
                     {item.label}
@@ -104,11 +102,10 @@ export function Navbar({ className }: NavbarProps) {
               {/* CTA */}
               <button
                 className={`hidden md:inline-flex h-9 items-center gap-2 px-4 rounded-full text-sm font-semibold transition shadow
-                                    ${
-                                      isScrolled
-                                        ? 'bg-white text-black hover:bg-gray-200'
-                                        : 'bg-black text-white hover:bg-black/80'
-                                    }
+                                    ${isScrolled
+                    ? 'bg-white text-black hover:bg-gray-200'
+                    : 'bg-black text-white hover:bg-black/80'
+                  }
                                 `}
                 aria-label="Choose Your Experience"
               >
@@ -120,7 +117,7 @@ export function Navbar({ className }: NavbarProps) {
 
               {/* Call */}
               <a
-                href="tel:+919567296056"
+                href="tel:+919947753154"
                 className={`h-9 inline-flex items-center justify-center rounded-full transition px-3 gap-2
                                     ${isScrolled ? 'text-white hover:bg-white/10' : 'text-black hover:bg-black/5'}
                                 `}
@@ -147,9 +144,8 @@ export function Navbar({ className }: NavbarProps) {
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden fixed top-[4.6rem] right-4 z-40 w-72 transition-all duration-300 origin-top-right ${
-          isOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible pointer-events-none'
-        }`}
+        className={`lg:hidden fixed top-[4.6rem] right-4 z-40 w-72 transition-all duration-300 origin-top-right ${isOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible pointer-events-none'
+          }`}
       >
         <div
           className={`backdrop-blur-lg rounded-3xl shadow-xl p-2 border transition-colors duration-300
@@ -166,15 +162,14 @@ export function Navbar({ className }: NavbarProps) {
                   setIsOpen(false);
                 }}
                 className={`flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition
-                                    ${
-                                      isActive
-                                        ? isScrolled
-                                          ? 'bg-white/10 text-white font-semibold'
-                                          : 'bg-gray-100 text-black font-semibold'
-                                        : isScrolled
-                                          ? 'text-gray-400 hover:text-white hover:bg-white/5'
-                                          : 'text-gray-600 hover:text-black hover:bg-black/5'
-                                    }
+                                    ${isActive
+                    ? isScrolled
+                      ? 'bg-white/10 text-white font-semibold'
+                      : 'bg-gray-100 text-black font-semibold'
+                    : isScrolled
+                      ? 'text-gray-400 hover:text-white hover:bg-white/5'
+                      : 'text-gray-600 hover:text-black hover:bg-black/5'
+                  }
                                 `}
               >
                 <item.icon

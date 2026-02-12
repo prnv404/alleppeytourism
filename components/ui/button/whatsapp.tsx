@@ -1,6 +1,6 @@
 'use client';
 
-export function WhatsAppButton({ message = 'Hello, I have a query about Alleppey Tourism!', phone = '919567296056' }) {
+export function WhatsAppButton({ message = 'Hello, I have a query about Alleppey Tourism!', phone = '919947753154' }) {
   const encodedMessage = encodeURIComponent(message);
   const whatsappUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
 

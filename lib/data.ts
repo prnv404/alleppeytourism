@@ -47,7 +47,7 @@ export const ACTIVITIES: Record<string, Activity> = {
                     { id: 'day', label: 'Day Cruise', multiplier: 0.75, description: '11 AM - 5 PM' },
                     { id: 'night', label: 'Night Stay', multiplier: 0.85, description: '5:30 PM - 9 AM Next Day' },
                 ],
-                images: [{ src: '/images/houseboats/premium-room-1.jpeg', alt: 'Deluxe shared houseboat bedroom in Alleppey' }],
+                images: [{ src: '/images/houseboats/premium-room-2.jpg', alt: 'Deluxe shared houseboat bedroom in Alleppey' }],
             },
             {
                 id: 'shared-premium',
@@ -121,7 +121,7 @@ export const ACTIVITIES: Record<string, Activity> = {
                     { id: 'day', label: 'Day Cruise', multiplier: 0.75, description: '11 AM - 5 PM' },
                     { id: 'night', label: 'Night Stay', multiplier: 0.85, description: '5:30 PM - 9 AM Next Day' },
                 ],
-                images: [{ src: '/images/houseboats/premium-room-2.jpg', alt: 'Luxury 5-star houseboat cruise in Alleppey' }],
+                images: [{ src: '/images/houseboats/luxury-houseboat.jpeg', alt: 'Luxury 5-star houseboat cruise in Alleppey' }],
             },
         ],
     },

@@ -151,7 +151,21 @@ export function PackageBuilder() {
                       <div className="flex-grow">
                         <h4 className="font-semibold text-gray-900 text-sm">{item.name}</h4>
                         <p className="text-xs text-gray-500">
-                          {item.type === 'houseboat' ? 'From ₹4,999' : `From ₹${item.basePrice}`}
+                          {(() => {
+                            if (isSelected) {
+                              if (item.type === 'houseboat' && selections[item.id]?.variantId) {
+                                const variant = item.variants?.find(v => v.id === selections[item.id].variantId);
+                                if (variant) return `₹${variant.price.toLocaleString()}`;
+                              } else if (item.type === 'time-based' && selections[item.id]?.durationId) {
+                                const duration = item.durations?.find(d => d.id === selections[item.id].durationId);
+                                if (duration) {
+                                  const price = item.basePrice * duration.multiplier * (selections[item.id].count || 1);
+                                  return `₹${price.toLocaleString()}`;
+                                }
+                              }
+                            }
+                            return `From ₹${item.basePrice.toLocaleString()}`;
+                          })()}
                         </p>
                       </div>
 
@@ -389,7 +403,7 @@ export function PackageBuilder() {
 
                         message += '\nCould you please check availability and share the best offer for this plan?';
 
-                        window.open(`https://wa.me/919567296056?text=${encodeURIComponent(message)}`, '_blank');
+                        window.open(`https://wa.me/919947753154?text=${encodeURIComponent(message)}`, '_blank');
                       }}
                       className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white transition-all duration-300 h-10 text-sm font-bold rounded-lg flex items-center justify-center gap-2 shadow-sm"
                     >

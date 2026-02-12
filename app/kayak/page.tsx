@@ -269,7 +269,7 @@ export default function KayakPage() {
                                             hover:text-black 
                                         "
                   >
-                    <a href="tel:+919567296056">Call Now</a>
+                    <a href="tel:+919947753154">Call Now</a>
                   </Button>
                 </div>
 

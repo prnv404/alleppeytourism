@@ -151,7 +151,7 @@ export default function VapiWidgetComponent() {
         return `${m}:${s.toString().padStart(2, '0')}`;
     };
 
-    if (!pathname || pathname.startsWith('/book')) return null;
+    if (!pathname || pathname.startsWith('/book') || pathname.startsWith('/houseboats')) return null;
 
     return (
         <div className="fixed bottom-6 right-6 z-[9999] font-sans touch-manipulation">

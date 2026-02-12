@@ -1,5 +1,6 @@
 'use client';
 
+import { cn } from '@/lib/utils';
 import * as React from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -15,9 +16,10 @@ type HeroSlide = {
 
 interface HeroProps {
   slides: HeroSlide[];
+  className?: string;
 }
 
-export function Hero({ slides }: HeroProps) {
+export function Hero({ slides, className }: HeroProps) {
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [direction, setDirection] = React.useState(0);
 
@@ -61,7 +63,7 @@ export function Hero({ slides }: HeroProps) {
   }, [currentIndex]);
 
   return (
-    <div className="relative w-full mt-5 px-4 sm:px-6 lg:px-8 mb-5">
+    <div className={cn("relative w-full mt-9 px-4 sm:px-6 lg:px-8 mb-5", className)}>
       <div className="relative w-full h-[75vh] min-h-[600px] max-h-[900px] rounded-[1.2rem] overflow-hidden shadow-2xl mx-auto max-w-7xl bg-black group">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
@@ -111,9 +113,9 @@ export function Hero({ slides }: HeroProps) {
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.3, duration: 0.5 }}
                   >
-                    <div className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight drop-shadow-lg leading-[1.1]">
+                    <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight drop-shadow-lg leading-[1.1]">
                       {slides[currentIndex].title}
-                    </div>
+                    </h1>
                   </motion.div>
                 )}
 
