@@ -65,14 +65,9 @@ function calculateShikaraPrice({ activity, selectedDurationId, peopleCount }: Pr
     const duration = activity.durations.find(d => d.id === selectedDurationId);
     if (!duration) return 0;
 
-    // Shikara Logic: 800 for 1hr (base), +100 per extra pax > 4
-    const baseRate = activity.basePrice; // 800
-    let price = baseRate * duration.multiplier;
-
-    if (peopleCount > 4) {
-        const extraPeople = peopleCount - 4;
-        price += extraPeople * 100 * duration.multiplier;
-    }
+    // Shikara Logic: Price scales per boat, assuming 5 persons max per boat
+    const boatsNeeded = Math.ceil(peopleCount / 5);
+    const price = activity.basePrice * duration.multiplier * boatsNeeded;
 
     return Math.round(price);
 }
@@ -119,7 +114,7 @@ function calculateKayakPrice({ activity, selectedDurationId, peopleCount }: Pric
     if (!duration) return 0;
 
     // Kayak is usually PER PERSON
-    const perPersonPrice = activity.basePrice * duration.multiplier;
+    const perPersonPrice = duration.price || (activity.basePrice * duration.multiplier);
     return Math.round(perPersonPrice * peopleCount);
 }
 

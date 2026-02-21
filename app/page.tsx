@@ -14,7 +14,7 @@ import { activities, DESTINATIONS, HOME_FAQS } from '@/lib/data';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Alleppey Houseboat | Shikara, Kayaking & Speed Boats',
+  title: 'Alleppey Houseboat Booking | Shikara, Kayaking & Speed Boat',
   description:
     'Book Deluxe to Luxury Houseboats in Alleppey, Shikara rides, Kayaking & Speed Boat adventures. Get all boating packages on one site',
 };

@@ -41,6 +41,7 @@ export interface ActivityDuration {
     id: string;
     name: string;
     multiplier: number;
+    price?: number;
     minPrice?: number;
     maxPrice?: number;
     image?: string;

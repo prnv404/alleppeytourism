@@ -35,10 +35,10 @@ export const ACTIVITIES: Record<string, Activity> = {
                 id: 'shared-standard',
                 name: 'Deluxe Shared Houseboat in Alleppey',
                 price: 5499,
-                description: 'Looking for a cheap houseboat in Alleppey without compromising on comfort? Our Shared Houseboat package is the smart choice. You get your own Deluxe Private Bedroom with an attached washroom, while enjoying the large open deck and dining area with other travelers. Perfect for budget couples, families, and backpackers, this Alleppey boat house experience lets you enjoy the beauty of the backwaters at a fraction of the cost',
+                description: 'Looking for a budget houseboat in Alleppey without compromising on comfort? Our Shared Houseboat package is the smart choice. You get your own Deluxe Private Bedroom with an attached washroom, while enjoying the large open deck and dining area with other travelers. Perfect for budget couples, families, and backpackers, this Alleppey boat house experience lets you enjoy the beauty of the backwaters at a fraction of the cost',
                 specs: [
-                    { label: 'AC availability', value: '9pm-6am', iconKey: 'bed' },
-                    { label: '1 bedroom', value: '3 person allowed', iconKey: 'users' },
+                    { label: 'AC availability', value: '9:00 PM - 6:00 AM', iconKey: 'bed' },
+                    { label: '1 bedroom', value: 'Private bedroom with attached shower', iconKey: 'users' },
                     { label: 'Boat Type', value: 'Shared', iconKey: 'boat' },
                     { label: 'Meals', value: 'All meals', iconKey: 'chef' },
                 ],
@@ -77,7 +77,7 @@ export const ACTIVITIES: Record<string, Activity> = {
                 specs: [
                     { label: 'Exclusivity', value: 'Private Boat', iconKey: 'shield' },
                     { label: 'Capacity', value: '1-3 Bedrooms', iconKey: 'users' },
-                    { label: 'AC Hours', value: 'On-Demand', iconKey: 'bed' },
+                    { label: 'AC Hours', value: '9:00 PM - 6:00 AM', iconKey: 'bed' },
                     { label: 'Style', value: 'Traditional', iconKey: 'boat' },
                 ],
                 cruiseTypes: [
@@ -157,9 +157,9 @@ export const ACTIVITIES: Record<string, Activity> = {
         basePrice: 500,
         features: ['Self-Paddled', 'Guided Tours', 'Morning/Evening Slots', 'Close to Nature'],
         durations: [
-            { id: '1hr', name: '1 Hour: "Quick Trial"', multiplier: 1 },
-            { id: 'sunrise', name: 'Sunrise (2 Hrs): Most Popular', multiplier: 2 },
-            { id: 'sunset', name: 'Sunset (2 Hrs): Golden Hour', multiplier: 2 },
+            { id: '1hr', name: '1 Hour Kayaking Experience', multiplier: 1, price: 500 },
+            { id: 'sunrise', name: 'Sunrise (2 Hrs): Most Popular', multiplier: 2, price: 650 },
+            { id: 'sunset', name: 'Sunset (2 Hrs): Golden Hour', multiplier: 2, price: 650 },
         ],
     },
     speedboat: {

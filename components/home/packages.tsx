@@ -19,7 +19,9 @@ interface Selection {
   id: string;
   variantId?: string; // For houseboats
   durationId?: string; // For rides
-  count?: number; // For person count in rides
+  count?: number; // legacy
+  adults?: number;
+  kids?: number;
 }
 
 export function PackageBuilder() {
@@ -59,6 +61,9 @@ export function PackageBuilder() {
         defaultSelection.durationId = activity.durations[0].id;
       }
 
+      defaultSelection.adults = 2;
+      defaultSelection.kids = 0;
+
       setSelections(prev => ({ ...prev, [id]: defaultSelection }));
       setExpandedId(id); // Auto expand to show options
     }
@@ -71,13 +76,13 @@ export function PackageBuilder() {
     }));
   };
 
-  const updateCount = (id: string, delta: number) => {
+  const updateGuests = (id: string, type: 'adults' | 'kids', delta: number) => {
     setSelections(prev => {
-      const current = prev[id]?.count || 1;
-      const newCount = Math.max(1, current + delta);
+      const current = prev[id]?.[type] || 0;
+      const newCount = type === 'adults' ? Math.max(1, current + delta) : Math.max(0, current + delta);
       return {
         ...prev,
-        [id]: { ...prev[id], count: newCount },
+        [id]: { ...prev[id], [type]: newCount },
       };
     });
   };
@@ -96,18 +101,27 @@ export function PackageBuilder() {
     } else if (activity.type === 'time-based' && selection.durationId) {
       const duration = activity.durations?.find((d: any) => d.id === selection.durationId);
       if (duration) {
-        let count = selection.count || 1;
+        let totalGuests = (selection.adults || 1) + (selection.kids || 0);
+
+        if (duration.price) {
+          return duration.price * totalGuests;
+        }
+
         if (activity.id === 'speedboat') {
           if (duration.id === '30min') {
-            return count <= 4 ? 2500 : 3000;
+            return totalGuests <= 4 ? 2500 : 3000;
           } else if (duration.id === '1hr') {
-            return count <= 4 ? 5000 : 6000;
+            return totalGuests <= 4 ? 5000 : 6000;
           } else {
-            const extraPersons = Math.max(0, count - 3);
+            const extraPersons = Math.max(0, totalGuests - 3);
             return activity.basePrice + (extraPersons * 300);
           }
         }
-        return activity.basePrice * duration.multiplier * count;
+        if (activity.id === 'shikara') {
+          return activity.basePrice * duration.multiplier * Math.ceil(totalGuests / 5);
+        }
+
+        return activity.basePrice * duration.multiplier * totalGuests;
       }
     }
     return 0;
@@ -235,33 +249,51 @@ export function PackageBuilder() {
                                     ))}
                                   </div>
                                 </div>
-
-                                {/* Person Counter for Kayak/Speedboat */}
-                                {(item.id === 'kayak' || item.id === 'speedboat') && (
-                                  <div>
-                                    <p className="text-xs font-semibold text-gray-500 uppercase flex items-center gap-1 mb-2">
-                                      Number of People
-                                    </p>
-                                    <div className="flex items-center gap-3">
-                                      <button
-                                        onClick={() => updateCount(item.id, -1)}
-                                        className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50"
-                                        disabled={(selections[item.id]?.count || 1) <= 1}
-                                      >
-                                        -
-                                      </button>
-                                      <span className="text-sm font-bold w-4 text-center">{selections[item.id]?.count || 1}</span>
-                                      <button
-                                        onClick={() => updateCount(item.id, 1)}
-                                        className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-100"
-                                      >
-                                        +
-                                      </button>
-                                    </div>
-                                  </div>
-                                )}
                               </div>
                             )}
+
+                            {/* Person Counter for All */}
+                            <div className="mt-4 pt-4 border-t border-gray-100 flex flex-col gap-3">
+                              <p className="text-xs font-semibold text-gray-500 uppercase flex items-center gap-1">
+                                Guests
+                              </p>
+                              <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
+                                <div className="flex items-center gap-3">
+                                  <span className="text-xs text-gray-700 w-10">Adults</span>
+                                  <button
+                                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); updateGuests(item.id, 'adults', -1); }}
+                                    className="w-8 h-8 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center hover:bg-gray-50 disabled:opacity-50 transition-colors"
+                                    disabled={(selections[item.id]?.adults || 1) <= 1}
+                                  >
+                                    -
+                                  </button>
+                                  <span className="text-sm font-bold w-4 text-center">{selections[item.id]?.adults || 1}</span>
+                                  <button
+                                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); updateGuests(item.id, 'adults', 1); }}
+                                    className="w-8 h-8 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center hover:bg-gray-50 transition-colors"
+                                  >
+                                    +
+                                  </button>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                  <span className="text-xs text-gray-700 w-10">Kids</span>
+                                  <button
+                                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); updateGuests(item.id, 'kids', -1); }}
+                                    className="w-8 h-8 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center hover:bg-gray-50 disabled:opacity-50 transition-colors"
+                                    disabled={(selections[item.id]?.kids || 0) <= 0}
+                                  >
+                                    -
+                                  </button>
+                                  <span className="text-sm font-bold w-4 text-center">{selections[item.id]?.kids || 0}</span>
+                                  <button
+                                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); updateGuests(item.id, 'kids', 1); }}
+                                    className="w-8 h-8 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center hover:bg-gray-50 transition-colors"
+                                  >
+                                    +
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                           <div className="mt-3 pt-3 border-t border-gray-100 flex justify-end">
                             <Link
@@ -303,10 +335,10 @@ export function PackageBuilder() {
 
                         if (item?.type === 'houseboat') {
                           const v = item.variants?.find(x => x.id === sel.variantId);
-                          detail = v?.name || '';
+                          detail = `${v?.name || ''} • ${sel.adults || 1}A, ${sel.kids || 0}K`;
                         } else {
                           const d = item?.durations?.find(x => x.id === sel.durationId);
-                          detail = `${d?.name || ''} x ${sel.count || 1} person(s)`;
+                          detail = `${d?.name || ''} • ${sel.adults || 1}A, ${sel.kids || 0}K`;
                         }
 
                         return (
@@ -399,7 +431,7 @@ export function PackageBuilder() {
                             const d = item?.durations?.find(x => x.id === sel.durationId);
                             detail = d?.name || '';
                           }
-                          message += `\n- ${item?.name} (${detail})`;
+                          message += `\n- ${item?.name} (${detail}) - ${sel.adults || 1} Adults, ${sel.kids || 0} Kids`;
                         });
 
                         if (selectedDestinations.length > 0) {
@@ -428,6 +460,6 @@ export function PackageBuilder() {
           </div>
         </div>
       </div>
-    </section>
+    </section >
   );
 }

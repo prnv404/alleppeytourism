@@ -93,7 +93,7 @@ export default function KayakPage() {
               <h2 className="text-3xl font-bold mb-6">Choose Your Session</h2>
               <div className="space-y-4">
                 {activity.durations?.map(d => {
-                  const price = Math.round(activity.basePrice * d.multiplier);
+                  const price = d.price || Math.round(activity.basePrice * d.multiplier);
                   const isPopular = d.id === 'sunrise';
                   return (
                     <div
