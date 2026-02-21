@@ -77,8 +77,6 @@ export default function ShikaraPage() {
         </div>
       </div>
 
-
-
       {/* Content Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 md:mb-20">
         <div className="grid md:grid-cols-12 gap-12 lg:gap-24">

@@ -2,7 +2,7 @@
 
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Star, ArrowRight, Zap, Ship, Anchor, Users } from 'lucide-react';
+import { Star, ArrowRight, Zap, Ship, Anchor, Users, Info } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
@@ -236,6 +236,13 @@ export function BookingListings() {
                         </Link>
                     </div> */}
         </motion.div>
+
+        <div className="flex justify-center mt-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-50 text-amber-700 rounded-lg text-xs font-medium border border-amber-200">
+            <Info className="w-3.5 h-3.5 shrink-0" />
+            <p>Please note: Package prices are subject to change depending on peak seasons and holidays.</p>
+          </div>
+        </div>
       </div>
     </section>
   );

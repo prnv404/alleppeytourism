@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, MapPin, ChevronDown, ChevronUp, X, ArrowRight, Clock, FileText, MessageCircle } from 'lucide-react';
+import { Check, MapPin, ChevronDown, ChevronUp, X, ArrowRight, Clock, FileText, MessageCircle, Info } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -87,20 +87,38 @@ export function PackageBuilder() {
   };
 
   // Calculate Price
+  const calculatePrice = (activity: any, selection: Selection | undefined) => {
+    if (!activity || !selection) return 0;
+
+    if (activity.type === 'houseboat' && selection.variantId) {
+      const variant = activity.variants?.find((v: any) => v.id === selection.variantId);
+      return variant ? variant.price : 0;
+    } else if (activity.type === 'time-based' && selection.durationId) {
+      const duration = activity.durations?.find((d: any) => d.id === selection.durationId);
+      if (duration) {
+        let count = selection.count || 1;
+        if (activity.id === 'speedboat') {
+          if (duration.id === '30min') {
+            return count <= 4 ? 2500 : 3000;
+          } else if (duration.id === '1hr') {
+            return count <= 4 ? 5000 : 6000;
+          } else {
+            const extraPersons = Math.max(0, count - 3);
+            return activity.basePrice + (extraPersons * 300);
+          }
+        }
+        return activity.basePrice * duration.multiplier * count;
+      }
+    }
+    return 0;
+  };
+
   const calculateTotal = () => {
     let total = 0;
     selectedIds.forEach(id => {
       const activity = activities.find(a => a.id === id);
       const selection = selections[id];
-      if (!activity || !selection) return;
-
-      if (activity.type === 'houseboat' && selection.variantId) {
-        const variant = activity.variants?.find(v => v.id === selection.variantId);
-        if (variant) total += variant.price;
-      } else if (activity.type === 'time-based' && selection.durationId) {
-        const duration = activity.durations?.find(d => d.id === selection.durationId);
-        if (duration) total += activity.basePrice * duration.multiplier * (selection.count || 1);
-      }
+      total += calculatePrice(activity, selection);
     });
     return total;
   };
@@ -153,16 +171,8 @@ export function PackageBuilder() {
                         <p className="text-xs text-gray-500">
                           {(() => {
                             if (isSelected) {
-                              if (item.type === 'houseboat' && selections[item.id]?.variantId) {
-                                const variant = item.variants?.find(v => v.id === selections[item.id].variantId);
-                                if (variant) return `₹${variant.price.toLocaleString()}`;
-                              } else if (item.type === 'time-based' && selections[item.id]?.durationId) {
-                                const duration = item.durations?.find(d => d.id === selections[item.id].durationId);
-                                if (duration) {
-                                  const price = item.basePrice * duration.multiplier * (selections[item.id].count || 1);
-                                  return `₹${price.toLocaleString()}`;
-                                }
-                              }
+                              const price = calculatePrice(item, selections[item.id]);
+                              if (price > 0) return `₹${price.toLocaleString()}`;
                             }
                             return `From ₹${item.basePrice.toLocaleString()}`;
                           })()}
@@ -289,15 +299,14 @@ export function PackageBuilder() {
                         const sel = selections[id];
                         // Find Name of variant/duration
                         let detail = '';
-                        let price = 0;
+                        let price = calculatePrice(item, sel);
+
                         if (item?.type === 'houseboat') {
                           const v = item.variants?.find(x => x.id === sel.variantId);
                           detail = v?.name || '';
-                          price = v?.price || 0;
                         } else {
                           const d = item?.durations?.find(x => x.id === sel.durationId);
                           detail = `${d?.name || ''} x ${sel.count || 1} person(s)`;
-                          price = (item?.basePrice || 0) * (d?.multiplier || 1) * (sel.count || 1);
                         }
 
                         return (

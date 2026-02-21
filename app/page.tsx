@@ -7,7 +7,6 @@ import { Footer } from '@/components/home/footer';
 import { Testimonials } from '@/components/home/testimonial';
 import { PackageBuilder } from '@/components/home/packages';
 import { ScrollReveal } from '@/components/ui/scroll-reveal';
-
 import { ListingGrid, ListingItem } from '@/components/ui/listing-grid';
 import { FaqSection } from '@/components/ui/faq-section';
 import { activities, DESTINATIONS, HOME_FAQS } from '@/lib/data';

@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu, X, Phone, Search, Home, Ship, Package, Compass, Info, MessageCircle } from 'lucide-react';
+import { Menu, X, Phone, Search, Home, Ship, Package, Compass, Info, MessageCircle, ChevronDown } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
@@ -12,6 +12,13 @@ const navItems = [
   { label: 'Shikara', href: '/shikara', icon: Ship },
   { label: 'Kayak', href: '/kayak', icon: Ship },
   { label: 'SpeedBoat', href: '/speedboat', icon: Ship },
+];
+
+const aboutUsItems = [
+  { label: 'Contact Us', href: '/contact' },
+  { label: 'Blogs', href: '/blogs' },
+  { label: 'Privacy Policy', href: '/privacy-policy' },
+  { label: 'Terms and Conditions', href: '/terms-and-conditions' },
 ];
 
 const carouselItems = ['Alleppey Tourism', 'Blazing Houseboat', 'Cruise Shikara', 'Delight Kayak', 'Crazy SpeedBoat'];
@@ -95,26 +102,58 @@ export function Navbar({ className }: NavbarProps) {
                   </Link>
                 );
               })}
+
+              <div className="relative group">
+                <button
+                  className={`group relative h-9 px-4 inline-flex items-center justify-center gap-1 rounded-full text-sm font-medium transition-all
+                    ${isScrolled
+                      ? 'text-gray-300 hover:text-white hover:bg-white/10'
+                      : 'text-gray-600 hover:text-black hover:bg-black/5'
+                    }
+                  `}
+                >
+                  <Info
+                    className={`h-4 w-4 transition-colors mr-1
+                      ${isScrolled ? 'text-gray-400 group-hover:text-white' : 'text-gray-500 group-hover:text-black'}
+                    `}
+                  />
+                  About Us
+                  <ChevronDown
+                    className={`h-4 w-4 transition-colors
+                      ${isScrolled ? 'text-gray-400 group-hover:text-white' : 'text-gray-500 group-hover:text-black'}
+                    `}
+                  />
+                </button>
+                <div className="absolute top-full left-0 mt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left">
+                  <div className={`backdrop-blur-lg rounded-2xl shadow-xl p-2 border ${isScrolled ? 'bg-black/90 border-white/10' : 'bg-white/90 border-black/5'}`}>
+                    {aboutUsItems.map(item => {
+                      const isActive = pathname === item.href;
+                      return (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          className={`block px-4 py-2 rounded-xl text-sm font-medium transition-all
+                            ${isActive
+                              ? isScrolled
+                                ? 'bg-white/10 text-white font-semibold'
+                                : 'bg-gray-100 text-black font-semibold'
+                              : isScrolled
+                                ? 'text-gray-300 hover:text-white hover:bg-white/10'
+                                : 'text-gray-600 hover:text-black hover:bg-black/5'
+                            }
+                          `}
+                        >
+                          {item.label}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Right Section */}
             <div className="flex items-center gap-2">
-              {/* CTA */}
-              <button
-                className={`hidden md:inline-flex h-9 items-center gap-2 px-4 rounded-full text-sm font-semibold transition shadow
-                                    ${isScrolled
-                    ? 'bg-white text-black hover:bg-gray-200'
-                    : 'bg-black text-white hover:bg-black/80'
-                  }
-                                `}
-                aria-label="Choose Your Experience"
-              >
-                Choose Your Experience
-                <span className="bg-emerald-500 rounded-full p-1">
-                  <Search className="h-3.5 w-3.5 text-white" />
-                </span>
-              </button>
-
               {/* Call */}
               <a
                 href="tel:+919947753154"
@@ -175,6 +214,32 @@ export function Navbar({ className }: NavbarProps) {
                 <item.icon
                   className={`h-4 w-4 ${isActive ? 'text-emerald-500' : isScrolled ? 'text-gray-500' : 'text-gray-500'}`}
                 />
+                {item.label}
+              </Link>
+            );
+          })}
+
+          <div className={`my-2 border-t ${isScrolled ? 'border-white/10' : 'border-black/5'}`} />
+
+          <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">About Us</div>
+          {aboutUsItems.map(item => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                className={`flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition
+                  ${isActive
+                    ? isScrolled
+                      ? 'bg-white/10 text-white font-semibold'
+                      : 'bg-gray-100 text-black font-semibold'
+                    : isScrolled
+                      ? 'text-gray-400 hover:text-white hover:bg-white/5'
+                      : 'text-gray-600 hover:text-black hover:bg-black/5'
+                  }
+                `}
+              >
                 {item.label}
               </Link>
             );
