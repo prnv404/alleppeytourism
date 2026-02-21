@@ -29,6 +29,7 @@ interface NavbarProps {
 
 export function Navbar({ className }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
   const pathname = usePathname();
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -221,29 +222,60 @@ export function Navbar({ className }: NavbarProps) {
 
           <div className={`my-2 border-t ${isScrolled ? 'border-white/10' : 'border-black/5'}`} />
 
-          <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">About Us</div>
-          {aboutUsItems.map(item => {
-            const isActive = pathname === item.href;
-            return (
-              <Link
-                key={item.label}
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition
-                  ${isActive
-                    ? isScrolled
-                      ? 'bg-white/10 text-white font-semibold'
-                      : 'bg-gray-100 text-black font-semibold'
-                    : isScrolled
-                      ? 'text-gray-400 hover:text-white hover:bg-white/5'
-                      : 'text-gray-600 hover:text-black hover:bg-black/5'
-                  }
-                `}
+          <button
+            onClick={() => setIsMobileAboutOpen(!isMobileAboutOpen)}
+            className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-medium transition
+              ${isScrolled
+                ? 'text-gray-300 hover:text-white hover:bg-white/5'
+                : 'text-gray-600 hover:text-black hover:bg-black/5'
+              }
+            `}
+          >
+            <div className="flex items-center gap-3">
+              <Info className={`h-4 w-4 ${isScrolled ? 'text-gray-500' : 'text-gray-500'}`} />
+              About Us
+            </div>
+            <ChevronDown className={`h-4 w-4 transition-transform ${isMobileAboutOpen ? 'rotate-180' : ''}`} />
+          </button>
+
+          <AnimatePresence>
+            {isMobileAboutOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className="overflow-hidden"
               >
-                {item.label}
-              </Link>
-            );
-          })}
+                <div className="pl-4 pb-2">
+                  {aboutUsItems.map(item => {
+                    const isActive = pathname === item.href;
+                    return (
+                      <Link
+                        key={item.label}
+                        href={item.href}
+                        onClick={() => {
+                          setIsOpen(false);
+                          setIsMobileAboutOpen(false);
+                        }}
+                        className={`flex items-center gap-3 px-4 py-3 mt-1 rounded-2xl text-sm font-medium transition
+                          ${isActive
+                            ? isScrolled
+                              ? 'bg-white/10 text-white font-semibold'
+                              : 'bg-gray-100 text-black font-semibold'
+                            : isScrolled
+                              ? 'text-gray-400 hover:text-white hover:bg-white/5'
+                              : 'text-gray-600 hover:text-black hover:bg-black/5'
+                          }
+                        `}
+                      >
+                        {item.label}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </>
